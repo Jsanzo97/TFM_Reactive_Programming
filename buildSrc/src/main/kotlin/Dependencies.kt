@@ -27,7 +27,7 @@ object Versions {
     const val coreKtx = "1.1.0"
     const val material = "1.1.0-alpha10"
     const val constraintLayout = "2.0.0-beta3"
-    const val lifecycle = "2.1.0"
+    const val lifecycle = "2.5.0-alpha04"
     const val liveData = "2.4.0"
     const val room = "2.4.0-rc01"
     const val navigation = "2.1.0"
@@ -35,7 +35,6 @@ object Versions {
 
     const val arrow = "0.10.0"
     const val threeTenABP = "1.2.1"
-    const val timber = "4.7.1"
     const val koin = "2.0.1"
 
     const val debugDb = "1.0.6"
@@ -56,7 +55,7 @@ object Libs {
     const val coreKtx = "androidx.core:core-ktx:${Versions.coreKtx}"
     const val material = "com.google.android.material:material:${Versions.material}"
     const val constraintLayout = "androidx.constraintlayout:constraintlayout:${Versions.constraintLayout}"
-    const val lifecycle = "androidx.lifecycle:lifecycle-extensions:${Versions.lifecycle}"
+    const val lifecycleRuntime = "androidx.lifecycle:lifecycle-runtime-ktx:${Versions.lifecycle}"
     const val roomKtx = "androidx.room:room-ktx:${Versions.room}"
     const val liveDataKtx = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.lifecycle}"
     const val liveData = "androidx.lifecycle:lifecycle-livedata-ktx:${Versions.liveData}"
@@ -70,7 +69,6 @@ object Libs {
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     const val koinAndroidScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koinAndroidViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-    const val timber = "com.jakewharton.timber:timber:${Versions.timber}"
 
 }
 

@@ -14,7 +14,7 @@ class DataManagementTeamAdapter(
 ) : RecyclerView.Adapter<DataManagementTeamAdapter.ViewHolder>() {
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): ViewHolder {
-        val v = LayoutInflater.from(p0.context).inflate(R.layout.data_management_sport_view, p0, false)
+        val v = LayoutInflater.from(p0.context).inflate(R.layout.data_management_team_view, p0, false)
         return ViewHolder(v)
     }
 

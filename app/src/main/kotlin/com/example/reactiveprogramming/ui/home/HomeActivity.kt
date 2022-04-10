@@ -23,17 +23,13 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.common.UiConfigurationViewModel
 import com.example.common.UiConfigurationViewState
 import com.example.common.extensions.*
-import com.example.common.logger.LifecycleLogger
-import com.example.common.logger.Logger
 import com.example.reactiveprogramming.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeActivity: AppCompatActivity(), LifecycleObserver {
-
-    private val logger: Logger by inject()
+class HomeActivity: AppCompatActivity() {
 
     private val toolbar by lazy { findViewById<MaterialToolbar>(R.id.toolbar) }
     private lateinit var appBarConfiguration: AppBarConfiguration
@@ -61,8 +57,6 @@ class HomeActivity: AppCompatActivity(), LifecycleObserver {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        lifecycle.addObserver(LifecycleLogger(logger.tag("Home Fragment")))
 
         setContentView(R.layout.home_activity)
 

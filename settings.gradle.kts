@@ -1,1 +1,1 @@
-include(":app", ":database", ":hardware", ":data", ":domain", ":common")
+include(":app", ":database", ":sensors", ":data", ":domain", ":common")
