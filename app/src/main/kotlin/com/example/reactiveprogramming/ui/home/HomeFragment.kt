@@ -7,15 +7,10 @@ import androidx.lifecycle.Observer
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
 import com.example.common.fragment.CustomFragment
-import com.example.common.logger.LifecycleLogger
-import com.example.common.logger.Logger
 import com.example.reactiveprogramming.R
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeFragment : CustomFragment(R.layout.home_fragment), LifecycleObserver {
-
-    private val logger: Logger by inject()
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -33,8 +28,6 @@ class HomeFragment : CustomFragment(R.layout.home_fragment), LifecycleObserver {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        viewLifecycleOwner.lifecycle.addObserver(LifecycleLogger(logger.tag("Home Fragment")))
 
         viewModel.getInitializerDatabaseLiveData().observe(this, Observer { state ->
             when (state) {

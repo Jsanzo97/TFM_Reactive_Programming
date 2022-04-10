@@ -99,6 +99,10 @@ android {
         sourceCompatibility = Versions.sourceCompatibility
         targetCompatibility = Versions.targetCompatibility
     }
+
+    packagingOptions {
+        exclude("META-INF/com.android.tools/proguard/coroutines.pro")
+    }
 }
 
 dependencies {
@@ -106,6 +110,7 @@ dependencies {
     implementation(project(":data"))
     implementation(project(":database"))
     implementation(project(":common"))
+    implementation(project(":sensors"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.coroutines)
     implementation(Libs.coroutinesAndroid)
@@ -113,7 +118,7 @@ dependencies {
     implementation(Libs.coreKtx)
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
-    implementation(Libs.lifecycle)
+    implementation(Libs.lifecycleRuntime)
     implementation(Libs.liveDataKtx)
     implementation(Libs.liveData)
     implementation(Libs.viewModelKtx)
@@ -127,7 +132,6 @@ dependencies {
     implementation(Libs.arrowCore)
     implementation(Libs.roomKtx)
     implementation(Libs.threeTenABP)
-    implementation(Libs.timber)
 
     debugImplementation(DebugLibs.debugDb)
 

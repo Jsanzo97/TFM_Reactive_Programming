@@ -4,57 +4,53 @@ import android.os.AsyncTask
 import androidx.lifecycle.*
 import com.example.domain.entity.*
 import com.example.domain.usecase.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class DataManagementViewModel(
-    getTeamsReactiveUseCase: GetTeamsReactiveUseCase,
+    private val getTeamsReactiveUseCase: GetTeamsReactiveUseCase,
     private val getTeamsFunctionalUseCase: GetTeamsFunctionalUseCase,
     private val updateTeamUseCase: UpdateTeamUseCase,
     private val removeTeamUseCase: RemoveTeamUseCase,
     private val createTeamUseCase: CreateTeamUseCase
 ): ViewModel() {
 
-    private val dataManagementViewModelLiveData: MutableLiveData<DataManagementViewState> = MutableLiveData()
-
-    private var retrievedTeamsFromDatabaseLiveData: LiveData<List<Team>> = getTeamsReactiveUseCase().asLiveData()
-    private var retrievedTeamsFromDatabaseObserver = Observer<List<Team>> { teamList ->
-        dataManagementViewModelLiveData.postValue(
-            RetrievedReactiveTeams(
-                teamList
-            )
-        )
-    }
+    private val _dataManagementViewModelStateFlow = MutableStateFlow<DataManagementViewState>(InitialState)
+    val dataManagementViewModelSateFlow: StateFlow<DataManagementViewState> get() = _dataManagementViewModelStateFlow
 
     fun getTeamsReactive() {
-        if (!retrievedTeamsFromDatabaseLiveData.hasObservers()) {
-            dataManagementViewModelLiveData.postValue(RetrievingTeams)
-            retrievedTeamsFromDatabaseLiveData.observeForever(retrievedTeamsFromDatabaseObserver)
+        _dataManagementViewModelStateFlow.value = RetrievingReactiveTeams
+
+        viewModelScope.launch {
+            getTeamsReactiveUseCase().collectLatest {
+                _dataManagementViewModelStateFlow.value = RetrievedReactiveTeams(it)
+            }
         }
     }
 
+
     fun getTeamsFunctional() {
-        dataManagementViewModelLiveData.postValue(RetrievingTeams)
+        _dataManagementViewModelStateFlow.value = RetrievingFunctionalTeams
+
         AsyncTask.execute {
-            dataManagementViewModelLiveData.postValue(
-                RetrievedFunctionalTeams(
-                    getTeamsFunctionalUseCase()
-                )
-            )
+            _dataManagementViewModelStateFlow.value =
+                RetrievedFunctionalTeams(getTeamsFunctionalUseCase())
         }
     }
 
     fun updateTeam(team: Team?) {
         team?.let {
-            dataManagementViewModelLiveData.postValue(UpdatingTeam)
+            _dataManagementViewModelStateFlow.value = UpdatingTeam
+
             viewModelScope.launch {
                 updateTeamUseCase(it).fold(
                     {
-                        dataManagementViewModelLiveData.postValue(UpdatedTeam)
+                        _dataManagementViewModelStateFlow.value = UpdatedTeam
                     },
                     {
-                        dataManagementViewModelLiveData.postValue(
-                            ErrorInOperation("Error al actualizar el equipo $team")
-                        )
+                        _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al actualizar el equipo $team")
                     }
                 )
             }
@@ -63,16 +59,15 @@ class DataManagementViewModel(
 
     fun removeTeam(team: Team?) {
         team?.let {
-            dataManagementViewModelLiveData.postValue(RemovingTeam)
+            _dataManagementViewModelStateFlow.value = RemovingTeam
+
             viewModelScope.launch {
                 removeTeamUseCase(it).fold(
                     {
-                        dataManagementViewModelLiveData.postValue(RemovedTeam)
+                        _dataManagementViewModelStateFlow.value = RemovedTeam
                     },
                     {
-                        dataManagementViewModelLiveData.postValue(
-                            ErrorInOperation("Error al borrar el equipo $team")
-                        )
+                        _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al borrar el equipo $team")
                     }
                 )
             }
@@ -80,28 +75,19 @@ class DataManagementViewModel(
     }
 
     fun createNewTeam() {
-        dataManagementViewModelLiveData.postValue(CreatingTeam)
+        _dataManagementViewModelStateFlow.value = CreatingTeam
 
         viewModelScope.launch {
             createTeamUseCase(
                 generateRandomTeam()
             ).fold(
                 {
-                    dataManagementViewModelLiveData.postValue(CreatedTeam)
+                    _dataManagementViewModelStateFlow.value = CreatedTeam
                 },
                 {
-                    dataManagementViewModelLiveData.postValue(
-                        ErrorInOperation("Error al crear el equipo")
-                    )
+                    _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al crear el equipo")
                 }
             )
         }
-    }
-
-    fun getTeamsBySportLiveData() = dataManagementViewModelLiveData
-
-    override fun onCleared() {
-        super.onCleared()
-        retrievedTeamsFromDatabaseLiveData.removeObserver(retrievedTeamsFromDatabaseObserver)
     }
 }
