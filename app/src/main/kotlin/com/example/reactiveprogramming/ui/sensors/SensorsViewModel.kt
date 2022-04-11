@@ -9,8 +9,12 @@ class SensorsViewModel(
     private val accelerometerSensor: Sensor
 ): ViewModel() {
 
-    val brightSensorFlow = brightnessSensor.sensorFlow
-    val orientationSensorFlow = orientationSensor.sensorFlow
-    val accelerometerSensorFlow = accelerometerSensor.sensorFlow
+    fun getBrightSensorFlow() = brightnessSensor.sensorFlow
+    fun getOrientationSensorFlow() = orientationSensor.sensorFlow
+    fun getAccelerometerSensorFlow() = accelerometerSensor.sensorFlow
+
+    fun getBrightnessSensorData() = brightnessSensor.getSensorValue()
+    fun getOrientationSensorData() = orientationSensor.getSensorValue()
+    fun getAccelerometerSensorData() = accelerometerSensor.getSensorValue()
 
 }
