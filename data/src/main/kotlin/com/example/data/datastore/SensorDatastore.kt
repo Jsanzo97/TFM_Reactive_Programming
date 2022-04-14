@@ -5,6 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface SensorDatastore {
 
+    fun initializeBrightnessSensor()
+    fun initializeOrientationSensor()
+    fun initializeAccelerationSensor()
+
     fun getBrightnessSensorFlow(): Flow<DataSensor>
     fun getOrientationSensorFlow(): Flow<DataSensor>
     fun getAccelerometerSensorFlow(): Flow<DataSensor>

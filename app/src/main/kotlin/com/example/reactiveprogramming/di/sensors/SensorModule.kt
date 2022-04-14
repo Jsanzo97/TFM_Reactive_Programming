@@ -7,8 +7,11 @@ import org.koin.dsl.module
 
 val sensorModule = module {
 
-    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
+    factory { InitializeBrightnessSensorUseCase(get()) }
+    factory { InitializeOrientationSensorUseCase(get()) }
+    factory { InitializeAccelerationSensorUseCase(get()) }
     factory { GetBrightnessSensorFlowUseCase(get()) }
     factory { GetOrientationSensorFlowUseCase(get()) }
     factory { GetAccelerometerSensorFlowUseCase(get()) }

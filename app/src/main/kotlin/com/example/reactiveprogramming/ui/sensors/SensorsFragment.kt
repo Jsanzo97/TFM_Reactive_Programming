@@ -88,7 +88,12 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     }
 
     private fun startUpdateSensorData() {
+        sensorsViewModel.initializeBrightnessSensor()
+        sensorsViewModel.initializeOrientationSensor()
+        sensorsViewModel.initializeAccelerationSensor()
+
         brightnessDataFlow = lifecycleScope.launchWhenStarted {
+            startUpdateSensorDataButton.isEnabled = false
             sensorsViewModel.getBrightSensorFlow().let { flow ->
                 flow.cancellable().collectLatest { sensorData ->
                     reactiveBrightnessResultText.text = sensorData.formatToString(requireContext())
@@ -163,6 +168,7 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         brightnessDataFlow?.cancel()
         orientationDataFlow?.cancel()
         accelerationDataFlow?.cancel()
+        startUpdateSensorDataButton.isEnabled = true
     }
 
     private fun updateSensorData() {
@@ -173,6 +179,30 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         functionalBrightnessResultText.text = sensorsViewModel.getBrightnessSensorData().formatToString(requireContext())
         functionalOrientationResultText.text = sensorsViewModel.getOrientationSensorData().formatToString(requireContext())
         functionalAccelerationResultText.text = sensorsViewModel.getAccelerometerSensorData().formatToString(requireContext())
+
+        checkSensorValue(
+            sensorsViewModel.getBrightnessSensorData(),
+            reactiveBrightnessMaxValue,
+            reactiveBrightnessMinValue,
+            reactiveBrightnessMaxResultText,
+            reactiveBrightnessMinResultText
+        )
+
+        checkSensorValue(
+            sensorsViewModel.getOrientationSensorData(),
+            reactiveOrientationMaxValue,
+            reactiveOrientationMinValue,
+            reactiveOrientationMaxResultText,
+            reactiveOrientationMinResultText
+        )
+
+        checkSensorValue(
+            sensorsViewModel.getAccelerometerSensorData(),
+            reactiveAccelerationMaxValue,
+            reactiveAccelerationMinValue,
+            reactiveAccelerationMaxResultText,
+            reactiveAccelerationMinResultText
+        )
 
         checkSensorValue(
             sensorsViewModel.getBrightnessSensorData(),
@@ -228,6 +258,9 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         reactiveAccelerationMinValue.valueX = 0f
         reactiveAccelerationMinValue.valueY = 0f
         reactiveAccelerationMinValue.valueZ = 0f
+
+        reactiveAccelerationMaxResultText.text = null
+        reactiveAccelerationMinResultText.text = null
 
         functionalAccelerationMaxResultText.text = null
         functionalAccelerationMinResultText.text = null

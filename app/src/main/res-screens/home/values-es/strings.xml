@@ -3,7 +3,7 @@
 
     <string name="database_management_fragment">Gestion de Base de Datos</string>
     <string name="sensors_fragment">Sensores</string>
-    <string name="big_collections_fragment">Grandes collecciones de datos</string>
+    <string name="big_collections_fragment">Grandes coleciones de datos</string>
 
     <string name="error_update_team">Error al actualizar el equipo: %1$s</string>
     <string name="error_remove_team">Error al borrar el equipo: %1$s</string>
