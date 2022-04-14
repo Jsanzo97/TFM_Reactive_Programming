@@ -37,7 +37,6 @@ dependencies {
     implementation(Libs.navigationFragmentKtx)
     implementation(Libs.arrowCore)
     implementation(Libs.koinAndroidViewModel)
-    implementation(Libs.timber)
     implementation(Libs.material)
     implementation(Libs.constraintLayout)
 }

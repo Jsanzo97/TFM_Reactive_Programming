@@ -1,9 +1,8 @@
 package com.example.data.datastore
 
+import arrow.core.Option
 import com.example.data.entity.DataTeam
 import com.example.data.error.LocalDataError
-import arrow.core.Option
-import com.example.domain.entity.Team
 import kotlinx.coroutines.flow.Flow
 
 interface LocalTeamsDatastore {

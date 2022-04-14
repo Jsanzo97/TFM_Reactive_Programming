@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.DialogFragment
 import com.example.common.R
+import com.example.common.extensions.changeVisibility
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
@@ -32,8 +33,8 @@ class CustomDialogFragment(
         dialogOkButton = view.findViewById(R.id.custom_dialog_fragment_accept_button)
         dialogCancelButton = view.findViewById(R.id.custom_dialog_fragment_cancel_button)
 
-        dialogOkButton.visibility = if (showOkButton) View.VISIBLE else View.GONE
-        dialogCancelButton.visibility = if (showCancelButton) View.VISIBLE else View.GONE
+        dialogOkButton.changeVisibility(showOkButton)
+        dialogCancelButton.changeVisibility(showCancelButton)
 
         dialogOkButton.setOnClickListener {
             positiveButtonAction()
