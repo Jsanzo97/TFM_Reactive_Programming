@@ -9,11 +9,6 @@ class SensorDataRepository (
     private val sensorDatastore: SensorDatastore
 ) : SensorRepository {
 
-    override fun initializeBrightnessSensor() = sensorDatastore.initializeBrightnessSensor()
-    override fun initializeOrientationSensor() = sensorDatastore.initializeOrientationSensor()
-    override fun initializeAccelerationSensor() = sensorDatastore.initializeAccelerationSensor()
-
-
     override fun getBrightnessSensorFlow() = sensorDatastore.getBrightnessSensorFlow().map { it.toSensorResult() }
     override fun getOrientationSensorFlow() = sensorDatastore.getOrientationSensorFlow().map { it.toSensorResult() }
     override fun getAccelerometerSensorFlow() = sensorDatastore.getAccelerometerSensorFlow().map { it.toSensorResult() }

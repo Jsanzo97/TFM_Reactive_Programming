@@ -88,10 +88,6 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     }
 
     private fun startUpdateSensorData() {
-        sensorsViewModel.initializeBrightnessSensor()
-        sensorsViewModel.initializeOrientationSensor()
-        sensorsViewModel.initializeAccelerationSensor()
-
         brightnessDataFlow = lifecycleScope.launchWhenStarted {
             startUpdateSensorDataButton.isEnabled = false
             sensorsViewModel.getBrightSensorFlow().let { flow ->
