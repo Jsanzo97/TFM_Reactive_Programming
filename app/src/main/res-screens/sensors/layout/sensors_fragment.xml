@@ -68,7 +68,8 @@
         tools:text="Reactive Max Brightness Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reactive_brightness_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_result_text" />
@@ -80,7 +81,8 @@
         tools:text="Reactive Min Brightness Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/reactive_brightness_max_result_text"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_result_text" />
@@ -92,7 +94,8 @@
         tools:text="Reactive Max Orientation Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reactive_orientation_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/reactive_brightness_max_result_text" />
@@ -104,7 +107,8 @@
         tools:text="Reactive Min Orientation Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/reactive_orientation_max_result_text"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toBottomOf="@id/reactive_brightness_min_result_text" />
@@ -116,7 +120,8 @@
         tools:text="Reactive Max Acceleration Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/reactive_acceleration_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/reactive_orientation_max_result_text" />
@@ -128,7 +133,8 @@
         tools:text="Reactive Min Acceleration Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/reactive_acceleration_max_result_text"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toBottomOf="@id/reactive_orientation_min_result_text" />
@@ -187,7 +193,8 @@
         tools:text="Functional Max Brightness Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
         app:layout_constraintEnd_toStartOf="@id/functional_brightness_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/functional_acceleration_result_text" />
@@ -199,7 +206,8 @@
         tools:text="Functional Min Brightness Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/functional_brightness_max_result_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/functional_acceleration_result_text" />
@@ -211,7 +219,8 @@
         tools:text="Functional Max Orientation Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
         app:layout_constraintEnd_toStartOf="@id/functional_orientation_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/functional_brightness_max_result_text" />
@@ -223,7 +232,8 @@
         tools:text="Functional Min Orientation Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/functional_orientation_max_result_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/functional_brightness_min_result_text" />
@@ -235,7 +245,8 @@
         tools:text="Functional Max Acceleration Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
         app:layout_constraintEnd_toStartOf="@id/functional_acceleration_min_result_text"
         app:layout_constraintTop_toBottomOf="@id/functional_orientation_max_result_text" />
@@ -247,7 +258,8 @@
         tools:text="Functional Min Acceleration Result"
         android:textColor="@color/white"
         android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginStart="@dimen/smallest_space"
         app:layout_constraintStart_toEndOf="@id/functional_acceleration_max_result_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@id/functional_orientation_min_result_text" />
@@ -258,7 +270,7 @@
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/small_space"
         android:text="@string/start_update_data_text"
-        style="@style/AppTheme.Button.White"
+        style="@style/AppTheme.Button.WithStateColor"
         app:layout_constraintBottom_toTopOf="@id/stop_update_sensor_data_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

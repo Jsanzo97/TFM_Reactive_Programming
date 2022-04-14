@@ -11,7 +11,7 @@ class Sensor(sensorManager: SensorManager, sensorType: Int) {
 
     private var sensor: Sensor? = null
 
-    private var sensorValue = SensorDataType()
+    private var sensorValue = SensorDataType(sensorType = sensorType)
 
     private var _sensorFlow = MutableStateFlow(SensorDataType())
     val sensorFlow: Flow<SensorDataType> get() = _sensorFlow
