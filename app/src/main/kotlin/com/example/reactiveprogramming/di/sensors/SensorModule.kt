@@ -1,22 +1,50 @@
 package com.example.reactiveprogramming.di.sensors
 
+import android.content.Context
+import android.hardware.Sensor as AndroidSensor
+import com.example.sensors.Sensor
+import android.hardware.SensorManager
 import com.example.domain.usecase.*
 import com.example.reactiveprogramming.ui.sensors.SensorsViewModel
+import org.koin.android.ext.koin.androidApplication
 import org.koin.androidx.viewmodel.dsl.viewModel
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
+
+internal const val BRIGHTNESS_SENSOR = "brightness_sensor"
+internal const val ORIENTATION_SENSOR = "orientation_sensor"
+internal const val ACCELEROMETER_SENSOR = "accelerometer_sensor"
 
 val sensorModule = module {
 
-    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
+    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get()) }
 
-    factory { InitializeBrightnessSensorUseCase(get()) }
-    factory { InitializeOrientationSensorUseCase(get()) }
-    factory { InitializeAccelerationSensorUseCase(get()) }
     factory { GetBrightnessSensorFlowUseCase(get()) }
     factory { GetOrientationSensorFlowUseCase(get()) }
     factory { GetAccelerometerSensorFlowUseCase(get()) }
     factory { GetBrightnessSensorDataUseCase(get()) }
     factory { GetOrientationSensorDataUseCase(get()) }
     factory { GetAccelerometerSensorDataUseCase(get()) }
+
+    single(named(BRIGHTNESS_SENSOR)) {
+        Sensor(
+            (androidApplication().applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager),
+            AndroidSensor.TYPE_LIGHT
+        )
+    }
+
+    single(named(ORIENTATION_SENSOR)) {
+        Sensor(
+            (androidApplication().applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager),
+            AndroidSensor.TYPE_ROTATION_VECTOR
+        )
+    }
+
+    single(named(ACCELEROMETER_SENSOR)) {
+        Sensor(
+            (androidApplication().applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager),
+            AndroidSensor.TYPE_LINEAR_ACCELERATION
+        )
+    }
 
 }

@@ -9,9 +9,6 @@ import com.example.domain.usecase.*
 import com.example.reactiveprogramming.R
 
 class SensorsViewModel(
-    private val initializeBrightnessSensorUseCase: InitializeBrightnessSensorUseCase,
-    private val initializeOrientationSensorUseCase: InitializeOrientationSensorUseCase,
-    private val initializeAccelerationSensorUseCase: InitializeAccelerationSensorUseCase,
     private val getBrightnessSensorFlowUseCase: GetBrightnessSensorFlowUseCase,
     private val getOrientationSensorFlowUseCase: GetOrientationSensorFlowUseCase,
     private val getAccelerometerSensorFlowUseCase: GetAccelerometerSensorFlowUseCase,
@@ -19,10 +16,6 @@ class SensorsViewModel(
     private val getOrientationSensorDataUseCase: GetOrientationSensorDataUseCase,
     private val getAccelerometerSensorDataUseCase: GetAccelerometerSensorDataUseCase
 ): ViewModel() {
-
-    fun initializeBrightnessSensor() = initializeBrightnessSensorUseCase()
-    fun initializeOrientationSensor() = initializeOrientationSensorUseCase()
-    fun initializeAccelerationSensor() = initializeAccelerationSensorUseCase()
 
     fun getBrightSensorFlow() = getBrightnessSensorFlowUseCase()
     fun getOrientationSensorFlow() = getOrientationSensorFlowUseCase()
