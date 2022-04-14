@@ -1,7 +1,7 @@
 package com.example.reactiveprogramming.ui.dataManagement
 
-import com.example.domain.entity.Team
 import androidx.recyclerview.widget.DiffUtil
+import com.example.domain.entity.Team
 
 class DataManagementDiffUtilCallback(
     private val newList: List<Team>,

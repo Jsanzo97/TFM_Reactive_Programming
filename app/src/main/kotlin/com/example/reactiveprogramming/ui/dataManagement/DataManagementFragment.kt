@@ -40,6 +40,16 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRecyclerViews()
+
+        setupViewModelLiveData()
+
+        setupClickListeners()
+    }
+
+    private fun setupRecyclerViews() {
+        functionalTeamListRecycler.setHasFixedSize(true)
+
         reactiveTeamListRecycler.layoutManager = LinearLayoutManager(
             requireContext(),
             LinearLayoutManager.VERTICAL,
@@ -53,12 +63,6 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
             LinearLayoutManager.VERTICAL,
             false
         )
-
-        functionalTeamListRecycler.setHasFixedSize(true)
-
-        setupViewModelLiveData()
-
-        setupClickListeners()
     }
 
     private fun setupViewModelLiveData() {
@@ -80,30 +84,31 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
                         hideProgressDialog()
                     }
                     is ErrorInOperation -> {
-                        showError(state.message)
+                        showError(getString(state.messageId, state.team.toString()))
                     }
-                    else -> { }
+                    else -> { /* no-op */ }
                 }
             }
         }
     }
 
     private fun setupClickListeners() {
-        loadReactiveDataButton.setOnClickListener { viewModel.getTeamsReactive() }
+        loadReactiveDataButton.setOnClickListener { button ->
+            viewModel.getTeamsReactive()
+            button.isEnabled = false
+        }
 
         loadFunctionalDataButton.setOnClickListener { viewModel.getTeamsFunctional() }
 
         updateRandomTeamButton.setOnClickListener {
             viewModel.updateTeam(reactiveTeamListRecycler.adapter?.let { adapter ->
-                (adapter as DataManagementTeamAdapter)
-                    .getTeamList()[(0 until adapter.itemCount).random()]
+                getRandomTeamFromAdapter(adapter)
             })
         }
 
         removeRandomTeamButton.setOnClickListener {
             viewModel.removeTeam(reactiveTeamListRecycler.adapter?.let { adapter ->
-                (adapter as DataManagementTeamAdapter)
-                    .getTeamList()[(0 until adapter.itemCount).random()]
+                getRandomTeamFromAdapter(adapter)
             })
         }
 
@@ -118,6 +123,15 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
             recyclerToUpdate.adapter = adapter
         } else {
             recyclerToUpdate.adapter = DataManagementTeamAdapter(teamsRetrieved.toMutableList())
+        }
+    }
+
+    private fun getRandomTeamFromAdapter(adapter: RecyclerView.Adapter<RecyclerView.ViewHolder>): Team? {
+        val dataManagementAdapter = (adapter as DataManagementTeamAdapter).getTeamList()
+        return if (dataManagementAdapter.isNotEmpty()) {
+            dataManagementAdapter[(0 until adapter.itemCount).random()]
+        } else {
+            null
         }
     }
 }

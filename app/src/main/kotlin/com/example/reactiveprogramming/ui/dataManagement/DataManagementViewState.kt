@@ -19,4 +19,4 @@ object RemovedTeam: DataManagementViewState()
 object CreatingTeam: DataManagementViewState()
 object CreatedTeam: DataManagementViewState()
 
-class ErrorInOperation(val message: String): DataManagementViewState()
+class ErrorInOperation(val messageId: Int, val team: Team): DataManagementViewState()

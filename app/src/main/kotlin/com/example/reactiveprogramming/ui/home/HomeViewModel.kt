@@ -3,7 +3,7 @@ package com.example.reactiveprogramming.ui.home
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.domain.entity.*
+import com.example.domain.entity.generateRandomTeam
 import com.example.domain.usecase.InitializeDatabaseUseCase
 import kotlinx.coroutines.launch
 

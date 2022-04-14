@@ -13,7 +13,6 @@ import androidx.appcompat.graphics.drawable.DrawerArrowDrawable
 import androidx.constraintlayout.widget.ConstraintLayout
 import androidx.core.view.updateMargins
 import androidx.drawerlayout.widget.DrawerLayout
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -26,7 +25,6 @@ import com.example.common.extensions.*
 import com.example.reactiveprogramming.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
-import org.koin.android.ext.android.inject
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class HomeActivity: AppCompatActivity() {

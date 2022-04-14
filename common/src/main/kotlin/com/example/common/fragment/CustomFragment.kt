@@ -6,7 +6,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import com.example.common.DIALOG_FRAGMENT_TAG
 import com.example.common.R
 import com.example.common.UiConfigurationViewModel
@@ -38,7 +37,7 @@ abstract class CustomFragment(private val contentLayoutId: Int) : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        uiConfigurationViewModel.getUiConfigurationLiveData().observe(this, Observer {
+        uiConfigurationViewModel.getUiConfigurationLiveData().observe(this, {
             handleUiConfigurationViewState(it)
         })
     }
