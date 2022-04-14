@@ -31,6 +31,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":data"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.coreKtx)
     implementation(Libs.liveDataKtx)

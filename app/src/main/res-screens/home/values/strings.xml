@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    
+    <string name="home_fragment" translatable="false">Home</string>
+    <string name="database_management_fragment">DataBase Management</string>
+    <string name="sensors_fragment">Sensors</string>
+    <string name="big_collections_fragment">Big data collections</string>
+
+    <string name="error_update_team">Error when try to update team: %1$s</string>
+    <string name="error_remove_team">Error when try to remove team: %1$s</string>
+    <string name="error_create_team">Error when try to create team: %1$s</string>
+
+</resources>

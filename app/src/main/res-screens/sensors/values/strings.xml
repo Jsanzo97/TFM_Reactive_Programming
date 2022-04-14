@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="start_update_data_text">Start update data</string>
+    <string name="stop_update_data_text">Stop update data</string>
+    <string name="update_sensor_data_text">Update sensor data</string>
+    <string name="clear_sensor_data_text">Clear sensor data</string>
+
+    <string name="max_sensor_value" translatable="false">Max %1$s</string>
+    <string name="min_sensor_value" translatable="false">Min %1$s</string>
+
+    <string name="brightness_value">Brightness: %1$s</string>
+    <string name="orientation_value">Rotation: \n
+                X: %1$s \n
+                Y: %2$s \n
+                Z: %3$s \n
+    </string>
+    <string name="acceleration_value">Acceleration: \n
+                X: %1$s \n
+                Y: %2$s \n
+                Z: %3$s \n
+    </string>
+
+</resources>

@@ -7,19 +7,19 @@
     <group android:checkableBehavior="single">
         <item
             android:id="@id/home_fragment"
-            android:title="string/main_book_recipe" />
+            android:title="@string/home_fragment" />
 
         <item
             android:id="@id/data_management_fragment"
-            android:title="string/main_book_recipe" />
+            android:title="@string/database_management_fragment" />
 
         <item
             android:id="@id/sensors_fragment"
-            android:title="string/main_recipe_creation" />
+            android:title="@string/sensors_fragment" />
 
         <item
             android:id="@id/big_collections_fragment"
-            android:title="string/main_settings" />
+            android:title="@string/big_collections_fragment" />
 
     </group>
 

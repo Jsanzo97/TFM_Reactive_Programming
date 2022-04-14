@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="players">%1$d Players</string>
+    <string name="reactive_result_text">Reactive result</string>
+    <string name="functional_result_text">Functional result</string>
+    <string name="load_reactive_data_text">Load reactive data</string>
+    <string name="load_functional_data_text">Load functional data</string>
+    <string name="add_random_team_text">Add random team</string>
+    <string name="update_random_team_text">Update random team</string>
+    <string name="remove_random_team_text">Remove random team</string>
+
+</resources>

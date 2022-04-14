@@ -25,7 +25,7 @@ class DataManagementTeamAdapter(
     override fun onBindViewHolder(item: ViewHolder, position: Int) {
         item.teamNameLabel.text = teamList[position].name
         item.teamSportNameLabel.text = teamList[position].sport.name
-        item.teamPlayersNumberLabel.text = "${teamList[position].players.size} Jugadores"
+        item.teamPlayersNumberLabel.text = item.itemView.context.getString(R.string.players, teamList[position].players.size)
     }
 
     fun onNewData(newTeamList: List<Team>) {

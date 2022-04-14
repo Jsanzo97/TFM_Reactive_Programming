@@ -1,9 +1,12 @@
 package com.example.reactiveprogramming.ui.dataManagement
 
 import android.os.AsyncTask
-import androidx.lifecycle.*
-import com.example.domain.entity.*
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.domain.entity.Team
+import com.example.domain.entity.generateRandomTeam
 import com.example.domain.usecase.*
+import com.example.reactiveprogramming.R
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
@@ -50,7 +53,7 @@ class DataManagementViewModel(
                         _dataManagementViewModelStateFlow.value = UpdatedTeam
                     },
                     {
-                        _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al actualizar el equipo $team")
+                        _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_update_team, team)
                     }
                 )
             }
@@ -67,7 +70,7 @@ class DataManagementViewModel(
                         _dataManagementViewModelStateFlow.value = RemovedTeam
                     },
                     {
-                        _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al borrar el equipo $team")
+                        _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_remove_team, team)
                     }
                 )
             }
@@ -77,15 +80,17 @@ class DataManagementViewModel(
     fun createNewTeam() {
         _dataManagementViewModelStateFlow.value = CreatingTeam
 
+        val randomTeam = generateRandomTeam()
+
         viewModelScope.launch {
             createTeamUseCase(
-                generateRandomTeam()
+                randomTeam
             ).fold(
                 {
                     _dataManagementViewModelStateFlow.value = CreatedTeam
                 },
                 {
-                    _dataManagementViewModelStateFlow.value = ErrorInOperation("Error al crear el equipo")
+                    _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_create_team, randomTeam)
                 }
             )
         }

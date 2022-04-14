@@ -1,20 +1,17 @@
 package com.example.database.storage
 
 import arrow.core.None
+import arrow.core.Option
+import arrow.core.some
 import com.example.data.datastore.LocalTeamsDatastore
+import com.example.data.entity.DataTeam
 import com.example.data.error.LocalDataError
 import com.example.data.error.WritingError
 import com.example.database.dao.TeamsDao
-import arrow.core.Option
-import arrow.core.some
-import com.example.data.entity.*
 import com.example.database.entity.*
-import com.example.domain.entity.Team
 import kotlinx.coroutines.flow.Flow
-import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
-import java.lang.Exception
 
 class TeamsStorage (
     private val teamsDao: TeamsDao
