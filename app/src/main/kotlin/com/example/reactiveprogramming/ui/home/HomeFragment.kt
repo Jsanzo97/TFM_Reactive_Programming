@@ -2,7 +2,6 @@ package com.example.reactiveprogramming.ui.home
 
 import android.os.Bundle
 import android.view.View
-import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.Observer
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
@@ -10,7 +9,7 @@ import com.example.common.fragment.CustomFragment
 import com.example.reactiveprogramming.R
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-class HomeFragment : CustomFragment(R.layout.home_fragment), LifecycleObserver {
+class HomeFragment : CustomFragment(R.layout.home_fragment) {
 
     private val viewModel: HomeViewModel by viewModel()
 
@@ -29,14 +28,18 @@ class HomeFragment : CustomFragment(R.layout.home_fragment), LifecycleObserver {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        viewModel.getInitializerDatabaseLiveData().observe(this, Observer { state ->
+        setupViewModelLiveData()
+
+        viewModel.initializeDataBase(numberOfTeamsToCreate)
+    }
+
+    private fun setupViewModelLiveData() {
+        viewModel.initializerDatabaseLiveData.observe(this, Observer { state ->
             when (state) {
                 is InitializingDatabase -> showProgressDialog()
                 is InitializedDatabase -> hideProgressDialog()
                 is ErrorInOperation -> showError(state.message)
             }
         })
-
-        viewModel.initializeDataBase(numberOfTeamsToCreate)
     }
 }

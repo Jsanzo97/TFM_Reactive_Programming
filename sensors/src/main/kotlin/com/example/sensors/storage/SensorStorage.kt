@@ -1,6 +1,5 @@
 package com.example.sensors.storage
 
-import android.hardware.SensorManager
 import com.example.data.datastore.SensorDatastore
 import com.example.sensors.Sensor
 import com.example.sensors.toDataSensor

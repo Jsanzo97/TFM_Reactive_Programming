@@ -111,6 +111,7 @@ dependencies {
     implementation(project(":database"))
     implementation(project(":common"))
     implementation(project(":sensors"))
+    implementation(project(":collections"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.coroutines)
     implementation(Libs.coroutinesAndroid)
