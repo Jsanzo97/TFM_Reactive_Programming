@@ -6,14 +6,61 @@
     android:layout_height="match_parent"
     android:background="@color/colorPrimary">
 
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/example_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="0"
+        android:max="100"
+        android:progress="50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatSeekBar
+        android:id="@+id/example_discrete_seekbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:min="0"
+        android:max="5"
+        android:progress="2"
+        style="@style/Widget.AppCompat.SeekBar.Discrete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/example_seekbar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sequence_result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prueba Big Collections Fragment"
+        android:layout_margin="@dimen/small_space"
+        android:text="Sequence Result"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/example_discrete_seekbar"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_space"
+        android:text="List result"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/sequence_result_text"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculate_operation"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginTop="@dimen/small_space"
+        android:layout_marginBottom="@dimen/big_space"
+        android:text="Calculate operation"
+        style="@style/AppTheme.Button.White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -1,12 +1,16 @@
 package com.example.reactiveprogramming.di.data
 
 import androidx.room.Room
+import com.example.collections.storage.CollectionsStorage
+import com.example.data.datastore.CollectionsDatastore
 import com.example.data.datastore.LocalTeamsDatastore
 import com.example.data.datastore.SensorDatastore
+import com.example.data.repository.CollectionsDataRepository
 import com.example.data.repository.SensorDataRepository
 import com.example.data.repository.TeamsDataRepository
 import com.example.database.LocalDatabase
 import com.example.database.storage.TeamsStorage
+import com.example.domain.repository.CollectionsRepository
 import com.example.domain.repository.SensorRepository
 import com.example.domain.repository.TeamsRepository
 import com.example.reactiveprogramming.di.sensors.ACCELEROMETER_SENSOR
@@ -43,17 +47,21 @@ val dataModule = module {
 
     single<SensorRepository> { SensorDataRepository(get()) }
 
+    single<CollectionsRepository> { CollectionsDataRepository(get(), Dispatchers.Default) }
+
 
     /* DATASTORE */
 
     single<LocalTeamsDatastore> { TeamsStorage(get()) }
 
-    single <SensorDatastore> {
+    single<SensorDatastore> {
         SensorStorage(
             get(named(BRIGHTNESS_SENSOR)),
             get(named(ORIENTATION_SENSOR)),
             get(named(ACCELEROMETER_SENSOR))
         )
     }
+
+    single<CollectionsDatastore> { CollectionsStorage() }
 
 }
