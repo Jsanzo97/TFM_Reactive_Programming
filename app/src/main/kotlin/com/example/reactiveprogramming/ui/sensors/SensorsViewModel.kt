@@ -14,7 +14,10 @@ class SensorsViewModel(
     private val getAccelerometerSensorFlowUseCase: GetAccelerometerSensorFlowUseCase,
     private val getBrightnessSensorDataUseCase: GetBrightnessSensorDataUseCase,
     private val getOrientationSensorDataUseCase: GetOrientationSensorDataUseCase,
-    private val getAccelerometerSensorDataUseCase: GetAccelerometerSensorDataUseCase
+    private val getAccelerometerSensorDataUseCase: GetAccelerometerSensorDataUseCase,
+    private val startMeasureSensorDataUseCase: StartMeasureSensorDataUseCase,
+    private val stopMeasureSensorDataUseCase: StopMeasureSensorDataUseCase,
+    private val resetMeasureSensorDataUseCase: ResetMeasureSensorDataUseCase
 ): ViewModel() {
 
     fun getBrightSensorFlow() = getBrightnessSensorFlowUseCase()
@@ -24,6 +27,10 @@ class SensorsViewModel(
     fun getBrightnessSensorData() = getBrightnessSensorDataUseCase()
     fun getOrientationSensorData() = getOrientationSensorDataUseCase()
     fun getAccelerometerSensorData() = getAccelerometerSensorDataUseCase()
+
+    fun startMeasureSensorData() = startMeasureSensorDataUseCase()
+    fun stopMeasureSensorData() = stopMeasureSensorDataUseCase()
+    fun resetMeasureSensorData() = resetMeasureSensorDataUseCase()
 
 }
 

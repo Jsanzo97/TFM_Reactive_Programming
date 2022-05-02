@@ -17,4 +17,8 @@ class SensorDataRepository (
     override fun getOrientationSensorData() = sensorDatastore.getOrientationSensorData().toSensorResult()
     override fun getAccelerometerSensorData() = sensorDatastore.getAccelerometerSensorData().toSensorResult()
 
+    override fun stopRegisterData() = sensorDatastore.stopRegisterData()
+    override fun startRegisterData() = sensorDatastore.startRegisterData()
+    override fun resetDataCount() = sensorDatastore.resetDataCount()
+
 }

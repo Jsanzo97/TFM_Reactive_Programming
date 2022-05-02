@@ -13,12 +13,21 @@
     <string name="orientation_value">Rotation: \n
                 X: %1$s \n
                 Y: %2$s \n
-                Z: %3$s \n
+                Z: %3$s
     </string>
     <string name="acceleration_value">Acceleration: \n
                 X: %1$s \n
                 Y: %2$s \n
-                Z: %3$s \n
+                Z: %3$s
     </string>
+
+    <string name="data_collected">Data collected: %1$d</string>
+    <string name="data_generated">Data generated: %1$d</string>
+    <string name="data_performance">Performance: %1$s</string>
+
+    <string name="bar_description">Delay time to update the data by the functional way</string>
+    <string name="min_bar_value" translatable="false">0</string>
+    <string name="default_bar_value" translatable="false">500</string>
+    <string name="max_bar_value" translatable="false">1000</string>
 
 </resources>

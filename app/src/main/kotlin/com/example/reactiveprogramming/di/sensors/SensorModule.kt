@@ -17,7 +17,7 @@ internal const val ACCELEROMETER_SENSOR = "accelerometer_sensor"
 
 val sensorModule = module {
 
-    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get()) }
+    viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
 
     factory { GetBrightnessSensorFlowUseCase(get()) }
     factory { GetOrientationSensorFlowUseCase(get()) }
@@ -25,6 +25,9 @@ val sensorModule = module {
     factory { GetBrightnessSensorDataUseCase(get()) }
     factory { GetOrientationSensorDataUseCase(get()) }
     factory { GetAccelerometerSensorDataUseCase(get()) }
+    factory { StartMeasureSensorDataUseCase(get()) }
+    factory { StopMeasureSensorDataUseCase(get()) }
+    factory { ResetMeasureSensorDataUseCase(get()) }
 
     single(named(BRIGHTNESS_SENSOR)) {
         Sensor(

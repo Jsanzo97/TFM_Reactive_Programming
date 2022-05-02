@@ -19,5 +19,22 @@ class SensorStorage(
     override fun getOrientationSensorData() = orientationSensor.getSensorValue().toDataSensor()
     override fun getAccelerometerSensorData() = accelerationSensor.getSensorValue().toDataSensor()
 
+    override fun stopRegisterData() {
+        brightnessSensor.stopRegisterData()
+        orientationSensor.stopRegisterData()
+        accelerationSensor.stopRegisterData()
+    }
+
+    override fun startRegisterData() {
+        brightnessSensor.startRegisterData()
+        orientationSensor.startRegisterData()
+        accelerationSensor.startRegisterData()
+    }
+
+    override fun resetDataCount() {
+        brightnessSensor.resetDataCount()
+        orientationSensor.resetDataCount()
+        accelerationSensor.resetDataCount()
+    }
 
 }
