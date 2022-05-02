@@ -13,4 +13,8 @@ interface SensorDatastore {
     fun getOrientationSensorData(): DataSensor
     fun getAccelerometerSensorData(): DataSensor
 
+    fun stopRegisterData()
+    fun startRegisterData()
+    fun resetDataCount()
+
 }

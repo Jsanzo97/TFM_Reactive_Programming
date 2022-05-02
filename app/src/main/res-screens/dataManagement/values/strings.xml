@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="players">%1$d Players</string>
+    <plurals name="players">
+        <item quantity="one">%1$d Player</item>
+        <item quantity="other">%1$d Players</item>
+    </plurals>
     <string name="reactive_result_text">Reactive result</string>
     <string name="functional_result_text">Functional result</string>
     <string name="load_reactive_data_text">Load reactive data</string>

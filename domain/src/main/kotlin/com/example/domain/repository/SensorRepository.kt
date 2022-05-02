@@ -13,5 +13,8 @@ interface SensorRepository {
     fun getOrientationSensorData(): SensorResult
     fun getAccelerometerSensorData(): SensorResult
 
+    fun stopRegisterData()
+    fun startRegisterData()
+    fun resetDataCount()
 
 }

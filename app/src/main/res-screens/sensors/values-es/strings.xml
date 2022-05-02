@@ -10,12 +10,18 @@
     <string name="orientation_value">Rotación: \n
                 X: %1$s \n
                 Y: %2$s \n
-                Z: %3$s \n
+                Z: %3$s
     </string>
     <string name="acceleration_value">Aceleración: \n
                 X: %1$s \n
                 Y: %2$s \n
-                Z: %3$s \n
+                Z: %3$s
     </string>
+
+    <string name="data_collected">Datos recogidos: %1$d</string>
+    <string name="data_generated">Datos generados: %1$d</string>
+    <string name="data_performance">Efectividad: %1$s</string>
+
+    <string name="bar_description">Tiempo de espera para actuzalizar los datos de forma funcional</string>
 
 </resources>
