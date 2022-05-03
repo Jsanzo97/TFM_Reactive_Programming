@@ -15,21 +15,21 @@ class CollectionsDataRepository (
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> = withContext(dispatcher) {
+    ): List<Int> =
         collectionsDatastore.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
             numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
         )
-    }
+
 
     override suspend fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> = withContext(dispatcher) {
+    ): List<Int> =
         collectionsDatastore.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
             numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
         )
-    }
+
 
 }

@@ -28,13 +28,10 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         showLogoutButton = true
     )
 
-    private val listLength = 5000000
+    private val sequenceTestCasesResults = mutableListOf<BigCollectionsTestCaseResult>()
+    private val listTestCasesResults = mutableListOf<BigCollectionsTestCaseResult>()
 
-    private var firstListOfElements = listOf<Int>()
-    private var secondListOfElements = listOf<Int>()
-
-    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) =
-        Unit
+    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -42,59 +39,78 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         setupViewModelLiveData()
 
         setupListeners()
-
-        try {
-            firstListOfElements = List(listLength) { it }
-        } catch (e: Throwable) {
-            showError("Error in sequence $e")
-        }
-
-        try {
-            secondListOfElements = List(listLength) { it }
-        } catch (e: Throwable) {
-            showError("Error in list $e")
-        }
     }
 
     private fun setupViewModelLiveData() {
         bigCollectionsViewModel.bigCollectionsViewModelLiveData.observe(this, Observer { state ->
             when (state) {
                 is PerformingOperation -> {}
-                is SequenceOperationFinished -> {
-                    sequenceOperationResultText.text =
-                        "Sequence operations done in ${state.timeNeeded} filtered elements are ${state.elements.size}"
+                is ExecuteNextSequenceTestCase -> {
+                    executeSequenceTestCases(state.previousTestCaseResult.id + 1)
+                    sequenceTestCasesResults.add(state.previousTestCaseResult)
+
                 }
-                is ListOperationFinished -> {
+                is SequenceTestCasesFinished -> {
+                    sequenceTestCasesResults.add(state.testCaseResult)
+                    var text = ""
+                    sequenceTestCasesResults.forEach {
+                        text += "Sequence op ${it.id} in ${it.time} to take ${it.elements.size} elements \n"
+                    }
+                    sequenceOperationResultText.text = text
+                    executeListTestCases()
+                }
+                is SequenceOperationError -> {
+                    sequenceOperationResultText.text =
+                        "Error in sequence ${state.message}"
+                }
+                is ExecuteNextListTestCase -> {
+                    executeListTestCases(state.previousTestCaseResult.id + 1)
+                    listTestCasesResults.add(state.previousTestCaseResult)
+                }
+                is ListTestCasesFinished -> {
+                    listTestCasesResults.add(state.testCaseResult)
+                    var text = ""
+                    listTestCasesResults.forEach {
+                        text += "List op ${it.id} in ${it.time} to take ${it.elements.size} elements \n"
+                    }
+                    listOperationResultText.text = text
+                }
+                is ListOperationError -> {
                     listOperationResultText.text =
-                        "List operations done in ${state.timeNeeded} filtered elements are ${state.elements.size}"
+                        "Error in list ${state.message}"
                 }
             }
         })
     }
 
     private fun setupListeners() {
-        calculateOperationButton.setOnClickListener { setupAndLaunchOperations() }
+        calculateOperationButton.setOnClickListener { executeSequenceTestCases() }
     }
 
-    private fun setupAndLaunchOperations() {
-        val maxNumberToEvaluate = 3000000
-        val numbersToTake = 10000
-        val maxNumberLength = 9
+    private fun executeSequenceTestCases(testCaseNumber: Int = 0) {
+        val testCase = defaultTestCases[testCaseNumber]
+        try {
+            val sequenceOfElements = generateSequence(0) { it + 1 }.take(testCase.listLength)
+            bigCollectionsViewModel.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+                sequenceOfElements,
+                testCase
+            )
+        } catch (e: Throwable) {
+            bigCollectionsViewModel.errorInSequenceOperation(e)
+        }
+    }
 
-        bigCollectionsViewModel.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
-            secondListOfElements,
-            maxNumberToEvaluate,
-            numbersToTake,
-            maxNumberLength
-        )
-
-        bigCollectionsViewModel.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
-            firstListOfElements.asSequence(),
-            maxNumberToEvaluate,
-            numbersToTake,
-            maxNumberLength
-        )
-
+    private fun executeListTestCases(testCaseNumber: Int = 0) {
+        val testCase = defaultTestCases[testCaseNumber]
+        try {
+            val listOfElements = List(testCase.listLength) { it }
+            bigCollectionsViewModel.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
+                listOfElements,
+                testCase
+            )
+        } catch (e: Throwable) {
+            bigCollectionsViewModel.errorInListOperation(e)
+        }
     }
 }
 
