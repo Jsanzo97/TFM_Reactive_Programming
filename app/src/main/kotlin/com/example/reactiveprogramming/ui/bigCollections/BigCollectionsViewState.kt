@@ -3,6 +3,12 @@ package com.example.reactiveprogramming.ui.bigCollections
 sealed class BigCollectionsViewState
 
 object PerformingOperation: BigCollectionsViewState()
-class SequenceOperationFinished(val elements: List<Int>, val timeNeeded: Double): BigCollectionsViewState()
-class ListOperationFinished(val elements: List<Int>, val timeNeeded: Double): BigCollectionsViewState()
+
+class ExecuteNextSequenceTestCase(val previousTestCaseResult: BigCollectionsTestCaseResult): BigCollectionsViewState()
+class SequenceTestCasesFinished(val testCaseResult: BigCollectionsTestCaseResult): BigCollectionsViewState()
+class SequenceOperationError(val message: String): BigCollectionsViewState()
+
+class ExecuteNextListTestCase(val previousTestCaseResult: BigCollectionsTestCaseResult): BigCollectionsViewState()
+class ListTestCasesFinished(val testCaseResult: BigCollectionsTestCaseResult): BigCollectionsViewState()
+class ListOperationError(val message: String): BigCollectionsViewState()
 

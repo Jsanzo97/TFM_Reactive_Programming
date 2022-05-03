@@ -12,7 +12,7 @@ class BigCollectionsViewModel(
     private val findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase:
         FindFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase,
     private val findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase:
-    FindFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase
+        FindFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase
 ): ViewModel() {
 
     private val _bigCollectionsViewModelLiveData = MutableLiveData<BigCollectionsViewState>()
@@ -20,43 +20,104 @@ class BigCollectionsViewModel(
 
     fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
-        maxNumbersToEvaluate: Int,
-        numbersToTake: Int,
-        maxNumberLength: Int
+        testCase: BigCollectionsTestCase
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
         val startTimeOperation = System.currentTimeMillis()
 
         viewModelScope.launch {
-            _bigCollectionsViewModelLiveData.value = ListOperationFinished(
-                findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase(
-                    numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
-                ),
-                (System.currentTimeMillis() - startTimeOperation) / 1000.0
-            )
+            if (testCase.id != -1) {
+                val result = findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                    numberList,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
+
+                val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
+
+                _bigCollectionsViewModelLiveData.value = ExecuteNextListTestCase(
+                    BigCollectionsTestCaseResult(
+                        testCase.id,
+                        time,
+                        result
+                    )
+                )
+            } else {
+                val result = findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                    numberList,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
+
+                val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
+
+                _bigCollectionsViewModelLiveData.value = ListTestCasesFinished(
+                    BigCollectionsTestCaseResult(
+                        testCase.id,
+                        time,
+                        result
+                    )
+                )
+            }
         }
     }
 
+    fun errorInSequenceOperation(e: Throwable) {
+        _bigCollectionsViewModelLiveData.postValue(SequenceOperationError(e.toString()))
+    }
 
     fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
-        maxNumbersToEvaluate: Int,
-        numbersToTake: Int,
-        maxNumberLength: Int
+        testCase: BigCollectionsTestCase
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
         val startTimeOperation = System.currentTimeMillis()
 
         viewModelScope.launch {
-            _bigCollectionsViewModelLiveData.value = SequenceOperationFinished(
-                findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
-                    numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
-                ),
-                (System.currentTimeMillis() - startTimeOperation) / 1000.0
-            )
+            if (testCase.id != -1) {
+                val result = findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                    numberList,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
+
+                val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
+
+                _bigCollectionsViewModelLiveData.value = ExecuteNextSequenceTestCase(
+                    BigCollectionsTestCaseResult(
+                        testCase.id,
+                        time,
+                        result
+                    )
+                )
+            } else {
+                val result = findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                    numberList,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
+
+                val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
+
+                _bigCollectionsViewModelLiveData.value = SequenceTestCasesFinished(
+                    BigCollectionsTestCaseResult(
+                        testCase.id,
+                        time,
+                        result
+                    )
+                )
+            }
         }
+    }
+
+    fun errorInListOperation(e: Throwable) {
+        _bigCollectionsViewModelLiveData.postValue(ListOperationError(e.toString()))
     }
 
 }
