@@ -5,7 +5,7 @@ import com.example.domain.repository.CollectionsRepository
 class FindFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
     private val collectionsRepository: CollectionsRepository
 ) {
-    suspend operator fun invoke(
+    operator fun invoke(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,

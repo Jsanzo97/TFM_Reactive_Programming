@@ -5,7 +5,7 @@ import com.example.data.datastore.CollectionsDatastore
 
 class CollectionsStorage: CollectionsDatastore {
 
-    override suspend fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
+    override fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
@@ -14,7 +14,7 @@ class CollectionsStorage: CollectionsDatastore {
         numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
     )
 
-    override suspend fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+    override fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,

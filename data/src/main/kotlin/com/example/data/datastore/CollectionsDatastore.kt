@@ -2,14 +2,14 @@ package com.example.data.datastore
 
 interface CollectionsDatastore {
 
-    suspend fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
+    fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
     ): List<Int>
 
-    suspend fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+    fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,

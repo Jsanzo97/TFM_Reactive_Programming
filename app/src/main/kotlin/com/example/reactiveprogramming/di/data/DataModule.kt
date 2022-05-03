@@ -47,7 +47,7 @@ val dataModule = module {
 
     single<SensorRepository> { SensorDataRepository(get()) }
 
-    single<CollectionsRepository> { CollectionsDataRepository(get(), Dispatchers.Default) }
+    single<CollectionsRepository> { CollectionsDataRepository(get()) }
 
 
     /* DATASTORE */

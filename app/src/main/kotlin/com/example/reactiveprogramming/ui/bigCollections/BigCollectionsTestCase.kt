@@ -51,13 +51,12 @@ val defaultTestCases = listOf(
         6
     ),
     BigCollectionsTestCase(
-        -1,
+        5,
         10000000,
         500000,
         10000,
         7
-    )
-    /*
+    ),
     BigCollectionsTestCase(
         -1,
         100000000,
@@ -65,6 +64,4 @@ val defaultTestCases = listOf(
         100000,
         8
     )
-
-     */
 )

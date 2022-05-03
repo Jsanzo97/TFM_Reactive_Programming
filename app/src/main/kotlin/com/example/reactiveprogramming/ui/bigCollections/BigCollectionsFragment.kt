@@ -44,40 +44,57 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
     private fun setupViewModelLiveData() {
         bigCollectionsViewModel.bigCollectionsViewModelLiveData.observe(this, Observer { state ->
             when (state) {
-                is PerformingOperation -> {}
+                is PerformingOperation -> { showProgressDialog() }
                 is ExecuteNextSequenceTestCase -> {
-                    executeSequenceTestCases(state.previousTestCaseResult.id + 1)
-                    sequenceTestCasesResults.add(state.previousTestCaseResult)
+                    sequenceOperationResultText.text =
+                        sequenceOperationResultText.text.toString() +
+                            "Sequence op ${state.previousTestCaseResult.id} " +
+                            "in ${state.previousTestCaseResult.time} " +
+                            "to take ${state.previousTestCaseResult.elements.size} elements \n"
 
+                    sequenceTestCasesResults.add(state.previousTestCaseResult)
+                    executeSequenceTestCases(state.previousTestCaseResult.id + 1)
                 }
                 is SequenceTestCasesFinished -> {
+                    sequenceOperationResultText.text =
+                        sequenceOperationResultText.text.toString() +
+                                "Sequence op ${state.testCaseResult.id} " +
+                                "in ${state.testCaseResult.time} " +
+                                "to take ${state.testCaseResult.elements.size} elements \n"
+
                     sequenceTestCasesResults.add(state.testCaseResult)
-                    var text = ""
-                    sequenceTestCasesResults.forEach {
-                        text += "Sequence op ${it.id} in ${it.time} to take ${it.elements.size} elements \n"
-                    }
-                    sequenceOperationResultText.text = text
                     executeListTestCases()
+                    hideProgressDialog()
                 }
                 is SequenceOperationError -> {
                     sequenceOperationResultText.text =
-                        "Error in sequence ${state.message}"
+                        sequenceOperationResultText.text.toString() +
+                                "Error in sequence ${state.message}"
+                    hideProgressDialog()
                 }
                 is ExecuteNextListTestCase -> {
+                    listOperationResultText.text =
+                        listOperationResultText.text.toString() +
+                                "List op ${state.previousTestCaseResult.id} " +
+                                "in ${state.previousTestCaseResult.time} " +
+                                "to take ${state.previousTestCaseResult.elements.size} elements \n"
+
                     executeListTestCases(state.previousTestCaseResult.id + 1)
                     listTestCasesResults.add(state.previousTestCaseResult)
                 }
                 is ListTestCasesFinished -> {
-                    listTestCasesResults.add(state.testCaseResult)
-                    var text = ""
-                    listTestCasesResults.forEach {
-                        text += "List op ${it.id} in ${it.time} to take ${it.elements.size} elements \n"
-                    }
-                    listOperationResultText.text = text
+                    listOperationResultText.text =
+                        listOperationResultText.text.toString() +
+                                "List op ${state.testCaseResult.id} " +
+                                "in ${state.testCaseResult.time} " +
+                                "to take ${state.testCaseResult.elements.size} elements \n"
+                    hideProgressDialog()
                 }
                 is ListOperationError -> {
                     listOperationResultText.text =
-                        "Error in list ${state.message}"
+                        listOperationResultText.text.toString() +
+                                "Error in list ${state.message}"
+                    hideProgressDialog()
                 }
             }
         })
