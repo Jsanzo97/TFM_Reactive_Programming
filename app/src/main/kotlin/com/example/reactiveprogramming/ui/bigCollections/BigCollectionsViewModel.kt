@@ -1,5 +1,6 @@
 package com.example.reactiveprogramming.ui.bigCollections
 
+import android.os.AsyncTask
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -24,9 +25,9 @@ class BigCollectionsViewModel(
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
-        val startTimeOperation = System.currentTimeMillis()
+        AsyncTask.execute {
+            val startTimeOperation = System.currentTimeMillis()
 
-        viewModelScope.launch {
             if (testCase.id != -1) {
                 val result = findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigitsUseCase(
                     numberList,
@@ -37,11 +38,13 @@ class BigCollectionsViewModel(
 
                 val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
 
-                _bigCollectionsViewModelLiveData.value = ExecuteNextListTestCase(
-                    BigCollectionsTestCaseResult(
-                        testCase.id,
-                        time,
-                        result
+                _bigCollectionsViewModelLiveData.postValue(
+                    ExecuteNextListTestCase(
+                        BigCollectionsTestCaseResult(
+                            testCase.id,
+                            time,
+                            result
+                        )
                     )
                 )
             } else {
@@ -54,11 +57,13 @@ class BigCollectionsViewModel(
 
                 val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
 
-                _bigCollectionsViewModelLiveData.value = ListTestCasesFinished(
-                    BigCollectionsTestCaseResult(
-                        testCase.id,
-                        time,
-                        result
+                _bigCollectionsViewModelLiveData.postValue(
+                    ListTestCasesFinished(
+                        BigCollectionsTestCaseResult(
+                            testCase.id,
+                            time,
+                            result
+                        )
                     )
                 )
             }
@@ -75,41 +80,47 @@ class BigCollectionsViewModel(
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
-        val startTimeOperation = System.currentTimeMillis()
+        AsyncTask.execute {
+            val startTimeOperation = System.currentTimeMillis()
 
-        viewModelScope.launch {
             if (testCase.id != -1) {
-                val result = findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
-                    numberList,
-                    testCase.maxNumberToEvaluate,
-                    testCase.numbersToTake,
-                    testCase.maxNumberLength
-                )
+                val result =
+                    findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                        numberList,
+                        testCase.maxNumberToEvaluate,
+                        testCase.numbersToTake,
+                        testCase.maxNumberLength
+                    )
 
                 val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
 
-                _bigCollectionsViewModelLiveData.value = ExecuteNextSequenceTestCase(
-                    BigCollectionsTestCaseResult(
-                        testCase.id,
-                        time,
-                        result
+                _bigCollectionsViewModelLiveData.postValue(
+                    ExecuteNextSequenceTestCase(
+                        BigCollectionsTestCaseResult(
+                            testCase.id,
+                            time,
+                            result
+                        )
                     )
                 )
             } else {
-                val result = findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
-                    numberList,
-                    testCase.maxNumberToEvaluate,
-                    testCase.numbersToTake,
-                    testCase.maxNumberLength
-                )
+                val result =
+                    findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+                        numberList,
+                        testCase.maxNumberToEvaluate,
+                        testCase.numbersToTake,
+                        testCase.maxNumberLength
+                    )
 
                 val time = (System.currentTimeMillis() - startTimeOperation) / 1000.0
 
-                _bigCollectionsViewModelLiveData.value = SequenceTestCasesFinished(
-                    BigCollectionsTestCaseResult(
-                        testCase.id,
-                        time,
-                        result
+                _bigCollectionsViewModelLiveData.postValue(
+                    SequenceTestCasesFinished(
+                        BigCollectionsTestCaseResult(
+                            testCase.id,
+                            time,
+                            result
+                        )
                     )
                 )
             }

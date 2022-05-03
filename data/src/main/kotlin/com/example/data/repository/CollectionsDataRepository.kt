@@ -6,11 +6,10 @@ import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.withContext
 
 class CollectionsDataRepository (
-    private val collectionsDatastore: CollectionsDatastore,
-    private val dispatcher: CoroutineDispatcher
+    private val collectionsDatastore: CollectionsDatastore
 ) : CollectionsRepository {
 
-    override suspend fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
+    override fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
@@ -21,7 +20,7 @@ class CollectionsDataRepository (
         )
 
 
-    override suspend fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+    override fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
