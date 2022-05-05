@@ -6,8 +6,6 @@
     <string name="sensors_fragment">Sensors</string>
     <string name="big_collections_fragment">Big data collections</string>
 
-    <string name="error_update_team">Error when try to update team: %1$s</string>
-    <string name="error_remove_team">Error when try to remove team: %1$s</string>
-    <string name="error_create_team">Error when try to create team: %1$s</string>
+    <string name="home_fragment_description"></string>
 
 </resources>
