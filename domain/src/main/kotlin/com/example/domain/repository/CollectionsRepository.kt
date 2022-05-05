@@ -1,5 +1,7 @@
 package com.example.domain.repository
 
+import com.example.domain.entity.CollectionsResult
+
 interface CollectionsRepository {
 
     fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
@@ -7,13 +9,13 @@ interface CollectionsRepository {
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int>
+    ): CollectionsResult
 
     fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int>
+    ): CollectionsResult
 
 }

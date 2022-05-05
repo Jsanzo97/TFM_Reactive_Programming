@@ -36,6 +36,7 @@ object Versions {
     const val arrow = "0.10.0"
     const val threeTenABP = "1.2.1"
     const val koin = "2.0.1"
+    const val androidCharts = "3.1.0"
 
     const val debugDb = "1.0.6"
 }
@@ -69,7 +70,7 @@ object Libs {
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
     const val koinAndroidScope = "org.koin:koin-androidx-scope:${Versions.koin}"
     const val koinAndroidViewModel = "org.koin:koin-androidx-viewmodel:${Versions.koin}"
-
+    const val androidCharts = "com.github.PhilJay:MPAndroidChart:${Versions.androidCharts}"
 }
 
 object Kapt {

@@ -133,6 +133,7 @@ dependencies {
     implementation(Libs.arrowCore)
     implementation(Libs.roomKtx)
     implementation(Libs.threeTenABP)
+    implementation(Libs.androidCharts)
 
     debugImplementation(DebugLibs.debugDb)
 
