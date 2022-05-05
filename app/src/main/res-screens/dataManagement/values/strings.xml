@@ -13,4 +13,8 @@
     <string name="update_random_team_text">Update random team</string>
     <string name="remove_random_team_text">Remove random team</string>
 
+    <string name="error_update_team">Error when try to update team: %1$s</string>
+    <string name="error_remove_team">Error when try to remove team: %1$s</string>
+    <string name="error_create_team">Error when try to create team: %1$s</string>
+
 </resources>
