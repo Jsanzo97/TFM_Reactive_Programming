@@ -1,5 +1,7 @@
 package com.example.data.datastore
 
+import com.example.data.entity.DataCollectionResult
+
 interface CollectionsDatastore {
 
     fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
@@ -7,13 +9,13 @@ interface CollectionsDatastore {
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int>
+    ): DataCollectionResult
 
     fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int>
+    ): DataCollectionResult
 
 }

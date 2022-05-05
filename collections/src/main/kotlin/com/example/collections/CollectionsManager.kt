@@ -2,16 +2,20 @@ package com.example.collections
 
 class CollectionsManager {
 
-    /* Given number list of N elements, take the M first odd numbers, calculate the square of each one, take only prime
-       numbers and remove those that has more than D digits.
+    /* Given number list of N elements,
+       Take the M first odd numbers,
+       Then take only primes,
+       Then calculate the square of each one,
+       And finally remove those that has more than D digits.
      */
-    fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
+    fun findFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> {
-        return numberList
+    ): CollectionsManagerResult {
+        val startTime = System.currentTimeMillis()
+        val elements = numberList
             .takeWhile { it < maxNumbersToEvaluate }
             .filter { it % 2 != 0 }
             .take(numbersToTake)
@@ -20,18 +24,27 @@ class CollectionsManager {
             .map { it.toString() }
             .filter { it.length < maxNumberLength }
             .map { it.toInt() }
+        val endTime = System.currentTimeMillis()
+        return CollectionsManagerResult(
+            elements,
+            (endTime - startTime) / 1000.0
+        )
     }
 
-    /* Given number sequence of N elements, take the M first odd numbers, calculate the square of each one, take only prime
-       numbers and remove those that has more than D digits.
+    /* Given number sequence of N elements,
+       Take the M first odd numbers,
+       Then take only primes,
+       Then calculate the square of each one,
+       And finally remove those that has more than D digits.
      */
-    fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+    fun findFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> {
-        return numberList
+    ): CollectionsManagerResult {
+        val startTime = System.currentTimeMillis()
+        val elements = numberList
             .takeWhile { it < maxNumbersToEvaluate }
             .filter { it % 2 != 0 }
             .take(numbersToTake)
@@ -41,6 +54,11 @@ class CollectionsManager {
             .filter { it.length < maxNumberLength }
             .map { it.toInt() }
             .toList()
+        val endTime = System.currentTimeMillis()
+        return CollectionsManagerResult(
+            elements,
+            (endTime - startTime) / 1000.0
+        )
     }
 
     private fun Int.isPrime(): Boolean {

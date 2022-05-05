@@ -1,8 +1,11 @@
 package com.example.data.repository
 
 import com.example.data.datastore.CollectionsDatastore
+import com.example.data.entity.toCollectionResult
+import com.example.domain.entity.CollectionsResult
 import com.example.domain.repository.CollectionsRepository
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 
 class CollectionsDataRepository (
@@ -14,21 +17,19 @@ class CollectionsDataRepository (
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> =
+    ): CollectionsResult =
         collectionsDatastore.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
             numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
-        )
-
+        ).toCollectionResult()
 
     override fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
-    ): List<Int> =
+    ): CollectionsResult =
         collectionsDatastore.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
             numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
-        )
-
+        ).toCollectionResult()
 
 }

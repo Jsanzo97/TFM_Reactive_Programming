@@ -2,7 +2,7 @@ package com.example.domain.usecase
 
 import com.example.domain.repository.CollectionsRepository
 
-class FindFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigitsUseCase(
+class FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
     private val collectionsRepository: CollectionsRepository
 ) {
     operator fun invoke(
