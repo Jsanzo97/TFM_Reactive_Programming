@@ -7,13 +7,47 @@
     android:background="@color/colorPrimary">
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/sequence_result_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Prueba Big Collections Fragment"
+        android:layout_margin="@dimen/small_space"
+        android:text="Sequence Result"
         android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/list_result_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/small_space"
+        android:text="List result"
+        android:textColor="@color/white"
+        app:layout_constraintTop_toBottomOf="@id/sequence_result_text"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/calculate_operation_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginTop="@dimen/small_space"
+        android:layout_marginBottom="@dimen/big_space"
+        android:text="Calculate operation"
+        style="@style/AppTheme.Button.White"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.github.mikephil.charting.charts.LineChart
+        android:id="@+id/result_chart"
+        android:layout_width="@dimen/zero"
+        android:layout_height="@dimen/zero"
+        android:layout_margin="@dimen/small_space"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/list_result_text"
+        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

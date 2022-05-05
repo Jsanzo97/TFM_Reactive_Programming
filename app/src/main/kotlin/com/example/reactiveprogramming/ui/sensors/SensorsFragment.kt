@@ -3,15 +3,19 @@ package com.example.reactiveprogramming.ui.sensors
 import android.hardware.Sensor.*
 import android.os.Bundle
 import android.view.View
+import android.widget.SeekBar
+import androidx.appcompat.widget.AppCompatSeekBar
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
 import com.example.common.fragment.CustomFragment
 import com.example.domain.entity.SensorResult
+import com.example.domain.entity.reset
 import com.example.reactiveprogramming.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
-import kotlinx.coroutines.Job
+import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.cancellable
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
@@ -29,6 +33,9 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     private val reactiveAccelerationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_result_text) }
     private val reactiveAccelerationMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_max_result_text) }
     private val reactiveAccelerationMinResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_min_result_text) }
+    private val reactiveDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_collected_text) }
+    private val reactiveDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_generated_text) }
+    private val reactiveDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_performance_text) }
 
     private val functionalBrightnessResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_brightness_result_text) }
     private val functionalBrightnessMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_brightness_max_result_text) }
@@ -39,30 +46,57 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     private val functionalAccelerationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_result_text) }
     private val functionalAccelerationMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_max_result_text) }
     private val functionalAccelerationMinResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_min_result_text) }
+    private val functionalDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_collected_text) }
+    private val functionalDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_generated_text) }
+    private val functionalDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_performance_text) }
+
+    private val functionalDelayDataCollectDelaySelectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_delay_data_collect_value_text) }
+    private val functionalDelayDataCollectBar by lazy { requireView().findViewById<AppCompatSeekBar>(R.id.functional_delay_data_collect_bar)}
 
     private val startUpdateSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.start_update_sensor_data_button) }
     private val stopUpdateSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.stop_update_sensor_data_button) }
-    private val updateSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.update_sensor_data_button) }
     private val clearSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.clear_sensor_data_button) }
 
     private var brightnessDataFlow: Job? = null
     private var orientationDataFlow: Job? = null
     private var accelerationDataFlow: Job? = null
 
+    private var reactiveBrightnessValue = SensorResult(sensorType = TYPE_LIGHT)
     private var reactiveBrightnessMaxValue = SensorResult(sensorType = TYPE_LIGHT)
     private var reactiveBrightnessMinValue = SensorResult(sensorType = TYPE_LIGHT)
+    private var reactiveOrientationValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
     private var reactiveOrientationMaxValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
     private var reactiveOrientationMinValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
+    private var reactiveAccelerationValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
     private var reactiveAccelerationMaxValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
     private var reactiveAccelerationMinValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
 
+    private var brightnessSensorDataGenerated = 0L
+    private var orientationSensorDataGenerated = 0L
+    private var accelerationSensorDataGenerated = 0L
+
+    private var reactiveBrightnessSensorDataCollected = 0L
+    private var reactiveOrientationSensorDataCollected = 0L
+    private var reactiveAccelerationSensorDataCollected = 0L
+
+    private var functionalBrightnessSensorDataCollected = 0L
+    private var functionalOrientationSensorDataCollected = 0L
+    private var functionalAccelerationSensorDataCollected = 0L
+
+    private var functionalBrightnessValue = SensorResult(sensorType = TYPE_LIGHT)
     private var functionalBrightnessMaxValue = SensorResult(sensorType = TYPE_LIGHT)
     private var functionalBrightnessMinValue = SensorResult(sensorType = TYPE_LIGHT)
+    private var functionalOrientationValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
     private var functionalOrientationMaxValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
     private var functionalOrientationMinValue = SensorResult(sensorType = TYPE_ROTATION_VECTOR)
+    private var functionalAccelerationValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
     private var functionalAccelerationMaxValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
     private var functionalAccelerationMinValue = SensorResult(sensorType = TYPE_LINEAR_ACCELERATION)
 
+    private var shouldCollectSensorData = false
+    private var delayToCollectData = 500
+    private val minDelayToCollectData = 1
+    private val defaultDelayToCollectData = 500
 
     override var uiConfigurationViewState = UiConfigurationViewState(
         showToolbar = true,
@@ -78,25 +112,44 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         super.onViewCreated(view, savedInstanceState)
 
         setupListeners()
+        clearSensorData()
     }
 
     private fun setupListeners() {
         startUpdateSensorDataButton.setOnClickListener { startUpdateSensorData() }
         stopUpdateSensorDataButton.setOnClickListener { stopUpdateSensorData() }
-        updateSensorDataButton.setOnClickListener { updateSensorData() }
         clearSensorDataButton.setOnClickListener { clearSensorData() }
+
+        functionalDelayDataCollectBar.setOnSeekBarChangeListener(object: SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar, progress: Int, fromUser: Boolean) {
+                if (progress < minDelayToCollectData) {
+                    seekBar.progress = minDelayToCollectData
+                }
+                delayToCollectData = progress
+                functionalDelayDataCollectDelaySelectedText.text = progress.toString()
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) { /* no-op */ }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) { /* no-op */ }
+        })
     }
 
     private fun startUpdateSensorData() {
-        sensorsViewModel.initializeBrightnessSensor()
-        sensorsViewModel.initializeOrientationSensor()
-        sensorsViewModel.initializeAccelerationSensor()
+        shouldCollectSensorData = true
+        startUpdateSensorDataButton.isEnabled = false
 
         brightnessDataFlow = lifecycleScope.launchWhenStarted {
-            startUpdateSensorDataButton.isEnabled = false
             sensorsViewModel.getBrightSensorFlow().let { flow ->
                 flow.cancellable().collectLatest { sensorData ->
-                    reactiveBrightnessResultText.text = sensorData.formatToString(requireContext())
+                    brightnessSensorDataGenerated = sensorData.numberOfDataGenerated
+                    reactiveBrightnessSensorDataCollected++
+                    reactiveBrightnessValue = sensorData
+
+                    updateDataCollected()
+
+                    reactiveBrightnessResultText.text = reactiveBrightnessValue.formatToString(requireContext())
+
                     checkSensorValue(
                         sensorData,
                         reactiveBrightnessMaxValue,
@@ -104,6 +157,7 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
                         reactiveBrightnessMaxResultText,
                         reactiveBrightnessMinResultText
                     )
+
                 }
             }
         }
@@ -111,7 +165,14 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         orientationDataFlow = lifecycleScope.launchWhenStarted {
             sensorsViewModel.getOrientationSensorFlow().let { flow ->
                 flow.cancellable().collectLatest { sensorData ->
-                    reactiveOrientationResultText.text = sensorData.formatToString(requireContext())
+                    orientationSensorDataGenerated = sensorData.numberOfDataGenerated
+                    reactiveOrientationSensorDataCollected++
+                    reactiveOrientationValue = sensorData
+
+                    updateDataCollected()
+
+                    reactiveOrientationResultText.text = reactiveOrientationValue.formatToString(requireContext())
+
                     checkSensorValue(
                         sensorData,
                         reactiveOrientationMaxValue,
@@ -126,7 +187,14 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         accelerationDataFlow = lifecycleScope.launchWhenStarted {
             sensorsViewModel.getAccelerometerSensorFlow().let { flow ->
                 flow.cancellable().collectLatest { sensorData ->
-                    reactiveAccelerationResultText.text = sensorData.formatToString(requireContext())
+                    accelerationSensorDataGenerated = sensorData.numberOfDataGenerated
+                    reactiveAccelerationSensorDataCollected++
+                    reactiveAccelerationValue = sensorData
+
+                    updateDataCollected()
+
+                    reactiveAccelerationResultText.text = reactiveAccelerationValue.formatToString(requireContext())
+
                     checkSensorValue(
                         sensorData,
                         reactiveAccelerationMaxValue,
@@ -134,6 +202,25 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
                         reactiveAccelerationMaxResultText,
                         reactiveAccelerationMinResultText
                     )
+                }
+            }
+        }
+
+        sensorsViewModel.startMeasureSensorData()
+
+        startCollectFunctionalData()
+    }
+
+    private fun startCollectFunctionalData() {
+        sensorsViewModel.viewModelScope.launch {
+            runCatching {
+                withContext(Dispatchers.Default) {
+                    while(shouldCollectSensorData) {
+                        withContext(Dispatchers.Main) {
+                            updateFunctionalSensorData()
+                        }
+                        Thread.sleep(delayToCollectData.toLong())
+                    }
                 }
             }
         }
@@ -145,7 +232,6 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         minValueToCompareWith: SensorResult,
         maxTextToUpdate: MaterialTextView,
         minTextToUpdate: MaterialTextView
-
     ) {
         if (sensorData.sensorType == TYPE_LIGHT && minValueToCompareWith.valueX == 0f) {
             minValueToCompareWith.valueX = sensorData.valueX
@@ -165,44 +251,26 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     }
 
     private fun stopUpdateSensorData() {
+        shouldCollectSensorData = false
         brightnessDataFlow?.cancel()
         orientationDataFlow?.cancel()
         accelerationDataFlow?.cancel()
         startUpdateSensorDataButton.isEnabled = true
+        sensorsViewModel.stopMeasureSensorData()
     }
 
-    private fun updateSensorData() {
-        reactiveBrightnessResultText.text = sensorsViewModel.getBrightnessSensorData().formatToString(requireContext())
-        reactiveOrientationResultText.text = sensorsViewModel.getOrientationSensorData().formatToString(requireContext())
-        reactiveAccelerationResultText.text = sensorsViewModel.getAccelerometerSensorData().formatToString(requireContext())
+    private fun updateFunctionalSensorData() {
+        functionalBrightnessSensorDataCollected++
+        functionalOrientationSensorDataCollected++
+        functionalAccelerationSensorDataCollected++
 
-        functionalBrightnessResultText.text = sensorsViewModel.getBrightnessSensorData().formatToString(requireContext())
-        functionalOrientationResultText.text = sensorsViewModel.getOrientationSensorData().formatToString(requireContext())
-        functionalAccelerationResultText.text = sensorsViewModel.getAccelerometerSensorData().formatToString(requireContext())
+        functionalBrightnessValue = sensorsViewModel.getBrightnessSensorData()
+        functionalOrientationValue = sensorsViewModel.getOrientationSensorData()
+        functionalAccelerationValue = sensorsViewModel.getAccelerometerSensorData()
 
-        checkSensorValue(
-            sensorsViewModel.getBrightnessSensorData(),
-            reactiveBrightnessMaxValue,
-            reactiveBrightnessMinValue,
-            reactiveBrightnessMaxResultText,
-            reactiveBrightnessMinResultText
-        )
-
-        checkSensorValue(
-            sensorsViewModel.getOrientationSensorData(),
-            reactiveOrientationMaxValue,
-            reactiveOrientationMinValue,
-            reactiveOrientationMaxResultText,
-            reactiveOrientationMinResultText
-        )
-
-        checkSensorValue(
-            sensorsViewModel.getAccelerometerSensorData(),
-            reactiveAccelerationMaxValue,
-            reactiveAccelerationMinValue,
-            reactiveAccelerationMaxResultText,
-            reactiveAccelerationMinResultText
-        )
+        functionalBrightnessResultText.text = functionalBrightnessValue.formatToString(requireContext())
+        functionalOrientationResultText.text = functionalOrientationValue.formatToString(requireContext())
+        functionalAccelerationResultText.text = functionalAccelerationValue.formatToString(requireContext())
 
         checkSensorValue(
             sensorsViewModel.getBrightnessSensorData(),
@@ -227,72 +295,103 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
             functionalAccelerationMaxResultText,
             functionalAccelerationMinResultText
         )
+
+        updateDataCollected()
+    }
+
+    private fun updateDataCollected() {
+        val totalReactiveCollectedValue = reactiveBrightnessSensorDataCollected + reactiveOrientationSensorDataCollected + reactiveAccelerationSensorDataCollected
+        val totalFunctionalCollectedValue = functionalBrightnessSensorDataCollected + functionalOrientationSensorDataCollected + functionalAccelerationSensorDataCollected
+        val totalGeneratedValue = brightnessSensorDataGenerated + orientationSensorDataGenerated + accelerationSensorDataGenerated
+
+        reactiveDataCollectedText.text = getString(R.string.data_collected, totalReactiveCollectedValue)
+        reactiveDataGeneratedText.text = getString(R.string.data_generated, totalGeneratedValue)
+        reactiveDataPerformanceText.text = getString(R.string.data_performance, formatToPercentage(totalReactiveCollectedValue, totalGeneratedValue))
+
+        functionalDataCollectedText.text = getString(R.string.data_collected, totalFunctionalCollectedValue)
+        functionalDataGeneratedText.text = getString(R.string.data_generated, totalGeneratedValue)
+        functionalDataPerformanceText.text = getString(R.string.data_performance, formatToPercentage(totalFunctionalCollectedValue, totalGeneratedValue))
     }
 
     private fun clearSensorData() {
         stopUpdateSensorData()
 
-        reactiveBrightnessResultText.text = null
-        reactiveOrientationResultText.text = null
-        reactiveAccelerationResultText.text = null
+        sensorsViewModel.resetMeasureSensorData()
 
-        reactiveBrightnessMaxValue.valueX = 0f
-        reactiveBrightnessMinValue.valueX = 0f
+        brightnessSensorDataGenerated = 0L
+        orientationSensorDataGenerated = 0L
+        accelerationSensorDataGenerated = 0L
 
-        reactiveBrightnessMaxResultText.text = null
-        reactiveBrightnessMinResultText.text = null
+        reactiveBrightnessSensorDataCollected = 0L
+        reactiveOrientationSensorDataCollected = 0L
+        reactiveAccelerationSensorDataCollected = 0L
 
-        reactiveOrientationMaxValue.valueX = 0f
-        reactiveOrientationMaxValue.valueY = 0f
-        reactiveOrientationMaxValue.valueZ = 0f
-        reactiveOrientationMinValue.valueX = 0f
-        reactiveOrientationMinValue.valueY = 0f
-        reactiveOrientationMinValue.valueZ = 0f
+        functionalBrightnessSensorDataCollected = 0L
+        functionalOrientationSensorDataCollected = 0L
+        functionalAccelerationSensorDataCollected = 0L
 
-        reactiveOrientationMaxResultText.text = null
-        reactiveOrientationMinResultText.text = null
+        reactiveBrightnessValue.reset()
+        reactiveBrightnessMaxValue.reset()
+        reactiveBrightnessMinValue.reset()
 
-        reactiveAccelerationMaxValue.valueX = 0f
-        reactiveAccelerationMaxValue.valueY = 0f
-        reactiveAccelerationMaxValue.valueZ = 0f
-        reactiveAccelerationMinValue.valueX = 0f
-        reactiveAccelerationMinValue.valueY = 0f
-        reactiveAccelerationMinValue.valueZ = 0f
+        reactiveOrientationValue.reset()
+        reactiveOrientationMaxValue.reset()
+        reactiveOrientationMinValue.reset()
 
-        reactiveAccelerationMaxResultText.text = null
-        reactiveAccelerationMinResultText.text = null
+        reactiveAccelerationValue.reset()
+        reactiveAccelerationMaxValue.reset()
+        reactiveAccelerationMinValue.reset()
 
-        functionalAccelerationMaxResultText.text = null
-        functionalAccelerationMinResultText.text = null
+        functionalBrightnessValue.reset()
+        functionalBrightnessMaxValue.reset()
+        functionalBrightnessMinValue.reset()
 
-        functionalBrightnessResultText.text = null
-        functionalOrientationResultText.text = null
-        functionalAccelerationResultText.text = null
+        functionalOrientationValue.reset()
+        functionalOrientationMaxValue.reset()
+        functionalOrientationMinValue.reset()
 
-        functionalBrightnessMaxValue.valueX = 0f
-        functionalBrightnessMinValue.valueX = 0f
+        functionalAccelerationValue.reset()
+        functionalAccelerationMaxValue.reset()
+        functionalAccelerationMinValue.reset()
 
-        functionalBrightnessMaxResultText.text = null
-        functionalBrightnessMinResultText.text = null
+        reactiveBrightnessResultText.text = reactiveBrightnessValue.formatToString(requireContext())
+        reactiveBrightnessMaxResultText.text = getString(R.string.max_sensor_value, reactiveBrightnessMaxValue.formatToString(requireContext()))
+        reactiveBrightnessMinResultText.text = getString(R.string.min_sensor_value, reactiveBrightnessMinValue.formatToString(requireContext()))
 
-        functionalOrientationMaxValue.valueX = 0f
-        functionalOrientationMaxValue.valueY = 0f
-        functionalOrientationMaxValue.valueZ = 0f
-        functionalOrientationMinValue.valueX = 0f
-        functionalOrientationMinValue.valueY = 0f
-        functionalOrientationMinValue.valueZ = 0f
+        reactiveOrientationResultText.text = reactiveOrientationValue.formatToString(requireContext())
+        reactiveOrientationMaxResultText.text = getString(R.string.max_sensor_value, reactiveOrientationMaxValue.formatToString(requireContext()))
+        reactiveOrientationMinResultText.text = getString(R.string.min_sensor_value, reactiveOrientationMinValue.formatToString(requireContext()))
 
-        functionalOrientationMaxResultText.text = null
-        functionalOrientationMinResultText.text = null
+        reactiveAccelerationResultText.text = reactiveAccelerationValue.formatToString(requireContext())
+        reactiveAccelerationMaxResultText.text = getString(R.string.max_sensor_value, reactiveAccelerationMaxValue.formatToString(requireContext()))
+        reactiveAccelerationMinResultText.text = getString(R.string.min_sensor_value, reactiveAccelerationMinValue.formatToString(requireContext()))
 
-        functionalAccelerationMaxValue.valueX = 0f
-        functionalAccelerationMaxValue.valueY = 0f
-        functionalAccelerationMaxValue.valueZ = 0f
-        functionalAccelerationMinValue.valueX = 0f
-        functionalAccelerationMinValue.valueY = 0f
-        functionalAccelerationMinValue.valueZ = 0f
+        functionalBrightnessResultText.text = functionalBrightnessValue.formatToString(requireContext())
+        functionalBrightnessMaxResultText.text = getString(R.string.max_sensor_value, functionalBrightnessMaxValue.formatToString(requireContext()))
+        functionalBrightnessMinResultText.text = getString(R.string.min_sensor_value, functionalBrightnessMinValue.formatToString(requireContext()))
 
-        functionalAccelerationMaxResultText.text = null
-        functionalAccelerationMinResultText.text = null
+        functionalOrientationResultText.text = functionalOrientationValue.formatToString(requireContext())
+        functionalOrientationMaxResultText.text = getString(R.string.max_sensor_value, functionalOrientationMaxValue.formatToString(requireContext()))
+        functionalOrientationMinResultText.text = getString(R.string.min_sensor_value, functionalOrientationMinValue.formatToString(requireContext()))
+
+        functionalAccelerationResultText.text = functionalAccelerationValue.formatToString(requireContext())
+        functionalAccelerationMaxResultText.text = getString(R.string.max_sensor_value, functionalAccelerationMaxValue.formatToString(requireContext()))
+        functionalAccelerationMinResultText.text = getString(R.string.min_sensor_value, functionalAccelerationMinValue.formatToString(requireContext()))
+
+        delayToCollectData = defaultDelayToCollectData
+        functionalDelayDataCollectBar.progress = defaultDelayToCollectData
+
+        updateDataCollected()
+    }
+
+    private fun formatToPercentage(a: Long, b: Long) : String {
+        return if (b != 0L) {
+            "${
+                String.format("%.2f", (a.toFloat() / b.toFloat()) * 100.0)
+            }%"
+        } else {
+            "0"
+        }
+
     }
 }

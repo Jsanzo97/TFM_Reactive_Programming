@@ -9,20 +9,16 @@ import com.example.domain.usecase.*
 import com.example.reactiveprogramming.R
 
 class SensorsViewModel(
-    private val initializeBrightnessSensorUseCase: InitializeBrightnessSensorUseCase,
-    private val initializeOrientationSensorUseCase: InitializeOrientationSensorUseCase,
-    private val initializeAccelerationSensorUseCase: InitializeAccelerationSensorUseCase,
     private val getBrightnessSensorFlowUseCase: GetBrightnessSensorFlowUseCase,
     private val getOrientationSensorFlowUseCase: GetOrientationSensorFlowUseCase,
     private val getAccelerometerSensorFlowUseCase: GetAccelerometerSensorFlowUseCase,
     private val getBrightnessSensorDataUseCase: GetBrightnessSensorDataUseCase,
     private val getOrientationSensorDataUseCase: GetOrientationSensorDataUseCase,
-    private val getAccelerometerSensorDataUseCase: GetAccelerometerSensorDataUseCase
+    private val getAccelerometerSensorDataUseCase: GetAccelerometerSensorDataUseCase,
+    private val startMeasureSensorDataUseCase: StartMeasureSensorDataUseCase,
+    private val stopMeasureSensorDataUseCase: StopMeasureSensorDataUseCase,
+    private val resetMeasureSensorDataUseCase: ResetMeasureSensorDataUseCase
 ): ViewModel() {
-
-    fun initializeBrightnessSensor() = initializeBrightnessSensorUseCase()
-    fun initializeOrientationSensor() = initializeOrientationSensorUseCase()
-    fun initializeAccelerationSensor() = initializeAccelerationSensorUseCase()
 
     fun getBrightSensorFlow() = getBrightnessSensorFlowUseCase()
     fun getOrientationSensorFlow() = getOrientationSensorFlowUseCase()
@@ -31,6 +27,10 @@ class SensorsViewModel(
     fun getBrightnessSensorData() = getBrightnessSensorDataUseCase()
     fun getOrientationSensorData() = getOrientationSensorDataUseCase()
     fun getAccelerometerSensorData() = getAccelerometerSensorDataUseCase()
+
+    fun startMeasureSensorData() = startMeasureSensorDataUseCase()
+    fun stopMeasureSensorData() = stopMeasureSensorDataUseCase()
+    fun resetMeasureSensorData() = resetMeasureSensorDataUseCase()
 
 }
 

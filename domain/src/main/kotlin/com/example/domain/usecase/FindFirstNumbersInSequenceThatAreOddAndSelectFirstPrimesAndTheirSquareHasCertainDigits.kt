@@ -1,0 +1,16 @@
+package com.example.domain.usecase
+
+import com.example.domain.repository.CollectionsRepository
+
+class FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
+    private val collectionsRepository: CollectionsRepository
+) {
+    operator fun invoke(
+        numberList: Sequence<Int>,
+        maxNumbersToEvaluate: Int,
+        numbersToTake: Int,
+        maxNumberLength: Int
+    ) = collectionsRepository.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
+        numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
+    )
+}

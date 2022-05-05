@@ -1,6 +1,7 @@
 package com.example.reactiveprogramming
 
 import android.app.Application
+import com.example.reactiveprogramming.di.collections.collectionsModule
 import com.example.reactiveprogramming.di.data.dataModule
 import com.example.reactiveprogramming.di.dataManagement.dataManagementModule
 import com.example.reactiveprogramming.di.home.homeModule
@@ -22,7 +23,8 @@ class CustomApp : Application() {
                     dataModule,
                     homeModule,
                     dataManagementModule,
-                    sensorModule
+                    sensorModule,
+                    collectionsModule
                 )
             )
         }
