@@ -1,20 +1,25 @@
 package com.example.reactiveprogramming.di.data
 
-import android.content.Context
-import android.hardware.SensorManager
 import androidx.room.Room
+import com.example.collections.storage.CollectionsStorage
+import com.example.data.datastore.CollectionsDatastore
 import com.example.data.datastore.LocalTeamsDatastore
 import com.example.data.datastore.SensorDatastore
+import com.example.data.repository.CollectionsDataRepository
 import com.example.data.repository.SensorDataRepository
 import com.example.data.repository.TeamsDataRepository
 import com.example.database.LocalDatabase
 import com.example.database.storage.TeamsStorage
+import com.example.domain.repository.CollectionsRepository
 import com.example.domain.repository.SensorRepository
 import com.example.domain.repository.TeamsRepository
+import com.example.reactiveprogramming.di.sensors.ACCELEROMETER_SENSOR
+import com.example.reactiveprogramming.di.sensors.BRIGHTNESS_SENSOR
+import com.example.reactiveprogramming.di.sensors.ORIENTATION_SENSOR
 import com.example.sensors.storage.SensorStorage
 import kotlinx.coroutines.Dispatchers
-import org.koin.android.ext.koin.androidApplication
 import org.koin.android.ext.koin.androidContext
+import org.koin.core.qualifier.named
 import org.koin.dsl.module
 
 private const val DATABASE_NAME = "localStorage.db"
@@ -42,13 +47,21 @@ val dataModule = module {
 
     single<SensorRepository> { SensorDataRepository(get()) }
 
+    single<CollectionsRepository> { CollectionsDataRepository(get()) }
+
 
     /* DATASTORE */
 
     single<LocalTeamsDatastore> { TeamsStorage(get()) }
 
-    single <SensorDatastore> {
-        SensorStorage(androidApplication().applicationContext.getSystemService(Context.SENSOR_SERVICE) as SensorManager)
+    single<SensorDatastore> {
+        SensorStorage(
+            get(named(BRIGHTNESS_SENSOR)),
+            get(named(ORIENTATION_SENSOR)),
+            get(named(ACCELEROMETER_SENSOR))
+        )
     }
+
+    single<CollectionsDatastore> { CollectionsStorage() }
 
 }

@@ -5,10 +5,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface SensorRepository {
 
-    fun initializeBrightnessSensor()
-    fun initializeOrientationSensor()
-    fun initializeAccelerationSensor()
-
     fun getBrightnessSensorFlow(): Flow<SensorResult>
     fun getOrientationSensorFlow(): Flow<SensorResult>
     fun getAccelerometerSensorFlow(): Flow<SensorResult>
@@ -17,5 +13,8 @@ interface SensorRepository {
     fun getOrientationSensorData(): SensorResult
     fun getAccelerometerSensorData(): SensorResult
 
+    fun stopRegisterData()
+    fun startRegisterData()
+    fun resetDataCount()
 
 }

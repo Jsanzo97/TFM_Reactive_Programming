@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="players">%1$d Jugadores</string>
-    <string name="reactive_result_text">Resultado reactive</string>
+    <plurals name="players">
+        <item quantity="one">%1$d Jugador</item>
+        <item quantity="other">%1$d Jugadores</item>
+    </plurals>    <string name="reactive_result_text">Resultado reactive</string>
     <string name="functional_result_text">Resultado functional</string>
     <string name="load_reactive_data_text">Cargar datos reactive</string>
     <string name="load_functional_data_text">Cargar datos functional</string>

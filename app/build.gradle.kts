@@ -111,6 +111,7 @@ dependencies {
     implementation(project(":database"))
     implementation(project(":common"))
     implementation(project(":sensors"))
+    implementation(project(":collections"))
     implementation(Libs.kotlinStdlib)
     implementation(Libs.coroutines)
     implementation(Libs.coroutinesAndroid)
@@ -132,6 +133,7 @@ dependencies {
     implementation(Libs.arrowCore)
     implementation(Libs.roomKtx)
     implementation(Libs.threeTenABP)
+    implementation(Libs.androidCharts)
 
     debugImplementation(DebugLibs.debugDb)
 
