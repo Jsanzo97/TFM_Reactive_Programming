@@ -3,16 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="100dp">
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/vertical_50_guideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.5"/>
+
+    <ImageView
+        android:id="@+id/header_logo_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="@dimen/smallest_space"
+        android:src="@drawable/atom"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"/>
 
     <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/action_logout"
-        android:layout_width="match_parent"
-        android:layout_height="120dp"
-        android:gravity="center"
-        android:background="@color/colorAccent"
-        android:textColor="@color/white"
-        android:text="HEADER"
-        app:layout_constraintTop_toTopOf="parent"/>
+        android:id="@+id/header_title_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Reactive\nProgramming"
+        android:textSize="@dimen/header_title_text_size"
+        style="@style/AppTheme.MaterialTextView.Default"
+        android:textStyle="bold"
+        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+    <View
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/one_dp"
+        android:background="@color/colorAccent_50"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

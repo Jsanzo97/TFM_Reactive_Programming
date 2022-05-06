@@ -5,6 +5,7 @@
     <string name="sensors_fragment">Sensores</string>
     <string name="big_collections_fragment">Grandes coleciones de datos</string>
 
-    <string name="home_fragment_description"></string>
+    <string name="home_fragment_description">Descripcion de la app</string>
 
+    <string name="footer_description_text">Creado por Jorge Sanzo</string>
 </resources>
