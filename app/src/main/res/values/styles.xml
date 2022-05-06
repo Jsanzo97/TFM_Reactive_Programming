@@ -34,9 +34,15 @@
         <item name="android:statusBarColor">@color/white</item>
     </style>
 
+    <style name="AppTheme.NavigationDrawer.Text" parent="android:Widget.TextView">
+        <item name="android:fontFamily">@font/roboto_font</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
     <style name="AppTheme.Button.TextAppearance" parent="TextAppearance.MaterialComponents.Button">
         <item name="android:textAllCaps">false</item>
         <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
     </style>
 
     <style name="AppTheme.Button.White" parent="Widget.MaterialComponents.Button.TextButton">
@@ -55,6 +61,15 @@
 
     <style name="AppTheme.MaterialTextView.Default" parent="Widget.MaterialComponents.TextView">
         <item name="android:textColor">@color/fontColor</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+    </style>
+
+    <style name="AppTheme.FloatingActionButton.Default" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/floating_action_button_state_color</item>
+        <item name="borderWidth">@dimen/zero</item>
+        <item name="fabSize">normal</item>
+        <item name="tint">@color/white</item>
+        <item name="android:elevation">@dimen/zero</item>
     </style>
 
 </resources>
