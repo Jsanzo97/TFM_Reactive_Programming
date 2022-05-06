@@ -5,10 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    app:cardElevation="@dimen/cardView_elevation"
-    app:cardUseCompatPadding="true"
-    app:cardMaxElevation="@dimen/cardView_elevation"
-    app:cardCornerRadius="@dimen/cardView_corner_radius">
+    style="@style/AppTheme.CardView.Default" >
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"

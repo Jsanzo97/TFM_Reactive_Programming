@@ -1,14 +1,16 @@
 package com.example.reactiveprogramming.ui.bigCollections
 
 import android.graphics.Color
+import android.graphics.Typeface
+import android.os.Build
 import android.os.Bundle
 import android.view.View
+import androidx.core.content.res.ResourcesCompat
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
 import com.example.common.fragment.CustomFragment
 import com.example.reactiveprogramming.R
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.textview.MaterialTextView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.charts.LineChart
@@ -23,8 +25,6 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
 
     private val bigCollectionsViewModel: BigCollectionsViewModel by viewModel()
 
-    private val sequenceOperationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.sequence_result_text) }
-    private val listOperationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.list_result_text) }
     private val resultChart by lazy { requireView().findViewById<LineChart>(R.id.result_chart)}
 
     private val calculateOperationButton by lazy { requireView().findViewById<MaterialButton>(R.id.calculate_operation_button) }
@@ -61,19 +61,13 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
                 }
                 is SequenceTestCasesFinished -> {
                     updateProgressDialogTitle("Done Sequence operations")
-                    sequenceOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Done sequence operations"
-
                     sequenceTestCasesResults.add(state.testCaseResult)
                     executeListTestCases()
                     hideProgressDialog()
                 }
                 is SequenceOperationError -> {
-                    sequenceOperationResultText.text =
-                        sequenceOperationResultText.text.toString() +
-                                " Error in sequence ${state.message}"
                     hideProgressDialog()
+                    showError(state.message)
                 }
                 is ExecuteNextListTestCase -> {
                     updateProgressDialogTitle("Done List nº ${state.previousTestCaseResult.id}")
@@ -82,19 +76,13 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
                 }
                 is ListTestCasesFinished -> {
                     updateProgressDialogTitle("Done List operations")
-                    listOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Done list operations"
-
                     listTestCasesResults.add(state.testCaseResult)
                     hideProgressDialog()
                     generateChartResult()
                 }
                 is ListOperationError -> {
-                    listOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Error in list ${state.message}"
                     hideProgressDialog()
+                    showError(state.message)
                     generateChartResult()
                 }
             }
@@ -110,6 +98,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             description.isEnabled = false
             setPinchZoom(false)
             setDrawGridBackground(false)
+            setTouchEnabled(false)
             axisRight.isEnabled = false
             axisRight.setDrawGridLines(false)
             axisLeft.setDrawGridLines(false)
@@ -156,54 +145,26 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         val sequenceValues = sequenceTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
         val listValues = listTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
 
-        val sequenceValuesSet = LineDataSet(sequenceValues, "Sequence times")
+        val sequenceValuesSet = LineDataSet(sequenceValues, "Sequence times in seconds")
         sequenceValuesSet.apply {
             color = Color.GREEN
             setDrawValues(false)
+            setDrawCircles(false)
         }
 
-        val listValueSet = LineDataSet(listValues, "List times")
+        val listValueSet = LineDataSet(listValues, "List times in seconds")
         listValueSet.apply {
             color = Color.RED
             setDrawValues(false)
+            setDrawCircles(false)
         }
 
         val dataSets = arrayListOf<ILineDataSet>(sequenceValuesSet, listValueSet)
         val data = LineData(dataSets)
 
+        data.setValueTypeface(ResourcesCompat.getFont(requireContext(), R.font.roboto_light))
+
         resultChart.data = data
         resultChart.invalidate()
-
     }
 }
-
-/*
-
-val sequence = listOf("One", "Two", "Three", "Four")
-val list = listOf(1,2,3,4)
-val listAsSequence = list.asSequence()
-
-val strNumberSize = sequence
-    .asSequence()
-    .filter { it.length > 3 }
-    .map { it.length }
-    .toList()
-
-val randomNumbers = sequence {
-    yield(3)
-    yieldAll(listOf(4, 5, 6, 8, 25))
-    yieldAll(generateSequence(2) { it*it })
-}
-
-PROBAR ZIP y GROUPBY
-
-val numbersToTake = 1000
-val maxNumber = 1000000
-val maxLength = 7
-
-var startTimeOperation: Long
-var endTimeOperation: Long
-
-
-
- */
