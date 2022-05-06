@@ -72,4 +72,11 @@
         <item name="android:elevation">@dimen/zero</item>
     </style>
 
+    <style name="AppTheme.CardView.Default" parent="Widget.MaterialComponents.CardView">
+        <item name="cardElevation">@dimen/cardView_elevation</item>
+        <item name="cardUseCompatPadding">true</item>
+        <item name="cardMaxElevation">@dimen/cardView_elevation</item>
+        <item name="cardCornerRadius">@dimen/cardView_corner_radius</item>
+    </style>
+
 </resources>
