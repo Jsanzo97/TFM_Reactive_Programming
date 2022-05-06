@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <dimen name="max_distance_for_buttons_in_motion_layout">108dp</dimen>
+    <dimen name="distance_for_middle_button_in_motion_layout">36dp</dimen>
+
+</resources>

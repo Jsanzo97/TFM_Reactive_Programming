@@ -6,6 +6,9 @@
     <string name="sensors_fragment">Sensors</string>
     <string name="big_collections_fragment">Big data collections</string>
 
-    <string name="home_fragment_description"></string>
+    <string name="home_fragment_description">App description</string>
+
+    <string name="header_description_text" translatable="false">Reactive\nProgramming</string>
+    <string name="footer_description_text">Created by Jorge Sanzo</string>
 
 </resources>

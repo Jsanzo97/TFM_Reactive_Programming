@@ -3,6 +3,7 @@
 
     <!-- COMMON DIMENS -->
     <dimen name="zero">0dp</dimen>
+    <dimen name="one_dp">1dp</dimen>
     <dimen name="smallest_space">4dp</dimen>
     <dimen name="small_space">8dp</dimen>
     <dimen name="medium_space">16dp</dimen>
@@ -12,6 +13,17 @@
     <dimen name="button_font_size">12dp</dimen>
 
     <dimen name="cardView_corner_radius">8dp</dimen>
-    <dimen name="cardView_elevation">8dp</dimen>
+    <dimen name="cardView_elevation">4dp</dimen>
+
+    <dimen name="navigation_view_footer_text_size">11sp</dimen>
+    <dimen name="header_title_text_size">18sp</dimen>
+
+
+
+    <!-- OVERRIDE DIMENS -->
+    <dimen name="design_navigation_padding_top_default">0dp</dimen>
+    <dimen name="design_navigation_separator_vertical_padding">0dp</dimen>
+    <dimen name="design_navigation_padding_bottom">0dp</dimen>
+
 
 </resources>

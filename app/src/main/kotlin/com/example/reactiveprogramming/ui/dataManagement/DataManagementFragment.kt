@@ -2,15 +2,19 @@ package com.example.reactiveprogramming.ui.dataManagement
 
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import arrow.core.some
+import com.example.common.ConstantsAnimation
 import com.example.common.UiConfigurationViewState
+import com.example.common.extensions.rotate
 import com.example.common.fragment.CustomFragment
 import com.example.domain.entity.Team
 import com.example.reactiveprogramming.R
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
@@ -21,11 +25,16 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
     private val functionalTeamListRecycler by lazy { requireView().findViewById<RecyclerView>(R.id.functional_team_list_recycler) }
     private val reactiveTeamListRecycler by lazy { requireView().findViewById<RecyclerView>(R.id.reactive_team_list_recycler) }
 
-    private val loadReactiveDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.load_reactive_data_button) }
-    private val loadFunctionalDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.load_functional_data_button) }
-    private val updateRandomTeamButton by lazy { requireView().findViewById<MaterialButton>(R.id.update_random_team_button) }
-    private val removeRandomTeamButton by lazy { requireView().findViewById<MaterialButton>(R.id.remove_random_team_button) }
-    private val createRandomTeamButton by lazy { requireView().findViewById<MaterialButton>(R.id.add_random_team_button) }
+    private val loadReactiveDataButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.load_reactive_data_button) }
+    private val loadFunctionalDataButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.load_functional_data_button) }
+    private val updateRandomTeamButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.update_random_team_button) }
+    private val removeRandomTeamButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.remove_random_team_button) }
+    private val createRandomTeamButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.add_random_team_button) }
+
+    private val actionButtonsMotionLayout by lazy { requireView().findViewById<MotionLayout>(R.id.action_buttons_motion_layout)}
+    private val expandActionButtonsButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.expand_action_buttons_button)}
+
+    private var isActionButtonsLayoutExpanded = false
 
     override var uiConfigurationViewState = UiConfigurationViewState(
         showToolbar = true,
@@ -113,6 +122,20 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
         }
 
         createRandomTeamButton.setOnClickListener { viewModel.createNewTeam() }
+
+        expandActionButtonsButton.setOnClickListener { toggleActionButtons(it) }
+    }
+
+    private fun toggleActionButtons(view: View) {
+        if (isActionButtonsLayoutExpanded) {
+            view.rotate(ConstantsAnimation.START_ROTATE)
+            actionButtonsMotionLayout.transitionToStart()
+        } else {
+            view.rotate(ConstantsAnimation.COMPLETE_ROTATE)
+            actionButtonsMotionLayout.transitionToEnd()
+        }
+        isActionButtonsLayoutExpanded = !isActionButtonsLayoutExpanded
+
     }
 
     private fun onTeamsRetrieved(teamsRetrieved: List<Team>, recyclerToUpdate: RecyclerView) {

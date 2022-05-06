@@ -3,8 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:background="@color/colorPrimary">
+    android:layout_height="match_parent">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/vertical_50_guideline"
@@ -13,12 +12,18 @@
         android:orientation="vertical"
         app:layout_constraintGuide_percent="0.5"/>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/splash_background"
+        android:alpha="0.25" />
+
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/reactive_result_title_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/reactive_result_text"
-        android:textColor="@color/white"
+        style="@style/AppTheme.MaterialTextView.Default"
         android:layout_marginTop="@dimen/small_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
@@ -29,7 +34,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/functional_result_text"
-        android:textColor="@color/white"
+        style="@style/AppTheme.MaterialTextView.Default"
         android:layout_marginTop="@dimen/small_space"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toTopOf="parent"
@@ -47,7 +52,7 @@
         app:layout_constraintTop_toBottomOf="@id/reactive_result_title_text"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintBottom_toTopOf="@id/load_reactive_data_button"/>
+        app:layout_constraintBottom_toBottomOf="parent"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/functional_team_list_recycler"
@@ -61,74 +66,155 @@
         app:layout_constraintTop_toBottomOf="@id/functional_result_title_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintBottom_toTopOf="@id/load_functional_data_button" />
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/load_reactive_data_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
-        android:text="@string/load_reactive_data_text"
-        style="@style/AppTheme.Button.WithStateColor"
-        app:layout_constraintBottom_toTopOf="@id/add_random_team_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/load_functional_data_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:text="@string/load_functional_data_text"
-        style="@style/AppTheme.Button.White"
-        app:layout_constraintTop_toTopOf="@id/load_reactive_data_button"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/add_random_team_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
-        android:text="@string/add_random_team_text"
-        style="@style/AppTheme.Button.White"
-        app:layout_constraintBottom_toTopOf="@id/update_random_team_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/update_random_team_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
-        android:text="@string/update_random_team_text"
-        style="@style/AppTheme.Button.White"
-        app:layout_constraintBottom_toTopOf="@id/remove_random_team_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
-
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/remove_random_team_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginBottom="@dimen/big_space"
-        android:text="@string/remove_random_team_text"
-        style="@style/AppTheme.Button.White"
+    <androidx.constraintlayout.motion.widget.MotionLayout
+        android:id="@+id/action_buttons_motion_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="@dimen/medium_space"
+        app:layoutDescription="@xml/motion_scene_data_management_fragment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintEnd_toEndOf="parent">
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/load_reactive_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/floating_action_button_state_color"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            android:elevation="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
+            app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/load_reactive_data_button_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialTextView.Default"
+            android:text="@string/load_reactive_data_text"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/small_space"
+            app:layout_constraintEnd_toEndOf="@id/load_reactive_data_button"
+            app:layout_constraintBottom_toTopOf="@id/load_reactive_data_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/load_functional_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            android:elevation="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
+            app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/load_functional_data_button_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialTextView.Default"
+            android:text="@string/load_functional_data_text"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/small_space"
+            app:layout_constraintEnd_toStartOf="@id/load_functional_data_button"
+            app:layout_constraintTop_toTopOf="@id/load_functional_data_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/add_random_team_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            android:elevation="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
+            app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/add_random_team_button_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialTextView.Default"
+            android:text="@string/add_random_team_text"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/small_space"
+            app:layout_constraintEnd_toStartOf="@id/add_random_team_button"
+            app:layout_constraintTop_toTopOf="@id/add_random_team_button"
+            app:layout_constraintBottom_toBottomOf="@id/add_random_team_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/update_random_team_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            android:elevation="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
+            app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/update_random_team_button_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialTextView.Default"
+            android:text="@string/update_random_team_text"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/small_space"
+            app:layout_constraintEnd_toStartOf="@id/update_random_team_button"
+            app:layout_constraintTop_toTopOf="@id/update_random_team_button"
+            app:layout_constraintBottom_toBottomOf="@id/update_random_team_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/remove_random_team_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            android:elevation="@dimen/zero"
+            app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
+            app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/remove_random_team_button_description_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/AppTheme.MaterialTextView.Default"
+            android:text="@string/remove_random_team_text"
+            android:visibility="gone"
+            android:layout_marginEnd="@dimen/small_space"
+            app:layout_constraintEnd_toStartOf="@id/remove_random_team_button"
+            app:layout_constraintTop_toTopOf="@id/remove_random_team_button"
+            app:layout_constraintBottom_toBottomOf="@id/remove_random_team_button" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/expand_action_buttons_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/small_space"
+            android:layout_marginBottom="@dimen/medium_space"
+            app:backgroundTint="@color/colorAccent"
+            app:borderWidth="@dimen/zero"
+            app:fabSize="normal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:srcCompat="@drawable/ic_home"
+            app:tint="@android:color/white" />
+
+    </androidx.constraintlayout.motion.widget.MotionLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 
