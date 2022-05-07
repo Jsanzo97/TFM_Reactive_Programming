@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="chart_title_text">Time in milliseconds that it takes to perform some heavy operations with Sequences or Lists</string>
+    <string name="calculate_operations_text">Calculate operations</string>
+
+    <string name="sequence_real_data_time">Real Sequence</string>
+    <string name="sequence_avg_data_time">Avg Sequence</string>
+    <string name="list_real_data_time">Real List</string>
+    <string name="list_avg_data_time">Avg List</string>
+
+</resources>

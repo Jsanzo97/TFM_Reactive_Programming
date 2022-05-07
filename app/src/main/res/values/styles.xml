@@ -96,12 +96,20 @@
         <item name="android:elevation">@dimen/zero</item>
     </style>
 
-
     <style name="AppTheme.CardView.Default" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">@dimen/cardView_elevation</item>
         <item name="cardUseCompatPadding">true</item>
         <item name="cardMaxElevation">@dimen/cardView_elevation</item>
         <item name="cardCornerRadius">@dimen/cardView_corner_radius</item>
+    </style>
+
+    <style name="AppTheme.ExtendedFloatingActionButton.Default" parent="Widget.MaterialComponents.ExtendedFloatingActionButton">
+        <item name="android:maxLines">2</item>
+        <item name="android:textAlignment">center</item>
+        <item name="android:textColor">@color/white</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:textSize">@dimen/button_font_size</item>
     </style>
 
 </resources>

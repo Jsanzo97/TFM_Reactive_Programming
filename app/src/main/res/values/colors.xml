@@ -13,6 +13,8 @@
     <color name="fontColorGreen">#307314</color>
     <color name="fontColorGreen_50">#50307314</color>
     <color name="fontColorRed">#BF403D</color>
+    <color name="fontColorBlue">#2A32BF</color>
+    <color name="fontColorYellow">#BFBF17</color>
 
     <color name="transparent">@android:color/transparent</color>
 </resources>

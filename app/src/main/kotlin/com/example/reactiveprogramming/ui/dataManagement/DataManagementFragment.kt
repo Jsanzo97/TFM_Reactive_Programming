@@ -109,6 +109,7 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
     private fun setupClickListeners() {
         loadReactiveDataButton.setOnClickListener { button ->
             viewModel.getTeamsReactive()
+            viewModel.getTeamsFunctional()
             button.isEnabled = false
         }
 

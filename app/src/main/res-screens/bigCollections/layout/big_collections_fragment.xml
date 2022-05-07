@@ -10,27 +10,103 @@
         android:layout_height="@dimen/zero"
         android:layout_margin="@dimen/small_space"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
+        app:layout_constraintBottom_toTopOf="@id/toggle_real_sequence_data_button"
         style="@style/AppTheme.CardView.Default">
 
-        <com.github.mikephil.charting.charts.LineChart
-            android:id="@+id/result_chart"
+        <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/small_space" />
+            android:layout_height="match_parent">
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/chart_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:text="@string/chart_title_text"
+                android:layout_margin="@dimen/small_space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/result_chart"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/zero"
+                android:layout_margin="@dimen/small_space"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/chart_title_text"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.button.MaterialButton
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/toggle_real_sequence_data_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginBottom="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:backgroundTint="@color/fontColorGreen"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:text="@string/sequence_real_data_time"
+        app:layout_constraintBottom_toTopOf="@id/toggle_avg_sequence_data_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/toggle_real_list_data_button"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/toggle_real_list_data_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:text="@string/list_real_data_time"
+        android:backgroundTint="@color/fontColorRed"
+        app:layout_constraintBottom_toTopOf="@id/toggle_avg_list_data_button"
+        app:layout_constraintStart_toEndOf="@id/toggle_real_sequence_data_button"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/toggle_avg_sequence_data_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/small_space"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:backgroundTint="@color/fontColorYellow"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:text="@string/sequence_avg_data_time"
+        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/toggle_avg_list_data_button"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
+        android:id="@+id/toggle_avg_list_data_button"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginBottom="@dimen/small_space"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:text="@string/list_avg_data_time"
+        android:backgroundTint="@color/fontColorBlue"
+        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
+        app:layout_constraintStart_toEndOf="@id/toggle_avg_sequence_data_button"
+        app:layout_constraintEnd_toEndOf="parent"/>
+
+    <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/calculate_operation_button"
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
         android:layout_marginBottom="@dimen/big_space"
-        android:text="Calculate operation"
-        style="@style/AppTheme.Button.White"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:text="@string/calculate_operations_text"
+        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
