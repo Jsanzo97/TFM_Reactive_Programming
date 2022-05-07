@@ -13,7 +13,7 @@ import com.example.common.fragment.CustomFragment
 import com.example.domain.entity.SensorResult
 import com.example.domain.entity.reset
 import com.example.reactiveprogramming.R
-import com.google.android.material.button.MaterialButton
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.*
 import kotlinx.coroutines.flow.cancellable
@@ -33,9 +33,9 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     private val reactiveAccelerationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_result_text) }
     private val reactiveAccelerationMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_max_result_text) }
     private val reactiveAccelerationMinResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_acceleration_min_result_text) }
-    private val reactiveDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_collected_text) }
-    private val reactiveDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_generated_text) }
-    private val reactiveDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_performance_text) }
+    private val reactiveDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_collected_value_text) }
+    private val reactiveDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_generated_value_text) }
+    private val reactiveDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_data_performance_text_value) }
 
     private val functionalBrightnessResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_brightness_result_text) }
     private val functionalBrightnessMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_brightness_max_result_text) }
@@ -46,16 +46,16 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     private val functionalAccelerationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_result_text) }
     private val functionalAccelerationMaxResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_max_result_text) }
     private val functionalAccelerationMinResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_acceleration_min_result_text) }
-    private val functionalDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_collected_text) }
-    private val functionalDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_generated_text) }
-    private val functionalDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_performance_text) }
+    private val functionalDataCollectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_collected_value_text) }
+    private val functionalDataGeneratedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_generated_value_text) }
+    private val functionalDataPerformanceText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_data_performance_value_text) }
 
     private val functionalDelayDataCollectDelaySelectedText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_delay_data_collect_value_text) }
     private val functionalDelayDataCollectBar by lazy { requireView().findViewById<AppCompatSeekBar>(R.id.functional_delay_data_collect_bar)}
 
-    private val startUpdateSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.start_update_sensor_data_button) }
-    private val stopUpdateSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.stop_update_sensor_data_button) }
-    private val clearSensorDataButton by lazy { requireView().findViewById<MaterialButton>(R.id.clear_sensor_data_button) }
+    private val startUpdateSensorDataButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.start_update_sensor_data_button) }
+    private val stopUpdateSensorDataButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.stop_update_sensor_data_button) }
+    private val clearSensorDataButton by lazy { requireView().findViewById<FloatingActionButton>(R.id.clear_sensor_data_button) }
 
     private var brightnessDataFlow: Job? = null
     private var orientationDataFlow: Job? = null
@@ -246,8 +246,8 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         maxValueToCompareWith.valueZ = maxOf(maxValueToCompareWith.valueZ, sensorData.valueZ)
         minValueToCompareWith.valueZ = minOf(minValueToCompareWith.valueZ, sensorData.valueZ)
 
-        maxTextToUpdate.text = getString(R.string.max_sensor_value, maxValueToCompareWith.formatToString(requireContext()))
-        minTextToUpdate.text = getString(R.string.min_sensor_value, minValueToCompareWith.formatToString(requireContext()))
+        maxTextToUpdate.text = maxValueToCompareWith.formatToString(requireContext())
+        minTextToUpdate.text = minValueToCompareWith.formatToString(requireContext())
     }
 
     private fun stopUpdateSensorData() {
@@ -304,13 +304,13 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         val totalFunctionalCollectedValue = functionalBrightnessSensorDataCollected + functionalOrientationSensorDataCollected + functionalAccelerationSensorDataCollected
         val totalGeneratedValue = brightnessSensorDataGenerated + orientationSensorDataGenerated + accelerationSensorDataGenerated
 
-        reactiveDataCollectedText.text = getString(R.string.data_collected, totalReactiveCollectedValue)
-        reactiveDataGeneratedText.text = getString(R.string.data_generated, totalGeneratedValue)
-        reactiveDataPerformanceText.text = getString(R.string.data_performance, formatToPercentage(totalReactiveCollectedValue, totalGeneratedValue))
+        reactiveDataCollectedText.text = getString(R.string.data_collected_value, totalReactiveCollectedValue)
+        reactiveDataGeneratedText.text = getString(R.string.data_generated_value, totalGeneratedValue)
+        reactiveDataPerformanceText.text = getString(R.string.data_performance_value, formatToPercentage(totalReactiveCollectedValue, totalGeneratedValue))
 
-        functionalDataCollectedText.text = getString(R.string.data_collected, totalFunctionalCollectedValue)
-        functionalDataGeneratedText.text = getString(R.string.data_generated, totalGeneratedValue)
-        functionalDataPerformanceText.text = getString(R.string.data_performance, formatToPercentage(totalFunctionalCollectedValue, totalGeneratedValue))
+        functionalDataCollectedText.text = getString(R.string.data_collected_value, totalFunctionalCollectedValue)
+        functionalDataGeneratedText.text = getString(R.string.data_generated_value, totalGeneratedValue)
+        functionalDataPerformanceText.text = getString(R.string.data_performance_value, formatToPercentage(totalFunctionalCollectedValue, totalGeneratedValue))
     }
 
     private fun clearSensorData() {
@@ -355,28 +355,28 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
         functionalAccelerationMinValue.reset()
 
         reactiveBrightnessResultText.text = reactiveBrightnessValue.formatToString(requireContext())
-        reactiveBrightnessMaxResultText.text = getString(R.string.max_sensor_value, reactiveBrightnessMaxValue.formatToString(requireContext()))
-        reactiveBrightnessMinResultText.text = getString(R.string.min_sensor_value, reactiveBrightnessMinValue.formatToString(requireContext()))
+        reactiveBrightnessMaxResultText.text = reactiveBrightnessMaxValue.formatToString(requireContext())
+        reactiveBrightnessMinResultText.text = reactiveBrightnessMinValue.formatToString(requireContext())
 
         reactiveOrientationResultText.text = reactiveOrientationValue.formatToString(requireContext())
-        reactiveOrientationMaxResultText.text = getString(R.string.max_sensor_value, reactiveOrientationMaxValue.formatToString(requireContext()))
-        reactiveOrientationMinResultText.text = getString(R.string.min_sensor_value, reactiveOrientationMinValue.formatToString(requireContext()))
+        reactiveOrientationMaxResultText.text = reactiveOrientationMaxValue.formatToString(requireContext())
+        reactiveOrientationMinResultText.text = reactiveOrientationMinValue.formatToString(requireContext())
 
         reactiveAccelerationResultText.text = reactiveAccelerationValue.formatToString(requireContext())
-        reactiveAccelerationMaxResultText.text = getString(R.string.max_sensor_value, reactiveAccelerationMaxValue.formatToString(requireContext()))
-        reactiveAccelerationMinResultText.text = getString(R.string.min_sensor_value, reactiveAccelerationMinValue.formatToString(requireContext()))
+        reactiveAccelerationMaxResultText.text = reactiveAccelerationMaxValue.formatToString(requireContext())
+        reactiveAccelerationMinResultText.text = reactiveAccelerationMinValue.formatToString(requireContext())
 
         functionalBrightnessResultText.text = functionalBrightnessValue.formatToString(requireContext())
-        functionalBrightnessMaxResultText.text = getString(R.string.max_sensor_value, functionalBrightnessMaxValue.formatToString(requireContext()))
-        functionalBrightnessMinResultText.text = getString(R.string.min_sensor_value, functionalBrightnessMinValue.formatToString(requireContext()))
+        functionalBrightnessMaxResultText.text = functionalBrightnessMaxValue.formatToString(requireContext())
+        functionalBrightnessMinResultText.text = functionalBrightnessMinValue.formatToString(requireContext())
 
         functionalOrientationResultText.text = functionalOrientationValue.formatToString(requireContext())
-        functionalOrientationMaxResultText.text = getString(R.string.max_sensor_value, functionalOrientationMaxValue.formatToString(requireContext()))
-        functionalOrientationMinResultText.text = getString(R.string.min_sensor_value, functionalOrientationMinValue.formatToString(requireContext()))
+        functionalOrientationMaxResultText.text = functionalOrientationMaxValue.formatToString(requireContext())
+        functionalOrientationMinResultText.text = functionalOrientationMinValue.formatToString(requireContext())
 
         functionalAccelerationResultText.text = functionalAccelerationValue.formatToString(requireContext())
-        functionalAccelerationMaxResultText.text = getString(R.string.max_sensor_value, functionalAccelerationMaxValue.formatToString(requireContext()))
-        functionalAccelerationMinResultText.text = getString(R.string.min_sensor_value, functionalAccelerationMinValue.formatToString(requireContext()))
+        functionalAccelerationMaxResultText.text = functionalAccelerationMaxValue.formatToString(requireContext())
+        functionalAccelerationMinResultText.text = functionalAccelerationMinValue.formatToString(requireContext())
 
         delayToCollectData = defaultDelayToCollectData
         functionalDelayDataCollectBar.progress = defaultDelayToCollectData
@@ -390,7 +390,7 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
                 String.format("%.2f", (a.toFloat() / b.toFloat()) * 100.0)
             }%"
         } else {
-            "0"
+            "0,00%"
         }
 
     }

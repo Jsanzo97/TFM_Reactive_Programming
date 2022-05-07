@@ -6,26 +6,28 @@
     <string name="update_sensor_data_text">Update sensor data</string>
     <string name="clear_sensor_data_text">Clear sensor data</string>
 
-    <string name="max_sensor_value" translatable="false">Max %1$s</string>
-    <string name="min_sensor_value" translatable="false">Min %1$s</string>
+    <string name="reactive_data_title">Reactive data</string>
+    <string name="functional_data_title">Functional data</string>
 
-    <string name="brightness_value">Brightness: %1$s</string>
-    <string name="orientation_value">Rotation: \n
-                X: %1$s \n
-                Y: %2$s \n
-                Z: %3$s
-    </string>
-    <string name="acceleration_value">Acceleration: \n
-                X: %1$s \n
-                Y: %2$s \n
-                Z: %3$s
-    </string>
+    <string name="performance_card_view_layout_text">Performance</string>
+    <string name="brightness_card_view_layout_text">Brightness sensor values</string>
+    <string name="orientation_card_view_layout_text">Orientation sensor values</string>
+    <string name="acceleration_card_view_layout_text">Acceleration sensor values</string>
 
-    <string name="data_collected">Data collected: %1$d</string>
-    <string name="data_generated">Data generated: %1$d</string>
-    <string name="data_performance">Performance: %1$s</string>
+    <string name="one_axis_name">Val:</string>
+    <string name="axis_names" translatable="false">X:\nY:\nZ:</string>
 
-    <string name="bar_description">Delay time to update the data by the functional way</string>
+    <string name="sensor_value" translatable="false">%1$s</string>
+    <string name="sensor_3d_value" translatable="false">%1$s\n%2$s\n%3$s</string>
+
+    <string name="data_collected_title">Collected:</string>
+    <string name="data_collected_value" translatable="false">%1$d</string>
+    <string name="data_generated_title">Generated:</string>
+    <string name="data_generated_value" translatable="false">%1$d</string>
+    <string name="data_performance_title">Performance:</string>
+    <string name="data_performance_value" translatable="false">%1$s</string>
+
+    <string name="bar_description">Delay time in milliseconds to update the data by the functional way</string>
     <string name="min_bar_value" translatable="false">0</string>
     <string name="default_bar_value" translatable="false">500</string>
     <string name="max_bar_value" translatable="false">1000</string>
