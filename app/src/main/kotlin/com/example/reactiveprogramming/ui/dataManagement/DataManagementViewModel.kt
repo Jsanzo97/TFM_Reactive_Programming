@@ -13,6 +13,7 @@ import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
 class DataManagementViewModel(
+    private val initializeDatabaseUseCase: InitializeDatabaseUseCase,
     private val getTeamsReactiveUseCase: GetTeamsReactiveUseCase,
     private val getTeamsFunctionalUseCase: GetTeamsFunctionalUseCase,
     private val updateTeamUseCase: UpdateTeamUseCase,
@@ -22,6 +23,23 @@ class DataManagementViewModel(
 
     private val _dataManagementViewModelStateFlow = MutableStateFlow<DataManagementViewState>(InitialState)
     val dataManagementViewModelSateFlow: StateFlow<DataManagementViewState> get() = _dataManagementViewModelStateFlow
+
+    fun initializeDataBase(numberOfTeamsToCreate: Int) {
+        _dataManagementViewModelStateFlow.value = InitializingDatabase
+
+        val teamList = (0 until numberOfTeamsToCreate).map { generateRandomTeam(it) }
+
+        viewModelScope.launch {
+            initializeDatabaseUseCase(teamList).fold(
+                {
+                    _dataManagementViewModelStateFlow.value = InitializedDatabase
+                },
+                {
+                    _dataManagementViewModelStateFlow.value = ErrorInOperation(it.toString())
+                }
+            )
+        }
+    }
 
     fun getTeamsReactive() {
         _dataManagementViewModelStateFlow.value = RetrievingReactiveTeams
@@ -53,7 +71,7 @@ class DataManagementViewModel(
                         _dataManagementViewModelStateFlow.value = UpdatedTeam
                     },
                     {
-                        _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_update_team, team)
+                        _dataManagementViewModelStateFlow.value = ErrorInOperationWithId(R.string.error_update_team, team)
                     }
                 )
             }
@@ -70,7 +88,7 @@ class DataManagementViewModel(
                         _dataManagementViewModelStateFlow.value = RemovedTeam
                     },
                     {
-                        _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_remove_team, team)
+                        _dataManagementViewModelStateFlow.value = ErrorInOperationWithId(R.string.error_remove_team, team)
                     }
                 )
             }
@@ -90,7 +108,7 @@ class DataManagementViewModel(
                     _dataManagementViewModelStateFlow.value = CreatedTeam
                 },
                 {
-                    _dataManagementViewModelStateFlow.value = ErrorInOperation(R.string.error_create_team, randomTeam)
+                    _dataManagementViewModelStateFlow.value = ErrorInOperationWithId(R.string.error_create_team, randomTeam)
                 }
             )
         }
