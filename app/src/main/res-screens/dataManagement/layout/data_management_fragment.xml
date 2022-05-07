@@ -84,7 +84,7 @@
             style="@style/AppTheme.FloatingActionButton.Default"
             app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
             app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_play" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/load_reactive_data_button_description_text"
@@ -105,7 +105,7 @@
             android:elevation="@dimen/zero"
             app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
             app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
-            app:srcCompat="@drawable/ic_home"/>
+            app:srcCompat="@drawable/ic_sync"/>
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/load_functional_data_button_description_text"
@@ -125,7 +125,7 @@
             style="@style/AppTheme.FloatingActionButton.Default"
             app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
             app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_add" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/add_random_team_button_description_text"
@@ -146,7 +146,7 @@
             style="@style/AppTheme.FloatingActionButton.Default"
             app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
             app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_edit" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/update_random_team_button_description_text"
@@ -167,7 +167,7 @@
             style="@style/AppTheme.FloatingActionButton.Default"
             app:layout_constraintBottom_toBottomOf="@id/expand_action_buttons_button"
             app:layout_constraintEnd_toEndOf="@id/expand_action_buttons_button"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_remove" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/remove_random_team_button_description_text"
@@ -190,7 +190,7 @@
             style="@style/AppTheme.FloatingActionButton.Default"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:srcCompat="@drawable/ic_home" />
+            app:srcCompat="@drawable/ic_database" />
 
     </androidx.constraintlayout.motion.widget.MotionLayout>
 
