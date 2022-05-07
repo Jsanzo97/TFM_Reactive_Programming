@@ -25,6 +25,7 @@
         android:text="@string/reactive_result_text"
         style="@style/AppTheme.MaterialTextView.Default"
         android:layout_marginTop="@dimen/small_space"
+        android:visibility="gone"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toTopOf="parent" />
@@ -36,6 +37,7 @@
         android:text="@string/functional_result_text"
         style="@style/AppTheme.MaterialTextView.Default"
         android:layout_marginTop="@dimen/small_space"
+        android:visibility="gone"
         app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />

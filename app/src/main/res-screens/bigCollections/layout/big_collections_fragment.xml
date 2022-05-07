@@ -48,7 +48,6 @@
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginBottom="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        android:backgroundTint="@color/fontColorGreen"
         style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/sequence_real_data_time"
         app:layout_constraintBottom_toTopOf="@id/toggle_avg_sequence_data_button"
@@ -64,7 +63,6 @@
         android:layout_marginEnd="@dimen/small_space"
         style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/list_real_data_time"
-        android:backgroundTint="@color/fontColorRed"
         app:layout_constraintBottom_toTopOf="@id/toggle_avg_list_data_button"
         app:layout_constraintStart_toEndOf="@id/toggle_real_sequence_data_button"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -76,7 +74,6 @@
         android:layout_marginBottom="@dimen/small_space"
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        android:backgroundTint="@color/fontColorYellow"
         style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/sequence_avg_data_time"
         app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
@@ -92,7 +89,6 @@
         android:layout_marginBottom="@dimen/small_space"
         style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/list_avg_data_time"
-        android:backgroundTint="@color/fontColorBlue"
         app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
         app:layout_constraintStart_toEndOf="@id/toggle_avg_sequence_data_button"
         app:layout_constraintEnd_toEndOf="parent"/>
@@ -106,7 +102,6 @@
         android:layout_marginBottom="@dimen/big_space"
         style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/calculate_operations_text"
-        android:backgroundTint="@color/colorPrimary"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>

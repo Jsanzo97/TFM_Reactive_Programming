@@ -9,9 +9,7 @@
     <string name="reactive_data_title">Datos reactive</string>
     <string name="functional_data_title">Datos functional</string>
 
-    <string name="data_collected_title">Recogidos:</string>
-    <string name="data_generated_title">Generados:</string>
-    <string name="data_performance_title">Efectividad:</string>
+    <string name="data_performance_title">E:</string>
 
     <string name="performance_card_view_layout_text">Efectividad</string>
     <string name="brightness_card_view_layout_text">Valores del sensor de luminosidad</string>
