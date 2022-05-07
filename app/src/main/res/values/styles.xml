@@ -64,13 +64,38 @@
         <item name="android:fontFamily">@font/roboto_font</item>
     </style>
 
+    <style name="AppTheme.MaterialTextView.Bold" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/fontColor</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+    </style>
+
+    <style name="AppTheme.MaterialTextView.Green" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/fontColorGreen</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+    </style>
+
+    <style name="AppTheme.MaterialTextView.Red" parent="Widget.MaterialComponents.TextView">
+        <item name="android:textColor">@color/fontColorRed</item>
+        <item name="android:fontFamily">@font/roboto_font</item>
+    </style>
+
     <style name="AppTheme.FloatingActionButton.Default" parent="Widget.MaterialComponents.FloatingActionButton">
-        <item name="backgroundTint">@color/floating_action_button_state_color</item>
+        <item name="backgroundTint">@color/default_floating_action_button_state_color</item>
         <item name="borderWidth">@dimen/zero</item>
         <item name="fabSize">normal</item>
         <item name="tint">@color/white</item>
         <item name="android:elevation">@dimen/zero</item>
     </style>
+
+    <style name="AppTheme.FloatingActionButton.Green" parent="Widget.MaterialComponents.FloatingActionButton">
+        <item name="backgroundTint">@color/green_floating_action_button_state_color</item>
+        <item name="borderWidth">@dimen/zero</item>
+        <item name="fabSize">normal</item>
+        <item name="tint">@color/white</item>
+        <item name="android:elevation">@dimen/zero</item>
+    </style>
+
 
     <style name="AppTheme.CardView.Default" parent="Widget.MaterialComponents.CardView">
         <item name="cardElevation">@dimen/cardView_elevation</item>

@@ -6,380 +6,660 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/vertical_50_guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_percent="0.5"/>
-
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="@drawable/splash_background"
-        android:alpha="0.25" />
+        android:alpha="0.15" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_result_title_text"
-        android:layout_width="wrap_content"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/performance_card_view_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/reactive_result_text"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toTopOf="parent" />
+        style="@style/AppTheme.CardView.Default"
+        app:layout_constraintTop_toTopOf="parent" >
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_brightness_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_result_title_text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_space">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_orientation_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_brightness_result_text" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_50_guideline_performance_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_acceleration_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_orientation_result_text" />
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_performance_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_data_performance_text_value"
+                app:layout_constraintStart_toStartOf="@id/vertical_50_guideline_performance_layout"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_brightness_max_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Max Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/reactive_brightness_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/performance_card_view_layout_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:text="@string/performance_card_view_layout_text"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_brightness_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Min Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/reactive_brightness_max_result_text"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_performance_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:text="@string/reactive_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@id/reactive_data_collected_title_text"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintTop_toBottomOf="@id/performance_card_view_layout_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_orientation_max_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Max Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/reactive_orientation_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/reactive_brightness_max_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_performance_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/functional_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/performance_card_view_layout_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_orientation_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Min Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/reactive_orientation_max_result_text"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_brightness_min_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_collected_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/data_collected_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reactive_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_acceleration_max_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Max Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/reactive_acceleration_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/reactive_orientation_max_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_collected_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/smallest_space"
+                tools:text="0"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/reactive_data_collected_title_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_acceleration_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Reactive Min Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/reactive_acceleration_max_result_text"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_orientation_min_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_generated_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/data_generated_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toStartOf="@id/reactive_data_collected_title_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_data_collected_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_data_collected_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_max_result_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_generated_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/smallest_space"
+                tools:text="0"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/reactive_data_generated_title_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_data_collected_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_data_generated_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_data_collected_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_performance_text_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/data_performance_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintTop_toBottomOf="@id/reactive_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/reactive_data_performance_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toBottomOf="@id/reactive_data_generated_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_data_performance_text_value"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="12,34%"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@+id/reactive_data_performance_text_title"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintTop_toBottomOf="@id/reactive_data_performance_text_title" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_result_title_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/functional_result_text"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_collected_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/data_collected_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintTop_toBottomOf="@id/functional_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_brightness_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_result_title_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_collected_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/smallest_space"
+                tools:text="0"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/functional_data_collected_title_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_orientation_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_brightness_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_generated_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/data_generated_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_performance_layout"
+                app:layout_constraintTop_toBottomOf="@id/functional_data_collected_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_acceleration_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginHorizontal="@dimen/small_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_orientation_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_generated_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/smallest_space"
+                tools:text="0"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/functional_data_generated_title_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_data_collected_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_brightness_max_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Max Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toStartOf="@id/functional_brightness_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/functional_acceleration_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_performance_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/data_performance_title"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/functional_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_brightness_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Min Brightness Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/functional_brightness_max_result_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_acceleration_result_text" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_data_performance_value_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="12,34%"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@id/functional_data_performance_title_text"
+                app:layout_constraintEnd_toEndOf="@id/functional_data_performance_title_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_data_performance_title_text" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_orientation_max_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Max Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toStartOf="@id/functional_orientation_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/functional_brightness_max_result_text" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_orientation_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Min Orientation Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/functional_orientation_max_result_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_brightness_min_result_text" />
+    </com.google.android.material.card.MaterialCardView>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_acceleration_max_result_text"
-        android:layout_width="@dimen/zero"
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/brightness_card_view_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        tools:text="Functional Max Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toStartOf="@id/functional_acceleration_min_result_text"
-        app:layout_constraintTop_toBottomOf="@id/functional_orientation_max_result_text" />
+        style="@style/AppTheme.CardView.Default"
+        app:layout_constraintTop_toBottomOf="@id/performance_card_view_layout" >
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_acceleration_min_result_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        tools:text="Functional Min Acceleration Result"
-        style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginStart="@dimen/smallest_space"
-        app:layout_constraintStart_toEndOf="@id/functional_acceleration_max_result_text"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_orientation_min_result_text" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_space">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_data_collected_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_acceleration_max_result_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_50_guideline_brightness_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_data_generated_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_data_collected_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_brightness_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_brightness_min_result_text"
+                app:layout_constraintStart_toStartOf="@id/vertical_50_guideline_brightness_layout"/>
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/functional_data_performance_text"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/small_space"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/functional_data_generated_text"
-        tools:text="Data performance \n10/100 = 30%" />
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                android:layout_marginStart="@dimen/smallest_space"
+                app:layout_constraintTop_toTopOf="@id/reactive_brightness_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_brightness_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/brightness_axis_index_text"/>
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/start_update_sensor_data_button"
-        android:layout_width="@dimen/zero"
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/brightness_card_view_layout_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:text="@string/orientation_card_view_layout_text"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_brightness_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:text="@string/reactive_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@id/reactive_brightness_result_text"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_brightness_layout"
+                app:layout_constraintTop_toBottomOf="@id/brightness_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_brightness_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/functional_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_brightness_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/brightness_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/brightness_axis_index_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/one_axis_name"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reactive_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_brightness_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/intermediate_space_12"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/brightness_axis_index_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_brightness_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                app:layout_constraintEnd_toStartOf="@id/reactive_brightness_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/reactive_brightness_result_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_brightness_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_brightness_layout"
+                app:layout_constraintTop_toBottomOf="@id/reactive_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_brightness_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/small_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_brightness_layout"
+                app:layout_constraintTop_toBottomOf="@id/functional_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_brightness_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                app:layout_constraintStart_toEndOf="@id/functional_brightness_result_text"
+                app:layout_constraintEnd_toStartOf="@id/functional_brightness_min_result_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_brightness_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_brightness_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/functional_brightness_title_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/orientation_card_view_layout"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_space"
-        android:text="@string/start_update_data_text"
-        style="@style/AppTheme.Button.WithStateColor"
-        app:layout_constraintBottom_toTopOf="@id/stop_update_sensor_data_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/vertical_50_guideline"/>
+        style="@style/AppTheme.CardView.Default"
+        app:layout_constraintTop_toBottomOf="@id/brightness_card_view_layout" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_space">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_50_guideline_orientation_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_orientation_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_orientation_min_result_text"
+                app:layout_constraintStart_toStartOf="@id/vertical_50_guideline_orientation_layout"/>
+
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_orientation_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_orientation_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/orientation_axis_index_text"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orientation_card_view_layout_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:text="@string/orientation_card_view_layout_text"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_orientation_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:text="@string/reactive_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@id/reactive_orientation_result_text"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_orientation_layout"
+                app:layout_constraintTop_toBottomOf="@id/orientation_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_orientation_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/functional_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_orientation_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/orientation_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/orientation_axis_index_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/axis_names"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reactive_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_orientation_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/orientation_axis_index_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_orientation_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                app:layout_constraintEnd_toStartOf="@id/reactive_orientation_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/reactive_orientation_result_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_orientation_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_orientation_layout"
+                app:layout_constraintTop_toBottomOf="@id/reactive_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_orientation_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/small_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_orientation_layout"
+                app:layout_constraintTop_toBottomOf="@id/functional_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_orientation_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                app:layout_constraintStart_toEndOf="@id/functional_orientation_result_text"
+                app:layout_constraintEnd_toStartOf="@id/functional_orientation_min_result_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_orientation_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_orientation_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/functional_orientation_title_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/acceleration_card_view_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        style="@style/AppTheme.CardView.Default"
+        app:layout_constraintTop_toBottomOf="@id/orientation_card_view_layout" >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="@dimen/small_space">
+
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_acceleration_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_acceleration_min_result_text"
+                app:layout_constraintStart_toStartOf="@id/vertical_50_guideline_acceleration_layout"/>
+
+            <View
+                android:layout_width="@dimen/one_dp"
+                android:layout_height="@dimen/zero"
+                android:background="@color/colorAccent_20"
+                app:layout_constraintTop_toTopOf="@id/reactive_acceleration_title_text"
+                app:layout_constraintBottom_toBottomOf="@id/reactive_acceleration_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/acceleration_axis_index_text"/>
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/vertical_50_guideline_acceleration_layout"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.5"/>
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/acceleration_card_view_layout_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:text="@string/acceleration_card_view_layout_text"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/acceleration_axis_index_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:text="@string/axis_names"
+                style="@style/AppTheme.MaterialTextView.Bold"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_acceleration_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:text="@string/reactive_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toStartOf="@id/reactive_acceleration_result_text"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_acceleration_layout"
+                app:layout_constraintTop_toBottomOf="@id/acceleration_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_acceleration_title_text"
+                android:layout_width="@dimen/zero"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/small_space"
+                android:layout_marginStart="@dimen/small_space"
+                android:text="@string/functional_data_title"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_acceleration_layout"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/acceleration_card_view_layout_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_acceleration_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/small_space"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/acceleration_axis_index_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_acceleration_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                android:layout_marginTop="@dimen/smallest_space"
+                app:layout_constraintEnd_toStartOf="@id/reactive_acceleration_min_result_text"
+                app:layout_constraintStart_toEndOf="@id/reactive_acceleration_result_text"
+                app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/reactive_acceleration_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline_acceleration_layout"
+                app:layout_constraintTop_toBottomOf="@id/reactive_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_acceleration_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/smallest_space"
+                android:layout_marginStart="@dimen/small_space"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Default"
+                app:layout_constraintStart_toEndOf="@id/vertical_50_guideline_acceleration_layout"
+                app:layout_constraintTop_toBottomOf="@id/functional_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_acceleration_max_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Green"
+                android:layout_marginTop="@dimen/smallest_space"
+                app:layout_constraintStart_toEndOf="@+id/functional_acceleration_result_text"
+                app:layout_constraintEnd_toStartOf="@id/functional_acceleration_min_result_text"
+                app:layout_constraintTop_toBottomOf="@id/functional_acceleration_title_text" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/functional_acceleration_min_result_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="0.00\n0.00\n0.00"
+                style="@style/AppTheme.MaterialTextView.Red"
+                android:layout_marginTop="@dimen/smallest_space"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/functional_acceleration_title_text" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 
     <com.google.android.material.textview.MaterialTextView
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:text="@string/bar_description"
         style="@style/AppTheme.MaterialTextView.Default"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
-        app:layout_constraintEnd_toEndOf="@id/functional_delay_data_collect_bar"
-        app:layout_constraintTop_toTopOf="@id/start_update_sensor_data_button"
-        app:layout_constraintBottom_toBottomOf="@id/start_update_sensor_data_button"
-        app:layout_constraintStart_toStartOf="@id/functional_delay_data_collect_bar" />
+        android:layout_marginStart="@dimen/small_space"
+        android:layout_marginEnd="@dimen/small_space"
+        android:layout_marginBottom="@dimen/medium_space"
+        android:gravity="center"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/functional_delay_data_collect_min_value_text"
+        app:layout_constraintStart_toStartOf="parent" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/stop_update_sensor_data_button"
-        android:layout_width="@dimen/zero"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/small_space"
-        android:text="@string/stop_update_data_text"
-        style="@style/AppTheme.Button.White"
-        app:layout_constraintBottom_toTopOf="@id/clear_sensor_data_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/vertical_50_guideline"/>
-    
     <com.google.android.material.textview.MaterialTextView
         android:id="@+id/functional_delay_data_collect_min_value_text"
         android:layout_width="wrap_content"
@@ -417,22 +697,59 @@
         android:layout_marginBottom="@dimen/small_space"
         android:max="1000"
         android:progress="500"
-        app:layout_constraintStart_toEndOf="@id/vertical_50_guideline"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="@id/stop_update_sensor_data_button" />
+        app:layout_constraintBottom_toTopOf="@id/action_buttons_layout" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/clear_sensor_data_button"
-        android:layout_width="@dimen/zero"
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/action_buttons_layout"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/small_space"
-        android:layout_marginEnd="@dimen/small_space"
-        android:layout_marginTop="@dimen/small_space"
         android:layout_marginBottom="@dimen/big_space"
-        android:text="@string/clear_sensor_data_text"
-        style="@style/AppTheme.Button.White"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="@id/vertical_50_guideline"/>
+        app:layout_constraintEnd_toEndOf="parent">
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/start_update_sensor_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_space"
+            style="@style/AppTheme.FloatingActionButton.Green"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/stop_update_sensor_data_button"
+            app:srcCompat="@drawable/ic_play"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/stop_update_sensor_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_space"
+            style="@style/AppTheme.FloatingActionButton.Default"
+            android:backgroundTint="@color/colorPrimary"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toEndOf="@id/start_update_sensor_data_button"
+            app:layout_constraintEnd_toStartOf="@id/clear_sensor_data_button"
+            app:srcCompat="@drawable/ic_pause"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/clear_sensor_data_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/small_space"
+            style="@style/AppTheme.FloatingActionButton.Default"
+            android:backgroundTint="@color/fontColorRed"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/stop_update_sensor_data_button"
+            app:srcCompat="@drawable/ic_remove"/>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,18 +6,18 @@
     <dimen name="one_dp">1dp</dimen>
     <dimen name="smallest_space">4dp</dimen>
     <dimen name="small_space">8dp</dimen>
+    <dimen name="intermediate_space_12">12dp</dimen>
     <dimen name="medium_space">16dp</dimen>
     <dimen name="big_space">24dp</dimen>
 
     <dimen name="spinner_dropdown_corner_radius">8dp</dimen>
-    <dimen name="button_font_size">12dp</dimen>
+    <dimen name="button_font_size">12sp</dimen>
 
     <dimen name="cardView_corner_radius">8dp</dimen>
     <dimen name="cardView_elevation">4dp</dimen>
 
     <dimen name="navigation_view_footer_text_size">11sp</dimen>
     <dimen name="header_title_text_size">18sp</dimen>
-
 
 
     <!-- OVERRIDE DIMENS -->

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="colorPrimary">#696ECA</color>
+    <color name="colorPrimary_50">#50696ECA</color>
     <color name="colorPrimary_30">#30696ECA</color>
     <color name="colorPrimaryDark">#2A32BF</color>
     <color name="colorAccent">#F279BC</color>
@@ -8,6 +9,10 @@
     <color name="colorAccent_20">#20F279BC</color>
 
     <color name="fontColor">#212340</color>
+
+    <color name="fontColorGreen">#307314</color>
+    <color name="fontColorGreen_50">#50307314</color>
+    <color name="fontColorRed">#BF403D</color>
 
     <color name="transparent">@android:color/transparent</color>
 </resources>
