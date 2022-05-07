@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <string name="chart_title_text">Tiempo en ms que se tarda en realizar operaciones pesadas con Secuencias y con Listas</string>
+    <string name="chart_title_text">Tiempo en ms que se tarda en realizar operaciones pesadas con Secuencias y Listas</string>
     <string name="calculate_operations_text">Calcular operaciones</string>
 
     <string name="sequence_real_data_time">Secuencia Real</string>

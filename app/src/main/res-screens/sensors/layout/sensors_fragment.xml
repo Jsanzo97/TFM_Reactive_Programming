@@ -44,7 +44,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:text="@string/performance_card_view_layout_text"
-                style="@style/AppTheme.MaterialTextView.Default"
+                style="@style/AppTheme.MaterialTextView.Bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -247,7 +247,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:text="@string/orientation_card_view_layout_text"
-                style="@style/AppTheme.MaterialTextView.Default"
+                style="@style/AppTheme.MaterialTextView.Bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -394,7 +394,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:text="@string/orientation_card_view_layout_text"
-                style="@style/AppTheme.MaterialTextView.Default"
+                style="@style/AppTheme.MaterialTextView.Bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -541,7 +541,7 @@
                 android:layout_width="@dimen/zero"
                 android:layout_height="wrap_content"
                 android:text="@string/acceleration_card_view_layout_text"
-                style="@style/AppTheme.MaterialTextView.Default"
+                style="@style/AppTheme.MaterialTextView.Bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
