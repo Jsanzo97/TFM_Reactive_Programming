@@ -20,11 +20,11 @@
     <string name="sensor_value" translatable="false">%1$s</string>
     <string name="sensor_3d_value" translatable="false">%1$s\n%2$s\n%3$s</string>
 
-    <string name="data_collected_title">Collected:</string>
+    <string name="data_collected_title" translatable="false">C:</string>
     <string name="data_collected_value" translatable="false">%1$d</string>
-    <string name="data_generated_title">Generated:</string>
+    <string name="data_generated_title" translatable="false">G:</string>
     <string name="data_generated_value" translatable="false">%1$d</string>
-    <string name="data_performance_title">Performance:</string>
+    <string name="data_performance_title">P:</string>
     <string name="data_performance_value" translatable="false">%1$s</string>
 
     <string name="bar_description">Delay time in milliseconds to update the data by the functional way</string>

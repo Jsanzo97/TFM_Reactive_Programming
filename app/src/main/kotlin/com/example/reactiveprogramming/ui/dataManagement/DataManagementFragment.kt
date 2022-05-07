@@ -15,12 +15,16 @@ import com.example.domain.entity.Team
 import com.example.reactiveprogramming.R
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import com.google.android.material.textview.MaterialTextView
 import kotlinx.coroutines.flow.collectLatest
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) {
 
     private val viewModel: DataManagementViewModel by viewModel()
+
+    private val reactiveResultTitleText by lazy { requireView().findViewById<MaterialTextView>(R.id.reactive_result_title_text)}
+    private val functionalResultTitleText by lazy { requireView().findViewById<MaterialTextView>(R.id.functional_result_title_text)}
 
     private val functionalTeamListRecycler by lazy { requireView().findViewById<RecyclerView>(R.id.functional_team_list_recycler) }
     private val reactiveTeamListRecycler by lazy { requireView().findViewById<RecyclerView>(R.id.reactive_team_list_recycler) }
@@ -111,6 +115,8 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
             viewModel.getTeamsReactive()
             viewModel.getTeamsFunctional()
             button.isEnabled = false
+            reactiveResultTitleText.visibility = View.VISIBLE
+            functionalResultTitleText.visibility = View.VISIBLE
         }
 
         loadFunctionalDataButton.setOnClickListener { viewModel.getTeamsFunctional() }
