@@ -36,6 +36,8 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
 
     private var isActionButtonsLayoutExpanded = false
 
+    private val numberOfTeamsToCreate = 5
+
     override var uiConfigurationViewState = UiConfigurationViewState(
         showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
@@ -50,10 +52,10 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
         super.onViewCreated(view, savedInstanceState)
 
         setupRecyclerViews()
-
         setupViewModelLiveData()
-
         setupClickListeners()
+
+        viewModel.initializeDataBase(numberOfTeamsToCreate)
     }
 
     private fun setupRecyclerViews() {
@@ -78,7 +80,7 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
         lifecycleScope.launchWhenStarted {
             viewModel.dataManagementViewModelSateFlow.collectLatest { state ->
                 when (state) {
-                    is RetrievingReactiveTeams, RetrievingFunctionalTeams, UpdatingTeam, RemovingTeam, CreatingTeam -> {
+                    is InitializingDatabase, RetrievingReactiveTeams, RetrievingFunctionalTeams, UpdatingTeam, RemovingTeam, CreatingTeam -> {
                         showProgressDialog()
                     }
                     is RetrievedReactiveTeams -> {
@@ -89,11 +91,14 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
                         onTeamsRetrieved(state.teams, functionalTeamListRecycler)
                         hideProgressDialog()
                     }
-                    is UpdatedTeam, CreatedTeam, RemovedTeam -> {
+                    is InitializedDatabase, UpdatedTeam, CreatedTeam, RemovedTeam -> {
                         hideProgressDialog()
                     }
-                    is ErrorInOperation -> {
+                    is ErrorInOperationWithId -> {
                         showError(getString(state.messageId, state.team.toString()))
+                    }
+                    is ErrorInOperation -> {
+                        showError(state.message)
                     }
                     else -> { /* no-op */ }
                 }
