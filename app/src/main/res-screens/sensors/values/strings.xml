@@ -14,7 +14,7 @@
     <string name="orientation_card_view_layout_text">Orientation sensor values</string>
     <string name="acceleration_card_view_layout_text">Acceleration sensor values</string>
 
-    <string name="one_axis_name">Val:</string>
+    <string name="one_axis_name" translatable="false">V:</string>
     <string name="axis_names" translatable="false">X:\nY:\nZ:</string>
 
     <string name="sensor_value" translatable="false">%1$s</string>

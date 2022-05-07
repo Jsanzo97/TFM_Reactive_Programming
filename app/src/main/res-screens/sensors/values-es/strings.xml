@@ -18,8 +18,6 @@
     <string name="orientation_card_view_layout_text">Valores del sensor de orientacion</string>
     <string name="acceleration_card_view_layout_text">Valores del sensor de aceleración</string>
 
-    <string name="one_axis_name">Val:</string>
-
     <string name="bar_description">Tiempo de espera en milisegundos para actuzalizar los datos de forma funcional</string>
 
 </resources>

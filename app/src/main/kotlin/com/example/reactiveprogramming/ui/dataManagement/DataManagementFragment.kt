@@ -81,7 +81,7 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
             viewModel.dataManagementViewModelSateFlow.collectLatest { state ->
                 when (state) {
                     is InitializingDatabase, RetrievingReactiveTeams, RetrievingFunctionalTeams, UpdatingTeam, RemovingTeam, CreatingTeam -> {
-                        showProgressDialog()
+                        //showProgressDialog()
                     }
                     is RetrievedReactiveTeams -> {
                         onTeamsRetrieved(state.teams, reactiveTeamListRecycler)
