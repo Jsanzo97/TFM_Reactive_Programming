@@ -12,13 +12,30 @@
         android:alpha="0.15" />
 
     <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/home_fragment_title_text"
+        android:layout_width="@dimen/zero"
+        android:layout_height="wrap_content"
+        android:text="@string/home_fragment_title"
+        style="@style/AppTheme.MaterialTextView.Bold"
+        android:layout_marginTop="@dimen/big_space"
+        android:layout_marginStart="@dimen/medium_space"
+        android:layout_marginEnd="@dimen/medium_space"
+        android:textSize="@dimen/home_title_text_size"
+        android:gravity="center"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <com.google.android.material.textview.MaterialTextView
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:text="@string/home_fragment_description"
         style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_margin="@dimen/medium_space"
-        android:gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="@dimen/huge_space"
+        android:layout_marginStart="@dimen/big_space"
+        android:layout_marginEnd="@dimen/big_space"
+        android:textSize="@dimen/home_description_text_size"
+        app:layout_constraintTop_toBottomOf="@id/home_fragment_title_text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
