@@ -6,8 +6,11 @@
     <string name="sensors_fragment">Sensors</string>
     <string name="big_collections_fragment">Big data collections</string>
 
-    <string name="error_update_team">Error when try to update team: %1$s</string>
-    <string name="error_remove_team">Error when try to remove team: %1$s</string>
-    <string name="error_create_team">Error when try to create team: %1$s</string>
+    <string name="home_fragment_title">Welcome to Reactive Programming!</string>
+    <string name="home_fragment_description">This application was created to be able to observe the differences between the reactive programming and the functional programming,
+        thanks to it we can check the behaviour in some different cases and scenarios.
+    </string>
+    <string name="header_description_text" translatable="false">Reactive\nProgramming</string>
+    <string name="footer_description_text">Created by Jorge Sanzo</string>
 
 </resources>

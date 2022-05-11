@@ -7,8 +7,9 @@ import org.koin.dsl.module
 
 val dataManagementModule = module {
 
-    viewModel { DataManagementViewModel(get(), get(), get(), get(), get()) }
+    viewModel { DataManagementViewModel(get(), get(), get(), get(), get(), get()) }
 
+    factory { InitializeDatabaseUseCase(get()) }
     factory { GetTeamsReactiveUseCase(get()) }
     factory { GetTeamsFunctionalUseCase(get()) }
     factory { UpdateTeamUseCase(get()) }

@@ -19,11 +19,12 @@ class BigCollectionsViewModel(
 
     fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
-        testCase: BigCollectionsTestCase
+        testCase: BigCollectionsTestCase,
+        testCaseNumber: Int
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
-        if (testCase.id != -1) {
+        if (testCaseNumber < defaultTestCases.size - 1) {
             AsyncTask.execute {
                 val result =
                     FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
@@ -36,7 +37,6 @@ class BigCollectionsViewModel(
                 _bigCollectionsViewModelLiveData.postValue(
                     ExecuteNextListTestCase(
                         BigCollectionsTestCaseResult(
-                            testCase.id,
                             result.time,
                             result.elements
                         )
@@ -56,7 +56,6 @@ class BigCollectionsViewModel(
                 _bigCollectionsViewModelLiveData.postValue(
                     ListTestCasesFinished(
                         BigCollectionsTestCaseResult(
-                            testCase.id,
                             result.time,
                             result.elements
                         )
@@ -73,11 +72,12 @@ class BigCollectionsViewModel(
 
     fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
         numberList: Sequence<Int>,
-        testCase: BigCollectionsTestCase
+        testCase: BigCollectionsTestCase,
+        testCaseNumber: Int
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
-        if (testCase.id != -1) {
+        if (testCaseNumber < defaultTestCases.size - 1) {
             AsyncTask.execute {
                 val result =
                     FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
@@ -90,7 +90,6 @@ class BigCollectionsViewModel(
                 _bigCollectionsViewModelLiveData.postValue(
                     ExecuteNextSequenceTestCase(
                         BigCollectionsTestCaseResult(
-                            testCase.id,
                             result.time,
                             result.elements
                         )
@@ -110,7 +109,6 @@ class BigCollectionsViewModel(
                 _bigCollectionsViewModelLiveData.postValue(
                     SequenceTestCasesFinished(
                         BigCollectionsTestCaseResult(
-                            testCase.id,
                             result.time,
                             result.elements
                         )

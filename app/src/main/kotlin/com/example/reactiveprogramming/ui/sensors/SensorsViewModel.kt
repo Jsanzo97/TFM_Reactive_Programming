@@ -38,13 +38,13 @@ fun SensorResult.formatToString(context: Context): String {
     return when (sensorType) {
         TYPE_LIGHT -> {
             context.getString(
-                R.string.brightness_value,
+                R.string.sensor_value,
                 String.format("%.2f", valueX)
             )
         }
         TYPE_ROTATION_VECTOR -> {
             context.getString(
-                R.string.orientation_value,
+                R.string.sensor_3d_value,
                 String.format("%.2f", valueX),
                 String.format("%.2f", valueY),
                 String.format("%.2f", valueZ)
@@ -52,7 +52,7 @@ fun SensorResult.formatToString(context: Context): String {
         }
         TYPE_LINEAR_ACCELERATION -> {
             context.getString(
-                R.string.acceleration_value,
+                R.string.sensor_3d_value,
                 String.format("%.2f", valueX),
                 String.format("%.2f", valueY),
                 String.format("%.2f", valueZ)

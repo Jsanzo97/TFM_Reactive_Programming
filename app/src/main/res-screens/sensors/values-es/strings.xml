@@ -6,22 +6,16 @@
     <string name="update_sensor_data_text">Actualizar datos</string>
     <string name="clear_sensor_data_text">Eliminar datos</string>
 
-    <string name="brightness_value">Luminosidad: %1$s</string>
-    <string name="orientation_value">Rotación: \n
-                X: %1$s \n
-                Y: %2$s \n
-                Z: %3$s
-    </string>
-    <string name="acceleration_value">Aceleración: \n
-                X: %1$s \n
-                Y: %2$s \n
-                Z: %3$s
-    </string>
+    <string name="reactive_data_title">Datos reactive</string>
+    <string name="functional_data_title">Datos functional</string>
 
-    <string name="data_collected">Datos recogidos: %1$d</string>
-    <string name="data_generated">Datos generados: %1$d</string>
-    <string name="data_performance">Efectividad: %1$s</string>
+    <string name="data_performance_title">E:</string>
 
-    <string name="bar_description">Tiempo de espera para actuzalizar los datos de forma funcional</string>
+    <string name="performance_card_view_layout_text">Efectividad</string>
+    <string name="brightness_card_view_layout_text">Valores del sensor de luminosidad</string>
+    <string name="orientation_card_view_layout_text">Valores del sensor de orientacion</string>
+    <string name="acceleration_card_view_layout_text">Valores del sensor de aceleración</string>
+
+    <string name="bar_description">Tiempo de espera en milisegundos para actuzalizar los datos de forma funcional</string>
 
 </resources>

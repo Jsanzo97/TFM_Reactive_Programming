@@ -7,18 +7,18 @@
     <fragment
         android:id="@+id/home_fragment"
         android:name="com.example.reactiveprogramming.ui.home.HomeFragment"
-        android:label="Home Fragment" />
+        android:label="@string/home_fragment" />
     <fragment
         android:id="@+id/data_management_fragment"
         android:name="com.example.reactiveprogramming.ui.dataManagement.DataManagementFragment"
-        android:label="Data Management Fragment" />
+        android:label="@string/database_management_fragment" />
     <fragment
         android:id="@+id/sensors_fragment"
         android:name="com.example.reactiveprogramming.ui.sensors.SensorsFragment"
-        android:label="Sensors Fragment" />
+        android:label="@string/sensors_fragment" />
 
     <fragment
         android:id="@+id/big_collections_fragment"
         android:name="com.example.reactiveprogramming.ui.bigCollections.BigCollectionsFragment"
-        android:label="Big Collections Fragment" />
+        android:label="@string/big_collections_fragment" />
 </navigation>
