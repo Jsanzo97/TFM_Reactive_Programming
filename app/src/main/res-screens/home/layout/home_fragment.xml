@@ -31,7 +31,7 @@
         android:layout_height="wrap_content"
         android:text="@string/home_fragment_description"
         style="@style/AppTheme.MaterialTextView.Default"
-        android:layout_marginTop="@dimen/huge_space"
+        android:layout_marginTop="@dimen/biggest_space"
         android:layout_marginStart="@dimen/big_space"
         android:layout_marginEnd="@dimen/big_space"
         android:textSize="@dimen/home_description_text_size"
