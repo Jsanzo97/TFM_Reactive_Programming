@@ -94,6 +94,7 @@ android {
     }
 
     lintOptions.isAbortOnError = false
+    lintOptions.isCheckReleaseBuilds = false
 
     compileOptions {
         sourceCompatibility = Versions.sourceCompatibility
