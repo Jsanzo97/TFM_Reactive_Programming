@@ -2,6 +2,7 @@ package com.example.reactiveprogramming.ui.bigCollections
 
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
 import androidx.core.content.res.ResourcesCompat
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
@@ -22,6 +23,8 @@ import com.google.android.material.floatingactionbutton.ExtendedFloatingActionBu
 class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) {
 
     private val bigCollectionsViewModel: BigCollectionsViewModel by viewModel()
+
+    private val bigCollectionsMotionLayout by lazy { requireView().findViewById<MotionLayout>(R.id.big_collections_motion_layout)}
 
     private val resultChart by lazy { requireView().findViewById<LineChart>(R.id.result_chart)}
 
@@ -123,7 +126,10 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             resultChart.invalidate()
         }
 
-        calculateOperationButton.setOnClickListener { executeSequenceTestCases() }
+        calculateOperationButton.setOnClickListener {
+            bigCollectionsMotionLayout.transitionToEnd()
+            executeSequenceTestCases()
+        }
     }
 
     private fun setupChart() {

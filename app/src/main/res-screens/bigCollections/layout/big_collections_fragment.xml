@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout
+<androidx.constraintlayout.motion.widget.MotionLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent" >
+    android:layout_height="match_parent"
+    app:layoutDescription="@xml/motion_scene_big_collections_fragment"
+    android:id="@+id/big_collections_motion_layout">
 
     <com.google.android.material.card.MaterialCardView
+        android:id="@+id/chart_layout"
         android:layout_width="match_parent"
         android:layout_height="@dimen/zero"
         android:layout_margin="@dimen/small_space"
@@ -46,26 +50,28 @@
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/small_space"
-        android:layout_marginBottom="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:elevation="@dimen/zero"
         android:text="@string/sequence_real_data_time"
-        app:layout_constraintBottom_toTopOf="@id/toggle_avg_sequence_data_button"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:layout_constraintEnd_toStartOf="@id/toggle_real_list_data_button"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toStartOf="@id/toggle_real_list_data_button"/>
+        app:layout_constraintTop_toTopOf="@id/calculate_operation_button"
+        tools:ignore="DuplicateClickableBoundsCheck" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/toggle_real_list_data_button"
         android:layout_width="@dimen/zero"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="@dimen/small_space"
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
+        android:elevation="@dimen/zero"
         android:text="@string/list_real_data_time"
-        app:layout_constraintBottom_toTopOf="@id/toggle_avg_list_data_button"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/toggle_real_sequence_data_button"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toTopOf="@id/calculate_operation_button"
+        tools:ignore="DuplicateClickableBoundsCheck" />
 
     <com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
         android:id="@+id/toggle_avg_sequence_data_button"
@@ -74,9 +80,9 @@
         android:layout_marginBottom="@dimen/small_space"
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
-        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/sequence_avg_data_time"
-        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:layout_constraintTop_toTopOf="@id/calculate_operation_button"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toStartOf="@id/toggle_avg_list_data_button"/>
 
@@ -87,9 +93,9 @@
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
         android:layout_marginBottom="@dimen/small_space"
-        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/list_avg_data_time"
-        app:layout_constraintBottom_toTopOf="@id/calculate_operation_button"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        app:layout_constraintTop_toTopOf="@id/calculate_operation_button"
         app:layout_constraintStart_toEndOf="@id/toggle_avg_sequence_data_button"
         app:layout_constraintEnd_toEndOf="parent"/>
 
@@ -100,10 +106,10 @@
         android:layout_marginStart="@dimen/small_space"
         android:layout_marginEnd="@dimen/small_space"
         android:layout_marginBottom="@dimen/big_space"
-        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         android:text="@string/calculate_operations_text"
+        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+</androidx.constraintlayout.motion.widget.MotionLayout>
