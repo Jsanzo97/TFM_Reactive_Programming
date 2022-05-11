@@ -6,9 +6,9 @@
     <string name="sensors_fragment">Sensors</string>
     <string name="big_collections_fragment">Big data collections</string>
 
-    <string name="home_fragment_title">¡Bienvenido a Reactive Programming!</string>
-    <string name="home_fragment_description">Esta aplicación ha sido diseñada para poder observar de una manera sencilla las diferencias entre la programación reactiva y la programación funcional,
-        gracias a ella podremos ver como se comportan en diversos casos y escenarios.\n
+    <string name="home_fragment_title">Welcome to Reactive Programming!</string>
+    <string name="home_fragment_description">This application was created to be able to observe the differences between the reactive programming and the functional programming,
+        thanks to it we can check the behaviour in some different cases and scenarios.
     </string>
     <string name="header_description_text" translatable="false">Reactive\nProgramming</string>
     <string name="footer_description_text">Created by Jorge Sanzo</string>
