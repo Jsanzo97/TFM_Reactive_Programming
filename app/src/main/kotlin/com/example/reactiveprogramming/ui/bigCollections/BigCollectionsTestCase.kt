@@ -1,7 +1,6 @@
 package com.example.reactiveprogramming.ui.bigCollections
 
 data class BigCollectionsTestCase(
-    val id: Int,
     val listLength: Int,
     val maxNumberToEvaluate: Int,
     val numbersToTake: Int,
@@ -9,7 +8,6 @@ data class BigCollectionsTestCase(
 )
 
 data class BigCollectionsTestCaseResult(
-    val id: Int,
     val time: Double,
     val elements: List<Int>
 )
@@ -39,21 +37,18 @@ const val ONE_MILLION = 1_000_000
 val defaultTestCases = listOf(
     // FIFTY THOUSAND TEST
     BigCollectionsTestCase(
-        0,
         ONE_MILLION,
         FIFTY_THOUSAND,
         THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        1,
         ONE_MILLION,
         FIFTY_THOUSAND,
         THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        2,
         ONE_MILLION,
         FIFTY_THOUSAND,
         THOUSAND,
@@ -62,21 +57,18 @@ val defaultTestCases = listOf(
 
     // SIXTY THOUSAND TEST
     BigCollectionsTestCase(
-        3,
         ONE_MILLION,
         SIXTY_THOUSAND,
         THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        4,
         ONE_MILLION,
         SIXTY_THOUSAND,
         THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        5,
         ONE_MILLION,
         SIXTY_THOUSAND,
         THOUSAND,
@@ -85,21 +77,18 @@ val defaultTestCases = listOf(
 
     // SEVENTY THOUSAND TEST
     BigCollectionsTestCase(
-        6,
         ONE_MILLION,
         SEVENTY_THOUSAND,
         THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        7,
         ONE_MILLION,
         SEVENTY_THOUSAND,
         THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        8,
         ONE_MILLION,
         SEVENTY_THOUSAND,
         THOUSAND,
@@ -108,21 +97,18 @@ val defaultTestCases = listOf(
 
     // EIGHTY THOUSAND TEST
     BigCollectionsTestCase(
-        9,
         ONE_MILLION,
         EIGHTY_THOUSAND,
         THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        10,
         ONE_MILLION,
         EIGHTY_THOUSAND,
         THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        11,
         ONE_MILLION,
         EIGHTY_THOUSAND,
         THOUSAND,
@@ -131,21 +117,18 @@ val defaultTestCases = listOf(
 
     // NINETY THOUSAND TEST
     BigCollectionsTestCase(
-        12,
         ONE_MILLION,
         NINETY_THOUSAND,
         THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        13,
         ONE_MILLION,
         NINETY_THOUSAND,
         THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        14,
         ONE_MILLION,
         NINETY_THOUSAND,
         THOUSAND,
@@ -154,21 +137,18 @@ val defaultTestCases = listOf(
 
     // ONE HUNDRED THOUSAND TEST
     BigCollectionsTestCase(
-        15,
         ONE_MILLION,
         ONE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        16,
         ONE_MILLION,
         ONE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        17,
         ONE_MILLION,
         ONE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
@@ -177,21 +157,18 @@ val defaultTestCases = listOf(
 
     // TWO HUNDRED THOUSAND TEST
     BigCollectionsTestCase(
-        18,
         ONE_MILLION,
         TWO_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        19,
         ONE_MILLION,
         TWO_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        20,
         ONE_MILLION,
         TWO_HUNDRED_THOUSAND,
         TEN_THOUSAND,
@@ -200,21 +177,18 @@ val defaultTestCases = listOf(
 
     // THREE HUNDRED THOUSAND TEST
     BigCollectionsTestCase(
-        21,
         ONE_MILLION,
         THREE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        22,
         ONE_MILLION,
         THREE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        23,
         ONE_MILLION,
         THREE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
@@ -223,21 +197,18 @@ val defaultTestCases = listOf(
 
     // FOUR HUNDRED THOUSAND TEST
     BigCollectionsTestCase(
-        24,
         ONE_MILLION,
         FOUR_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        25,
         ONE_MILLION,
         FOUR_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        26,
         ONE_MILLION,
         FOUR_HUNDRED_THOUSAND,
         TEN_THOUSAND,
@@ -246,21 +217,18 @@ val defaultTestCases = listOf(
 
     // FIVE HUNDRED THOUSAND TEST
     BigCollectionsTestCase(
-        27,
         ONE_MILLION,
         FIVE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         7
     ),
     BigCollectionsTestCase(
-        28,
         ONE_MILLION,
         FIVE_HUNDRED_THOUSAND,
         TEN_THOUSAND,
         8
     ),
     BigCollectionsTestCase(
-        -1,
         ONE_MILLION,
         FIVE_HUNDRED_THOUSAND,
         TEN_THOUSAND,

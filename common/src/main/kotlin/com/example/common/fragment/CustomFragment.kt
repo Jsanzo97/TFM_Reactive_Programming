@@ -51,27 +51,6 @@ abstract class CustomFragment(private val contentLayoutId: Int) : Fragment() {
         ).show(requireFragmentManager(), DIALOG_FRAGMENT_TAG)
     }
 
-    fun showSuccess(message: String) {
-        hideKeyboard()
-        hideProgressDialog()
-        CustomDialogFragment(
-            message = message,
-            title = getString(R.string.success)
-        ).show(requireFragmentManager(), DIALOG_FRAGMENT_TAG)
-    }
-
-    fun showDialogWithFunction(message: String, title: String = "", f: () -> Unit) {
-        hideKeyboard()
-        hideProgressDialog()
-        CustomDialogFragment(
-            message = message,
-            title = title,
-            showOkButton = true,
-            showCancelButton = true,
-            positiveButtonAction = { f() }
-        ).show(requireFragmentManager(), DIALOG_FRAGMENT_TAG)
-    }
-
     fun showProgressDialog(title: String = getString(R.string.loading)) {
         if (!::progressDialog.isInitialized) {
             progressView = layoutInflater.inflate(R.layout.custom_progress_dialog, null)

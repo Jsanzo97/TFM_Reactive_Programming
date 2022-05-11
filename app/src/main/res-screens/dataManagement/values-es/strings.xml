@@ -12,4 +12,8 @@
     <string name="update_random_team_text">Actualizar equipo aleatorio</string>
     <string name="remove_random_team_text">Borrar equipo aleatorio</string>
 
+    <string name="error_update_team">Error al actualizar el equipo: %1$s</string>
+    <string name="error_remove_team">Error al borrar el equipo: %1$s</string>
+    <string name="error_create_team">Error al crear el equipo: %1$s</string>
+
 </resources>

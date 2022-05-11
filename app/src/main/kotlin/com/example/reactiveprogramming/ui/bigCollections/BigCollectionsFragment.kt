@@ -1,14 +1,14 @@
 package com.example.reactiveprogramming.ui.bigCollections
 
-import android.graphics.Color
 import android.os.Bundle
 import android.view.View
+import androidx.constraintlayout.motion.widget.MotionLayout
+import androidx.core.content.res.ResourcesCompat
 import arrow.core.some
 import com.example.common.UiConfigurationViewState
 import com.example.common.fragment.CustomFragment
 import com.example.reactiveprogramming.R
 import com.google.android.material.button.MaterialButton
-import com.google.android.material.textview.MaterialTextView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 import androidx.lifecycle.Observer
 import com.github.mikephil.charting.charts.LineChart
@@ -18,15 +18,20 @@ import com.github.mikephil.charting.data.Entry
 import com.github.mikephil.charting.data.LineData
 import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
+import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) {
 
     private val bigCollectionsViewModel: BigCollectionsViewModel by viewModel()
 
-    private val sequenceOperationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.sequence_result_text) }
-    private val listOperationResultText by lazy { requireView().findViewById<MaterialTextView>(R.id.list_result_text) }
+    private val bigCollectionsMotionLayout by lazy { requireView().findViewById<MotionLayout>(R.id.big_collections_motion_layout)}
+
     private val resultChart by lazy { requireView().findViewById<LineChart>(R.id.result_chart)}
 
+    private val toggleRealSequenceDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_real_sequence_data_button) }
+    private val toggleAvgSequenceDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_avg_sequence_data_button) }
+    private val toggleRealListDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_real_list_data_button) }
+    private val toggleAvgListDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_avg_list_data_button) }
     private val calculateOperationButton by lazy { requireView().findViewById<MaterialButton>(R.id.calculate_operation_button) }
 
     override var uiConfigurationViewState = UiConfigurationViewState(
@@ -39,6 +44,13 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
 
     private val sequenceTestCasesResults = mutableListOf<BigCollectionsTestCaseResult>()
     private val listTestCasesResults = mutableListOf<BigCollectionsTestCaseResult>()
+
+    var sequenceValuesSet = LineDataSet(listOf(), "Sequence times in ms")
+    var listValueSet = LineDataSet(listOf(), "List times in ms")
+    var sequenceAvgValuesSet = LineDataSet(listOf(), "Sequence avg times in ms")
+    var listAvgValueSet = LineDataSet(listOf(), "List avg times in ms")
+
+    var testCaseNumber = 0
 
     override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
 
@@ -55,46 +67,38 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             when (state) {
                 is PerformingOperation -> { showProgressDialog() }
                 is ExecuteNextSequenceTestCase -> {
-                    updateProgressDialogTitle("Done Sequence nº ${state.previousTestCaseResult.id}")
+                    updateProgressDialogTitle("Done Sequence nº $testCaseNumber")
                     sequenceTestCasesResults.add(state.previousTestCaseResult)
-                    executeSequenceTestCases(state.previousTestCaseResult.id + 1)
+                    executeSequenceTestCases(testCaseNumber)
+                    testCaseNumber++
                 }
                 is SequenceTestCasesFinished -> {
+                    testCaseNumber = 0
                     updateProgressDialogTitle("Done Sequence operations")
-                    sequenceOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Done sequence operations"
-
                     sequenceTestCasesResults.add(state.testCaseResult)
-                    executeListTestCases()
+                    executeListTestCases(testCaseNumber)
                     hideProgressDialog()
                 }
                 is SequenceOperationError -> {
-                    sequenceOperationResultText.text =
-                        sequenceOperationResultText.text.toString() +
-                                " Error in sequence ${state.message}"
                     hideProgressDialog()
+                    showError(state.message)
                 }
                 is ExecuteNextListTestCase -> {
-                    updateProgressDialogTitle("Done List nº ${state.previousTestCaseResult.id}")
-                    executeListTestCases(state.previousTestCaseResult.id + 1)
+                    updateProgressDialogTitle("Done List nº $testCaseNumber")
+                    executeListTestCases(testCaseNumber)
                     listTestCasesResults.add(state.previousTestCaseResult)
+                    testCaseNumber++
                 }
                 is ListTestCasesFinished -> {
+                    testCaseNumber = 0
                     updateProgressDialogTitle("Done List operations")
-                    listOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Done list operations"
-
                     listTestCasesResults.add(state.testCaseResult)
                     hideProgressDialog()
                     generateChartResult()
                 }
                 is ListOperationError -> {
-                    listOperationResultText.text =
-                        listOperationResultText.text.toString() +
-                                " Error in list ${state.message}"
                     hideProgressDialog()
+                    showError(state.message)
                     generateChartResult()
                 }
             }
@@ -102,7 +106,30 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
     }
 
     private fun setupListeners() {
-        calculateOperationButton.setOnClickListener { executeSequenceTestCases() }
+        toggleRealSequenceDataButton.setOnClickListener {
+            sequenceValuesSet.isVisible = !sequenceValuesSet.isVisible
+            resultChart.invalidate()
+        }
+
+        toggleRealListDataButton.setOnClickListener {
+            listValueSet.isVisible = !listValueSet.isVisible
+            resultChart.invalidate()
+        }
+
+        toggleAvgSequenceDataButton.setOnClickListener {
+            sequenceAvgValuesSet.isVisible = !sequenceAvgValuesSet.isVisible
+            resultChart.invalidate()
+        }
+
+        toggleAvgListDataButton.setOnClickListener {
+            listAvgValueSet.isVisible = !listAvgValueSet.isVisible
+            resultChart.invalidate()
+        }
+
+        calculateOperationButton.setOnClickListener {
+            bigCollectionsMotionLayout.transitionToEnd()
+            executeSequenceTestCases()
+        }
     }
 
     private fun setupChart() {
@@ -110,6 +137,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             description.isEnabled = false
             setPinchZoom(false)
             setDrawGridBackground(false)
+            setTouchEnabled(false)
             axisRight.isEnabled = false
             axisRight.setDrawGridLines(false)
             axisLeft.setDrawGridLines(false)
@@ -122,6 +150,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
             orientation = Legend.LegendOrientation.HORIZONTAL
             setDrawInside(false)
+            isWordWrapEnabled = true
             form = Legend.LegendForm.SQUARE
         }
     }
@@ -132,7 +161,8 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             val sequenceOfElements = generateSequence(0) { it + 1 }.take(testCase.listLength)
             bigCollectionsViewModel.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
                 sequenceOfElements,
-                testCase
+                testCase,
+                testCaseNumber
             )
         } catch (e: Throwable) {
             bigCollectionsViewModel.errorInSequenceOperation(e)
@@ -145,7 +175,8 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             val listOfElements = List(testCase.listLength) { it }
             bigCollectionsViewModel.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
                 listOfElements,
-                testCase
+                testCase,
+                testCaseNumber
             )
         } catch (e: Throwable) {
             bigCollectionsViewModel.errorInListOperation(e)
@@ -156,54 +187,62 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         val sequenceValues = sequenceTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
         val listValues = listTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
 
-        val sequenceValuesSet = LineDataSet(sequenceValues, "Sequence times")
+        val avgSequenceValues = sequenceTestCasesResults.mapIndexed { index, result ->
+            val time = if (index == 0 || index >= sequenceTestCasesResults.size - 1) {
+                result.time.toFloat()
+            } else {
+                (result.time.toFloat() + sequenceTestCasesResults[index -1].time.toFloat() + sequenceTestCasesResults[index +1].time.toFloat()) / 3.0f
+            }
+
+            Entry(index.toFloat(), time)
+        }
+
+        val avgListValues = listTestCasesResults.mapIndexed { index, result ->
+            val time = if (index == 0 || index >= listTestCasesResults.size - 1) {
+                result.time.toFloat()
+            } else {
+                (result.time.toFloat() + listTestCasesResults[index -1].time.toFloat() + listTestCasesResults[index +1].time.toFloat() ) / 3.0f
+            }
+
+            Entry(index.toFloat(), time)
+        }
+
+        sequenceValuesSet = LineDataSet(sequenceValues, "Sequence times in ms")
         sequenceValuesSet.apply {
-            color = Color.GREEN
+            color = resources.getColor(R.color.fontColorGreen, null)
             setDrawValues(false)
+            setDrawCircles(false)
         }
 
-        val listValueSet = LineDataSet(listValues, "List times")
+        listValueSet = LineDataSet(listValues, "List times in ms")
         listValueSet.apply {
-            color = Color.RED
+            color = resources.getColor(R.color.fontColorRed, null)
             setDrawValues(false)
+            setDrawCircles(false)
         }
 
-        val dataSets = arrayListOf<ILineDataSet>(sequenceValuesSet, listValueSet)
+        sequenceAvgValuesSet = LineDataSet(avgSequenceValues, "Sequence avg times in ms")
+        sequenceAvgValuesSet.apply {
+            color = resources.getColor(R.color.fontColorYellow, null)
+            setDrawValues(false)
+            setDrawCircles(false)
+            isVisible = false
+        }
+
+        listAvgValueSet = LineDataSet(avgListValues, "List avg times in ms")
+        listAvgValueSet.apply {
+            color = resources.getColor(R.color.fontColorBlue, null)
+            setDrawValues(false)
+            setDrawCircles(false)
+            isVisible = false
+        }
+
+        val dataSets = arrayListOf<ILineDataSet>(sequenceValuesSet, listValueSet, sequenceAvgValuesSet, listAvgValueSet)
         val data = LineData(dataSets)
+
+        data.setValueTypeface(ResourcesCompat.getFont(requireContext(), R.font.roboto_light))
 
         resultChart.data = data
         resultChart.invalidate()
-
     }
 }
-
-/*
-
-val sequence = listOf("One", "Two", "Three", "Four")
-val list = listOf(1,2,3,4)
-val listAsSequence = list.asSequence()
-
-val strNumberSize = sequence
-    .asSequence()
-    .filter { it.length > 3 }
-    .map { it.length }
-    .toList()
-
-val randomNumbers = sequence {
-    yield(3)
-    yieldAll(listOf(4, 5, 6, 8, 25))
-    yieldAll(generateSequence(2) { it*it })
-}
-
-PROBAR ZIP y GROUPBY
-
-val numbersToTake = 1000
-val maxNumber = 1000000
-val maxLength = 7
-
-var startTimeOperation: Long
-var endTimeOperation: Long
-
-
-
- */
