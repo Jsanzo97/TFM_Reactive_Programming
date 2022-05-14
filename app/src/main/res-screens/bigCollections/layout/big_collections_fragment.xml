@@ -107,7 +107,7 @@
         android:layout_marginEnd="@dimen/small_space"
         android:layout_marginBottom="@dimen/big_space"
         android:text="@string/calculate_operations_text"
-        style="@style/Widget.MaterialComponents.Button.UnelevatedButton"
+        style="@style/AppTheme.ExtendedFloatingActionButton.Default"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"/>
