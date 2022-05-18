@@ -24,6 +24,13 @@ import org.koin.dsl.module
 
 private const val DATABASE_NAME = "localStorage.db"
 
+/**
+ * This module is used to create:
+ *  - Database Room instance
+ *  - DAO instance for database access
+ *  - All the repositories necessary to connect the Use Cases with the Data Store
+ *  - All the datastore necessary to access the Sensors, Database and Collections data
+ */
 val dataModule = module {
 
     single {
