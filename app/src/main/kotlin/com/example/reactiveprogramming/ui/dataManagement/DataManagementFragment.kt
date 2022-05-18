@@ -46,8 +46,7 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
         showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
         toolbarColor = R.color.colorPrimary.some(),
-        toolbarNavigationIconColor = R.color.white.some(),
-        showLogoutButton = true
+        toolbarNavigationIconColor = R.color.white.some()
     )
 
     override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
