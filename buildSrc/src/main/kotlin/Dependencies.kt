@@ -34,7 +34,6 @@ object Versions {
     const val drawerLayout = "1.1.0-alpha03"
 
     const val arrow = "0.10.0"
-    const val threeTenABP = "1.2.1"
     const val koin = "2.0.1"
     const val androidCharts = "3.1.0"
 
@@ -64,7 +63,6 @@ object Libs {
     const val navigationFragmentKtx = "androidx.navigation:navigation-fragment-ktx:${Versions.navigation}"
     const val navigationUiKtx = "androidx.navigation:navigation-ui-ktx:${Versions.navigation}"
     const val drawerLayout = "androidx.drawerlayout:drawerlayout:${Versions.drawerLayout}"
-    const val threeTenABP = "com.jakewharton.threetenabp:threetenabp:${Versions.threeTenABP}"
     const val arrowCore = "io.arrow-kt:arrow-core-data:${Versions.arrow}"
     const val koin = "org.koin:koin-core:${Versions.koin}"
     const val koinAndroid = "org.koin:koin-android:${Versions.koin}"
