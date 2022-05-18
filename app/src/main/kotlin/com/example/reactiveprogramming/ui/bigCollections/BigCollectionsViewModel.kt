@@ -88,7 +88,7 @@ class BigCollectionsViewModel(
         testCaseNumber: Int
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
-        
+
         AsyncTask.execute {
             val result =
                 FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
