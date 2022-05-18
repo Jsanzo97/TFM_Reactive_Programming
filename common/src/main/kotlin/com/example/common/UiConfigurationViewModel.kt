@@ -10,7 +10,6 @@ import arrow.core.or
 import arrow.core.some
 
 data class UiConfigurationViewState(
-    var showToolbar: Boolean = false,
     var statusBarColor: Option<Int> = None,
     var toolbarColor: Option<Int> = None,
     var toolbarNavigationIconColor: Option<Int> = None,

@@ -9,12 +9,9 @@ import com.example.reactiveprogramming.R
 class HomeFragment : CustomFragment(R.layout.home_fragment) {
 
     override var uiConfigurationViewState = UiConfigurationViewState(
-        showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
         toolbarColor = R.color.colorPrimary.some(),
         toolbarNavigationIconColor = R.color.white.some()
     )
-
-    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
 
 }
