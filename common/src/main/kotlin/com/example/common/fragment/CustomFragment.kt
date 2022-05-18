@@ -32,16 +32,6 @@ abstract class CustomFragment(private val contentLayoutId: Int) : Fragment() {
         return inflater.inflate(contentLayoutId, container, false)
     }
 
-    protected abstract fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState)
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-        uiConfigurationViewModel.getUiConfigurationLiveData().observe(this, {
-            handleUiConfigurationViewState(it)
-        })
-    }
-
     fun showError(message: String) {
         hideKeyboard()
         hideProgressDialog()

@@ -43,13 +43,10 @@ class DataManagementFragment: CustomFragment(R.layout.data_management_fragment) 
     private val numberOfTeamsToCreate = 5
 
     override var uiConfigurationViewState = UiConfigurationViewState(
-        showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
         toolbarColor = R.color.colorPrimary.some(),
         toolbarNavigationIconColor = R.color.white.some()
     )
-
-    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)

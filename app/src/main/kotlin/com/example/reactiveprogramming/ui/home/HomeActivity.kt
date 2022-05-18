@@ -116,62 +116,52 @@ class HomeActivity: AppCompatActivity() {
         insets: WindowInsets,
         uiConfigurationViewState: UiConfigurationViewState
     ) {
-        toolbar.changeVisibility(uiConfigurationViewState.showToolbar)
-
         val statusBarColor =
             getColorOrDefault(uiConfigurationViewState.statusBarColor, colorPrimaryDark)
 
         window.statusBarColor = statusBarColor
 
-        if (uiConfigurationViewState.showToolbar) {
-            val toolbarColor =
-                getColorOrDefault(uiConfigurationViewState.toolbarColor, toolbarDefaultColor)
-            toolbar.background = ColorDrawable(toolbarColor)
+        val toolbarColor = getColorOrDefault(uiConfigurationViewState.toolbarColor, toolbarDefaultColor)
+        toolbar.background = ColorDrawable(toolbarColor)
 
-            uiConfigurationViewState.toolbarColor.fold(
-                ifEmpty = {
+        uiConfigurationViewState.toolbarColor.fold(
+            ifEmpty = {
+                toolbar.setOnTouchListener(null)
+            },
+            ifSome = { color ->
+                if (color == R.color.transparent) {
+                    toolbar.setOnTouchListener { _, event ->
+                        uiConfigurationViewModel.toolbarMotion.postValue(event)
+                        true
+                    }
+                } else {
                     toolbar.setOnTouchListener(null)
-                },
-                ifSome = { color ->
-                    if (color == R.color.transparent) {
-                        toolbar.setOnTouchListener { _, event ->
-                            uiConfigurationViewModel.toolbarMotion.postValue(event)
-                            true
-                        }
-                    } else {
-                        toolbar.setOnTouchListener(null)
-                    }
-                }
-            )
-
-            toolbar.navigationIcon?.apply {
-                val toolbarNavigationIconColor =
-                    uiConfigurationViewState.toolbarNavigationIconColor.fold(
-                        ifEmpty = { toolbarNavigationIconDefaultColor },
-                        ifSome = { getColorCompat(it) }
-                    )
-
-                when (this) {
-                    is DrawerArrowDrawable -> color = toolbarNavigationIconColor
-                    else -> {
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-                            colorFilter = BlendModeColorFilter(toolbarNavigationIconColor, BlendMode.SRC_ATOP)
-                        } else {
-                            setColorFilter(toolbarNavigationIconColor, PorterDuff.Mode.SRC_ATOP)
-                        }
-                        alpha = 255
-                    }
                 }
             }
+        )
 
-            (toolbar.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-                updateMargins(top = insets.systemWindowInsetTop)
+        toolbar.navigationIcon?.apply {
+            val toolbarNavigationIconColor =
+                uiConfigurationViewState.toolbarNavigationIconColor.fold(
+                    ifEmpty = { toolbarNavigationIconDefaultColor },
+                    ifSome = { getColorCompat(it) }
+                )
+
+            when (this) {
+                is DrawerArrowDrawable -> color = toolbarNavigationIconColor
+                else -> {
+                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                        colorFilter = BlendModeColorFilter(toolbarNavigationIconColor, BlendMode.SRC_ATOP)
+                    } else {
+                        setColorFilter(toolbarNavigationIconColor, PorterDuff.Mode.SRC_ATOP)
+                    }
+                    alpha = 255
+                }
             }
         }
 
-        val newContentTopMargin = when {
-            uiConfigurationViewState.showToolbar -> toolbarHeight
-            else -> 0
+        (toolbar.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
+            updateMargins(top = insets.systemWindowInsetTop)
         }
 
         var newContentBottomMargin = 0
@@ -181,7 +171,7 @@ class HomeActivity: AppCompatActivity() {
 
         val content = findViewById<ConstraintLayout>(R.id.content)
         (content.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-            updateMargins(top = newContentTopMargin, bottom = newContentBottomMargin)
+            updateMargins(top = toolbarHeight, bottom = newContentBottomMargin)
         }
     }
 

@@ -20,22 +20,25 @@ import com.github.mikephil.charting.data.LineDataSet
 import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
+/**
+ * This class represents the difference of use Sequence or List to manage big data collections
+ */
 class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) {
 
+    // ViewModel to manage view actions
     private val bigCollectionsViewModel: BigCollectionsViewModel by viewModel()
 
+    // Bind view elements
     private val bigCollectionsMotionLayout by lazy { requireView().findViewById<MotionLayout>(R.id.big_collections_motion_layout)}
-
     private val resultChart by lazy { requireView().findViewById<LineChart>(R.id.result_chart)}
-
     private val toggleRealSequenceDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_real_sequence_data_button) }
     private val toggleAvgSequenceDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_avg_sequence_data_button) }
     private val toggleRealListDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_real_list_data_button) }
     private val toggleAvgListDataButton by lazy { requireView().findViewById<ExtendedFloatingActionButton>(R.id.toggle_avg_list_data_button) }
     private val calculateOperationButton by lazy { requireView().findViewById<MaterialButton>(R.id.calculate_operation_button) }
 
+    // UI Configuration for custom toolbar
     override var uiConfigurationViewState = UiConfigurationViewState(
-        showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
         toolbarColor = R.color.colorPrimary.some(),
         toolbarNavigationIconColor = R.color.white.some()
@@ -51,16 +54,13 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
 
     var testCaseNumber = 0
 
-    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupViewModelLiveData()
         setupChart()
         setupListeners()
     }
-
+    
     private fun setupViewModelLiveData() {
         bigCollectionsViewModel.bigCollectionsViewModelLiveData.observe(this, Observer { state ->
             when (state) {

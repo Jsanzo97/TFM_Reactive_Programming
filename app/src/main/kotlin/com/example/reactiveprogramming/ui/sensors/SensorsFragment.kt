@@ -99,13 +99,10 @@ class SensorsFragment: CustomFragment(R.layout.sensors_fragment) {
     private val defaultDelayToCollectData = 500
 
     override var uiConfigurationViewState = UiConfigurationViewState(
-        showToolbar = true,
         statusBarColor = R.color.colorPrimaryDark.some(),
         toolbarColor = R.color.colorPrimary.some(),
         toolbarNavigationIconColor = R.color.white.some()
     )
-
-    override fun handleUiConfigurationViewState(uiConfigurationViewState: UiConfigurationViewState) = Unit
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
