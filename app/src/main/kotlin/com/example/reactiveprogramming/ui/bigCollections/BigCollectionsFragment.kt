@@ -137,7 +137,6 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             description.isEnabled = false
             setPinchZoom(false)
             setDrawGridBackground(false)
-            setTouchEnabled(false)
             axisRight.isEnabled = false
             axisRight.setDrawGridLines(false)
             axisLeft.setDrawGridLines(false)

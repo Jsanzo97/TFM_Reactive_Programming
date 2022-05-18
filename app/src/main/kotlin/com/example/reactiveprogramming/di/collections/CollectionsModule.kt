@@ -6,6 +6,10 @@ import com.example.reactiveprogramming.ui.bigCollections.BigCollectionsViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * This module is used to create the necessary use cases to create the BigCollectionsViewModel and make it available
+ * to be injected into BigCollectionsFragment
+ */
 val collectionsModule = module {
 
     viewModel { BigCollectionsViewModel(get(), get()) }

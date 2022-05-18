@@ -5,6 +5,10 @@ import com.example.reactiveprogramming.ui.dataManagement.DataManagementViewModel
 import org.koin.androidx.viewmodel.dsl.viewModel
 import org.koin.dsl.module
 
+/**
+ * This module is used to create the necessary use cases to create the DataManagementViewModel and make it available
+ * to be injected into DataManagementFragment
+ */
 val dataManagementModule = module {
 
     viewModel { DataManagementViewModel(get(), get(), get(), get(), get(), get()) }

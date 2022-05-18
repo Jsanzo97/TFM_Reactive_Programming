@@ -24,6 +24,7 @@ class CollectionsManager {
             .map { it.toString() }
             .filter { it.length < maxNumberLength }
             .map { it.toInt() }
+            .sortedDescending()
         val endTime = System.currentTimeMillis()
         return CollectionsManagerResult(
             elements,
@@ -53,6 +54,7 @@ class CollectionsManager {
             .map { it.toString() }
             .filter { it.length < maxNumberLength }
             .map { it.toInt() }
+            .sortedDescending()
             .toList()
         val endTime = System.currentTimeMillis()
         return CollectionsManagerResult(

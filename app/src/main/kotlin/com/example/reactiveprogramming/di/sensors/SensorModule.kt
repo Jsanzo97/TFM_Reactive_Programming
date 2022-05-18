@@ -15,6 +15,12 @@ internal const val BRIGHTNESS_SENSOR = "brightness_sensor"
 internal const val ORIENTATION_SENSOR = "orientation_sensor"
 internal const val ACCELEROMETER_SENSOR = "accelerometer_sensor"
 
+/**
+ * This module is used to create the necessary use cases to create the SensorsViewModel and make it available
+ * to be injected into SensorsFragment
+ *
+ * It also creates one sensor of each type (Brightness, Orientation and Acceleration)
+ */
 val sensorModule = module {
 
     viewModel { SensorsViewModel(get(), get(), get(), get(), get(), get(), get(), get(), get()) }
