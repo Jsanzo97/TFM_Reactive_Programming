@@ -7,6 +7,13 @@ import androidx.lifecycle.ViewModel
 import com.example.domain.usecase.FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
 import com.example.domain.usecase.FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
 
+/**
+ * ViewModel to manage the actions performed in the view
+ * @param FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
+ *  Use case that manage the execution of test cases in lists
+ * @param FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
+ *  Use case that manage the execution of test cases in sequences
+ */
 class BigCollectionsViewModel(
     private val FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits:
         FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits,
@@ -17,6 +24,12 @@ class BigCollectionsViewModel(
     private val _bigCollectionsViewModelLiveData = MutableLiveData<BigCollectionsViewState>()
     val bigCollectionsViewModelLiveData: LiveData<BigCollectionsViewState> get() = _bigCollectionsViewModelLiveData
 
+    /**
+     * Execute the test case in list
+     * @param numberList list of numbers to execute the test
+     * @param testCase test case that will be executed with its configuration
+     * @param testCaseNumber number of the test case
+     */
     fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
         testCase: BigCollectionsTestCase,
@@ -24,16 +37,16 @@ class BigCollectionsViewModel(
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
 
-        if (testCaseNumber < defaultTestCases.size - 1) {
-            AsyncTask.execute {
-                val result =
-                    FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-                        numberList,
-                        testCase.maxNumberToEvaluate,
-                        testCase.numbersToTake,
-                        testCase.maxNumberLength
-                    )
+        AsyncTask.execute {
+            val result =
+                FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
+                    numberList,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
 
+            if (testCaseNumber < defaultTestCases.size - 1) {
                 _bigCollectionsViewModelLiveData.postValue(
                     ExecuteNextListTestCase(
                         BigCollectionsTestCaseResult(
@@ -42,17 +55,7 @@ class BigCollectionsViewModel(
                         )
                     )
                 )
-            }
-        } else {
-            AsyncTask.execute {
-                val result =
-                    FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-                        numberList,
-                        testCase.maxNumberToEvaluate,
-                        testCase.numbersToTake,
-                        testCase.maxNumberLength
-                    )
-
+            } else {
                 _bigCollectionsViewModelLiveData.postValue(
                     ListTestCasesFinished(
                         BigCollectionsTestCaseResult(
@@ -65,28 +68,37 @@ class BigCollectionsViewModel(
         }
     }
 
-
-    fun errorInSequenceOperation(e: Throwable) {
-        _bigCollectionsViewModelLiveData.postValue(SequenceOperationError(e.toString()))
+    /**
+     * Manage errors in list operations
+     * @param e error produced
+     */
+    fun errorInListOperation(e: Throwable) {
+        _bigCollectionsViewModelLiveData.postValue(ListOperationError(e.toString()))
     }
 
+    /**
+     * Execute the test case in sequence
+     * @param numberSequence sequence of numbers to execute the test
+     * @param testCase test case that will be executed with its configuration
+     * @param testCaseNumber number of the test case
+     */
     fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
-        numberList: Sequence<Int>,
+        numberSequence: Sequence<Int>,
         testCase: BigCollectionsTestCase,
         testCaseNumber: Int
     ) {
         _bigCollectionsViewModelLiveData.postValue(PerformingOperation)
+        
+        AsyncTask.execute {
+            val result =
+                FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
+                    numberSequence,
+                    testCase.maxNumberToEvaluate,
+                    testCase.numbersToTake,
+                    testCase.maxNumberLength
+                )
 
-        if (testCaseNumber < defaultTestCases.size - 1) {
-            AsyncTask.execute {
-                val result =
-                    FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-                        numberList,
-                        testCase.maxNumberToEvaluate,
-                        testCase.numbersToTake,
-                        testCase.maxNumberLength
-                    )
-
+            if (testCaseNumber < defaultTestCases.size - 1) {
                 _bigCollectionsViewModelLiveData.postValue(
                     ExecuteNextSequenceTestCase(
                         BigCollectionsTestCaseResult(
@@ -95,17 +107,7 @@ class BigCollectionsViewModel(
                         )
                     )
                 )
-            }
-        } else {
-            AsyncTask.execute {
-                val result =
-                    FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-                        numberList,
-                        testCase.maxNumberToEvaluate,
-                        testCase.numbersToTake,
-                        testCase.maxNumberLength
-                    )
-
+            } else {
                 _bigCollectionsViewModelLiveData.postValue(
                     SequenceTestCasesFinished(
                         BigCollectionsTestCaseResult(
@@ -118,8 +120,11 @@ class BigCollectionsViewModel(
         }
     }
 
-    fun errorInListOperation(e: Throwable) {
-        _bigCollectionsViewModelLiveData.postValue(ListOperationError(e.toString()))
+    /**
+     * Manage errors in sequence operations
+     * @param e error produced
+     */
+    fun errorInSequenceOperation(e: Throwable) {
+        _bigCollectionsViewModelLiveData.postValue(SequenceOperationError(e.toString()))
     }
-
 }

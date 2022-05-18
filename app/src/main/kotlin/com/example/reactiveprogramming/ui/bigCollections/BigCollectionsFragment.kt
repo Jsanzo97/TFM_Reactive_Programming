@@ -21,7 +21,7 @@ import com.github.mikephil.charting.interfaces.datasets.ILineDataSet
 import com.google.android.material.floatingactionbutton.ExtendedFloatingActionButton
 
 /**
- * This class represents the difference of use Sequence or List to manage big data collections
+ * Represents the difference of use Sequence or List to manage big data collections
  */
 class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) {
 
@@ -58,9 +58,13 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         super.onViewCreated(view, savedInstanceState)
         setupViewModelLiveData()
         setupChart()
+        setupChartLegend()
         setupListeners()
     }
-    
+
+    /**
+     * Manage the state changes of the view and perform the corresponding actions
+     */
     private fun setupViewModelLiveData() {
         bigCollectionsViewModel.bigCollectionsViewModelLiveData.observe(this, Observer { state ->
             when (state) {
@@ -104,6 +108,9 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         })
     }
 
+    /**
+     * Set button actions
+     */
     private fun setupListeners() {
         toggleRealSequenceDataButton.setOnClickListener {
             sequenceValuesSet.isVisible = !sequenceValuesSet.isVisible
@@ -131,6 +138,9 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         }
     }
 
+    /**
+     * Set chart ui configuration
+     */
     private fun setupChart() {
         resultChart.apply {
             description.isEnabled = false
@@ -142,7 +152,12 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             xAxis.setDrawGridLines(false)
             xAxis.position = XAxis.XAxisPosition.BOTTOM
         }
+    }
 
+    /**
+     * Set chart legend configuration
+     */
+    private fun setupChartLegend() {
         resultChart.legend.apply {
             verticalAlignment = Legend.LegendVerticalAlignment.BOTTOM
             horizontalAlignment = Legend.LegendHorizontalAlignment.LEFT
@@ -153,10 +168,14 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         }
     }
 
+    /**
+     * Execute the test case selected with Sequences
+     * @param testCaseNumber number of the test to execute
+     */
     private fun executeSequenceTestCases(testCaseNumber: Int = 0) {
         val testCase = defaultTestCases[testCaseNumber]
         try {
-            val sequenceOfElements = generateSequence(0) { it + 1 }.take(testCase.listLength)
+            val sequenceOfElements = generateSequence(0) { it + 1 }.take(testCase.collectionLength)
             bigCollectionsViewModel.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
                 sequenceOfElements,
                 testCase,
@@ -167,10 +186,14 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         }
     }
 
+    /**
+     * Execute the test case selected with Lists
+     * @param testCaseNumber number of the test to execute
+     */
     private fun executeListTestCases(testCaseNumber: Int = 0) {
         val testCase = defaultTestCases[testCaseNumber]
         try {
-            val listOfElements = List(testCase.listLength) { it }
+            val listOfElements = List(testCase.collectionLength) { it }
             bigCollectionsViewModel.findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
                 listOfElements,
                 testCase,
@@ -181,6 +204,9 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
         }
     }
 
+    /**
+     * Generate a chart with the result of the Sequence and List tests executed
+     */
     private fun generateChartResult() {
         val sequenceValues = sequenceTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
         val listValues = listTestCasesResults.mapIndexed { index, result -> Entry(index.toFloat(), result.time.toFloat()) }
@@ -205,6 +231,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             Entry(index.toFloat(), time)
         }
 
+        //Sequence tests time line
         sequenceValuesSet = LineDataSet(sequenceValues, "Sequence times in ms")
         sequenceValuesSet.apply {
             color = resources.getColor(R.color.fontColorGreen, null)
@@ -212,6 +239,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             setDrawCircles(false)
         }
 
+        //List tests time line
         listValueSet = LineDataSet(listValues, "List times in ms")
         listValueSet.apply {
             color = resources.getColor(R.color.fontColorRed, null)
@@ -219,6 +247,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             setDrawCircles(false)
         }
 
+        //Average sequence tests time line
         sequenceAvgValuesSet = LineDataSet(avgSequenceValues, "Sequence avg times in ms")
         sequenceAvgValuesSet.apply {
             color = resources.getColor(R.color.fontColorYellow, null)
@@ -227,6 +256,7 @@ class BigCollectionsFragment: CustomFragment(R.layout.big_collections_fragment) 
             isVisible = false
         }
 
+        //Average list test time line
         listAvgValueSet = LineDataSet(avgListValues, "List avg times in ms")
         listAvgValueSet.apply {
             color = resources.getColor(R.color.fontColorBlue, null)
