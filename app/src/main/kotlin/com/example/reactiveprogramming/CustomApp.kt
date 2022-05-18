@@ -6,10 +6,12 @@ import com.example.reactiveprogramming.di.data.dataModule
 import com.example.reactiveprogramming.di.dataManagement.dataManagementModule
 import com.example.reactiveprogramming.di.home.homeModule
 import com.example.reactiveprogramming.di.sensors.sensorModule
-import com.jakewharton.threetenabp.AndroidThreeTen
 import org.koin.android.ext.koin.androidContext
 import org.koin.core.context.startKoin
 
+/**
+ * This class is used to initiate the application, it will start the koin dependencies manager with all the necessaries modules
+ */
 class CustomApp : Application() {
 
     override fun onCreate() {
@@ -28,8 +30,5 @@ class CustomApp : Application() {
                 )
             )
         }
-
-        AndroidThreeTen.init(applicationContext)
     }
-
 }

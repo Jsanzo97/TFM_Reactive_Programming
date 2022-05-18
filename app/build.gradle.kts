@@ -50,7 +50,7 @@ android {
                 keyAlias = "debug"
                 keyPassword = KEY_PASSWORD
             } catch (e: Exception) {
-                throw InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+                throw Throwable("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
             }
         }
         register("release") {
@@ -60,7 +60,7 @@ android {
                 keyAlias = "release"
                 keyPassword = KEY_PASSWORD
             } catch (e: Exception) {
-                throw InvalidUserDataException("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
+                throw Throwable("You should define KEYSTORE_PASSWORD and KEY_PASSWORD in gradle.properties.")
             }
         }
     }
@@ -133,7 +133,6 @@ dependencies {
     implementation(Libs.koinAndroidViewModel)
     implementation(Libs.arrowCore)
     implementation(Libs.roomKtx)
-    implementation(Libs.threeTenABP)
     implementation(Libs.androidCharts)
 
     debugImplementation(DebugLibs.debugDb)
