@@ -26,6 +26,12 @@ import com.example.reactiveprogramming.R
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
+import android.R.color
+import android.graphics.BlendMode
+
+import android.graphics.BlendModeColorFilter
+import android.os.Build
+
 
 class HomeActivity: AppCompatActivity() {
 
@@ -148,7 +154,11 @@ class HomeActivity: AppCompatActivity() {
                 when (this) {
                     is DrawerArrowDrawable -> color = toolbarNavigationIconColor
                     else -> {
-                        setColorFilter(toolbarNavigationIconColor, PorterDuff.Mode.SRC_IN)
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
+                            colorFilter = BlendModeColorFilter(toolbarNavigationIconColor, BlendMode.SRC_ATOP)
+                        } else {
+                            setColorFilter(toolbarNavigationIconColor, PorterDuff.Mode.SRC_ATOP)
+                        }
                         alpha = 255
                     }
                 }

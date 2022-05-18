@@ -14,8 +14,7 @@ data class UiConfigurationViewState(
     var statusBarColor: Option<Int> = None,
     var toolbarColor: Option<Int> = None,
     var toolbarNavigationIconColor: Option<Int> = None,
-    var insets: Option<WindowInsets> = None,
-    var showLogoutButton: Boolean = false
+    var insets: Option<WindowInsets> = None
 )
 
 class UiConfigurationViewModel : ViewModel() {
