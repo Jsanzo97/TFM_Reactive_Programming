@@ -1,7 +1,6 @@
 package com.example.collections.storage
 
 import com.example.collections.CollectionsManager
-import com.example.collections.CollectionsManagerResult
 import com.example.collections.toDataCollectionResult
 import com.example.data.datastore.CollectionsDatastore
 import com.example.data.entity.DataCollectionResult
