@@ -3,6 +3,11 @@ package com.example.reactiveprogramming.ui.dataManagement
 import androidx.recyclerview.widget.DiffUtil
 import com.example.domain.entity.Team
 
+/**
+ * Calculate if there are changes in team list
+ * @param newList new list of teams with possible changes
+ * @param oldList original list of teams
+ */
 class DataManagementDiffUtilCallback(
     private val newList: List<Team>,
     private val oldList: List<Team>

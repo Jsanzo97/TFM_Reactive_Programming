@@ -12,6 +12,15 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 
+/**
+ * ViewModel to manage the actions performed in the DataManagementFragment
+ * @param initializeDatabaseUseCase Initialize the database with random data
+ * @param getTeamsReactiveUseCase Retrieve the teams from database by reactive way
+ * @param getTeamsFunctionalUseCase Retrieve the teams from database by functional way
+ * @param updateTeamUseCase Update random team from database
+ * @param removeTeamUseCase Remove random team from database
+ * @param createTeamUseCase Add new random team to database
+ */
 class DataManagementViewModel(
     private val initializeDatabaseUseCase: InitializeDatabaseUseCase,
     private val getTeamsReactiveUseCase: GetTeamsReactiveUseCase,
@@ -24,6 +33,10 @@ class DataManagementViewModel(
     private val _dataManagementViewModelStateFlow = MutableStateFlow<DataManagementViewState>(InitialState)
     val dataManagementViewModelSateFlow: StateFlow<DataManagementViewState> get() = _dataManagementViewModelStateFlow
 
+    /**
+     * Fill the database with random data
+     * @param numberOfTeamsToCreate number of random teams that will be created
+     */
     fun initializeDataBase(numberOfTeamsToCreate: Int) {
         _dataManagementViewModelStateFlow.value = InitializingDatabase
 
@@ -41,6 +54,9 @@ class DataManagementViewModel(
         }
     }
 
+    /**
+     * Retrieve the teams from database by reactive way
+     */
     fun getTeamsReactive() {
         _dataManagementViewModelStateFlow.value = RetrievingReactiveTeams
 
@@ -51,7 +67,9 @@ class DataManagementViewModel(
         }
     }
 
-
+    /**
+     * Retrieve the teams from database by functional way
+     */
     fun getTeamsFunctional() {
         _dataManagementViewModelStateFlow.value = RetrievingFunctionalTeams
 
@@ -61,6 +79,10 @@ class DataManagementViewModel(
         }
     }
 
+    /**
+     * Update team from databse
+     * @param team team to update
+     */
     fun updateTeam(team: Team?) {
         team?.let {
             _dataManagementViewModelStateFlow.value = UpdatingTeam
@@ -78,6 +100,10 @@ class DataManagementViewModel(
         }
     }
 
+    /**
+     * Remove team from database
+     * @param team team to remove
+     */
     fun removeTeam(team: Team?) {
         team?.let {
             _dataManagementViewModelStateFlow.value = RemovingTeam
@@ -95,6 +121,9 @@ class DataManagementViewModel(
         }
     }
 
+    /**
+     * Store new random team in the database
+     */
     fun createNewTeam() {
         _dataManagementViewModelStateFlow.value = CreatingTeam
 

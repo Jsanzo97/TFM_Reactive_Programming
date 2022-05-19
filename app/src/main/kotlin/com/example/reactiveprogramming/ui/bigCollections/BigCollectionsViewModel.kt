@@ -8,11 +8,11 @@ import com.example.domain.usecase.FindFirstNumbersInListThatAreOddAndSelectFirst
 import com.example.domain.usecase.FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
 
 /**
- * ViewModel to manage the actions performed in the view
+ * ViewModel to manage the actions performed in the BigCollectionsFragment
  * @param FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
- *  Use case that manage the execution of test cases in lists
+ *  Manage the execution of test cases in lists
  * @param FindFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits
- *  Use case that manage the execution of test cases in sequences
+ *  Manage the execution of test cases in sequences
  */
 class BigCollectionsViewModel(
     private val FindFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits:
