@@ -9,6 +9,10 @@ import com.example.domain.entity.Team
 import com.example.reactiveprogramming.R
 import com.google.android.material.textview.MaterialTextView
 
+/**
+ * Representation of one team inside the recycler view
+ * @param teamList list of teams that will be showed
+ */
 class DataManagementTeamAdapter(
     private val teamList: MutableList<Team>
 ) : RecyclerView.Adapter<DataManagementTeamAdapter.ViewHolder>() {
@@ -32,6 +36,10 @@ class DataManagementTeamAdapter(
         )
     }
 
+    /**
+     * Manage changes on data showed
+     * @param newTeamList new list with changes on teams
+     */
     fun onNewData(newTeamList: List<Team>) {
         val diffResult = DiffUtil.calculateDiff(DataManagementDiffUtilCallback(newTeamList, teamList))
         diffResult.dispatchUpdatesTo(this)
@@ -39,8 +47,15 @@ class DataManagementTeamAdapter(
         teamList.addAll(newTeamList)
     }
 
+    /**
+     * Returns the team list
+     */
     fun getTeamList() = teamList
 
+    /**
+     * Bind the view with the data
+     * @param itemView item that will be painted on screen
+     */
     class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         var teamNameLabel: MaterialTextView = itemView.findViewById(R.id.team_name_label)
         var teamSportNameLabel: MaterialTextView = itemView.findViewById(R.id.team_sport_name_label)
