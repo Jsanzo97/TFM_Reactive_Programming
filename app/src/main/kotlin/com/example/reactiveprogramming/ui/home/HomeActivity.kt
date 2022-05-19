@@ -34,7 +34,9 @@ import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 /**
- * Manage the UI Configuration application toolbar and navigation drawer
+ * Manage the UI Configuration application toolbar and setup navigation drawer
+ *
+ * The application structure is one activity and many fragments
  */
 class HomeActivity: AppCompatActivity() {
 
