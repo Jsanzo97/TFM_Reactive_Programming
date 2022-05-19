@@ -33,17 +33,25 @@ import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.navigation.NavigationView
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
-
+/**
+ * Manage the UI Configuration application toolbar and navigation drawer
+ */
 class HomeActivity: AppCompatActivity() {
 
-    private val toolbar by lazy { findViewById<MaterialToolbar>(R.id.toolbar) }
+    // ViewModel to manage the ui configuration
+    private val uiConfigurationViewModel: UiConfigurationViewModel by viewModel()
+
+    // Colors for toolbar and status bar
+    private val colorPrimary by lazy { getColorCompat(R.color.colorPrimary) }
+    private val colorPrimaryDark by lazy { getColorCompat(R.color.colorPrimaryDark) }
+
+    // Navigation drawer configuration
     private lateinit var appBarConfiguration: AppBarConfiguration
     private val navController by lazy { findNavController(R.id.main_nav_host_fragment) }
     private val navDrawer by lazy { findViewById<NavigationView>(R.id.main_nav_view) }
 
-    private val uiConfigurationViewModel: UiConfigurationViewModel by viewModel()
-    private val colorPrimary by lazy { getColorCompat(R.color.colorPrimary) }
-    private val colorPrimaryDark by lazy { getColorCompat(R.color.colorPrimaryDark) }
+    // Toolbar configuration
+    private val toolbar by lazy { findViewById<MaterialToolbar>(R.id.toolbar) }
     private val toolbarHeight by lazy { getActionBarSize() }
     private val toolbarDefaultColor by lazy {
         getColorFromStyle(
@@ -104,6 +112,10 @@ class HomeActivity: AppCompatActivity() {
 
     }
 
+    /**
+     * Manage the changes on the ui state
+     * @param uiConfigurationViewState new configuration state of the ui
+     */
     private fun handleUiConfigurationViewStates(uiConfigurationViewState: UiConfigurationViewState) {
         uiConfigurationViewState.insets.fold(
             ifEmpty = { },
@@ -113,32 +125,19 @@ class HomeActivity: AppCompatActivity() {
         )
     }
 
+    /**
+     * Apply changes on the ui configuration
+     * @param insets measure of how much need to move the toolbar and the screen view
+     * @param uiConfigurationViewState new configuration state
+     */
     private fun applyUiConfigurationViewState(
         insets: WindowInsets,
         uiConfigurationViewState: UiConfigurationViewState
     ) {
-        val statusBarColor =
-            getColorOrDefault(uiConfigurationViewState.statusBarColor, colorPrimaryDark)
+        window.statusBarColor = getColorOrDefault(uiConfigurationViewState.statusBarColor, colorPrimaryDark)
 
-        window.statusBarColor = statusBarColor
-
-        val toolbarColor = getColorOrDefault(uiConfigurationViewState.toolbarColor, toolbarDefaultColor)
-        toolbar.background = ColorDrawable(toolbarColor)
-
-        uiConfigurationViewState.toolbarColor.fold(
-            ifEmpty = {
-                toolbar.setOnTouchListener(null)
-            },
-            ifSome = { color ->
-                if (color == R.color.transparent) {
-                    toolbar.setOnTouchListener { _, event ->
-                        uiConfigurationViewModel.toolbarMotion.postValue(event)
-                        true
-                    }
-                } else {
-                    toolbar.setOnTouchListener(null)
-                }
-            }
+        toolbar.background = ColorDrawable(
+            getColorOrDefault(uiConfigurationViewState.toolbarColor, toolbarDefaultColor)
         )
 
         toolbar.navigationIcon?.apply {
@@ -179,16 +178,6 @@ class HomeActivity: AppCompatActivity() {
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.main_nav_host_fragment)
         return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-    fun lockNavDrawer() {
-        val drawerLayout = findViewById<DrawerLayout>(R.id.main_drawer_layout)
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
-    }
-
-    fun unlockNavDrawer() {
-        val drawerLayout = findViewById<DrawerLayout>(R.id.main_drawer_layout)
-        drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_UNLOCKED)
     }
 
 }
