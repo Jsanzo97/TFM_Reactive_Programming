@@ -24,8 +24,8 @@ class TeamsDataRepository (
     private val dispatcher: CoroutineDispatcher
 ) : TeamsRepository {
 
-    override suspend fun saveTeam(team: List<Team>): Option<CustomError> = withContext(dispatcher) {
-        localTeamsDatastore.saveTeam(team.map { it.toDataTeam() }).fold(
+    override suspend fun saveTeam(dataTeams: List<Team>): Option<CustomError> = withContext(dispatcher) {
+        localTeamsDatastore.saveTeam(dataTeams.map { it.toDataTeam() }).fold(
             {
                 None
             },
@@ -35,8 +35,8 @@ class TeamsDataRepository (
         )
     }
 
-    override suspend fun saveTeam(team: Team): Option<CustomError> = withContext(dispatcher) {
-        localTeamsDatastore.saveTeam(team.toDataTeam()).fold(
+    override suspend fun saveTeam(dataTeam: Team): Option<CustomError> = withContext(dispatcher) {
+        localTeamsDatastore.saveTeam(dataTeam.toDataTeam()).fold(
             {
                 None
             },
@@ -67,8 +67,8 @@ class TeamsDataRepository (
         }
 
 
-    override suspend fun updateTeam(team: Team): Option<CustomError> = withContext(dispatcher) {
-        localTeamsDatastore.updateTeam(team.toDataTeam()).fold(
+    override suspend fun updateTeam(dataTeam: Team): Option<CustomError> = withContext(dispatcher) {
+        localTeamsDatastore.updateTeam(dataTeam.toDataTeam()).fold(
             {
                 None
             },
@@ -78,8 +78,8 @@ class TeamsDataRepository (
         )
     }
 
-    override suspend fun removeTeam(team: Team): Option<CustomError> = withContext(dispatcher) {
-        localTeamsDatastore.removeTeam(team.toDataTeam()).fold(
+    override suspend fun removeTeam(dataTeam: Team): Option<CustomError> = withContext(dispatcher) {
+        localTeamsDatastore.removeTeam(dataTeam.toDataTeam()).fold(
             {
                 None
             },
