@@ -32,12 +32,4 @@ android {
 
 dependencies {
     implementation(project(":data"))
-    implementation(Libs.kotlinStdlib)
-    implementation(Libs.coreKtx)
-    implementation(Libs.liveDataKtx)
-    implementation(Libs.navigationFragmentKtx)
-    implementation(Libs.arrowCore)
-    implementation(Libs.koinAndroidViewModel)
-    implementation(Libs.material)
-    implementation(Libs.constraintLayout)
 }

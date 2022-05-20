@@ -7,6 +7,11 @@ import android.hardware.SensorManager
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 
+/**
+ * Manages the measure of data by the sensor
+ * @param sensorManager system sensor manager necessary to initialize this custom sensor
+ * @param sensorType type of the sensor that we want to create, it can be Brightness, Acceleration or Orientation
+ */
 class Sensor(sensorManager: SensorManager, sensorType: Int) {
 
     private var sensor: Sensor? = null
@@ -19,6 +24,9 @@ class Sensor(sensorManager: SensorManager, sensorType: Int) {
     var numberOfDataGenerated = 0L
     var shouldCountData = false
 
+    /**
+     * Initialization of the sensor and registration of its listener
+     */
     init {
         sensor = sensorManager.getDefaultSensor(sensorType)
 
@@ -45,19 +53,32 @@ class Sensor(sensorManager: SensorManager, sensorType: Int) {
         )
     }
 
+    /**
+     * Stops the measure of data
+     */
     fun stopRegisterData() {
         shouldCountData = false
     }
 
+    /**
+     * Starts the measure of data
+     */
     fun startRegisterData() {
         shouldCountData = true
         numberOfDataGenerated++
     }
 
+    /**
+     * Resets the data of the sensor
+     */
     fun resetDataCount() {
         stopRegisterData()
         numberOfDataGenerated = 0L
     }
 
+    /**
+     * Returns the value of the sensor data at this moment
+     * @return value of sensor data
+     */
     fun getSensorValue() = sensorValue
 }
