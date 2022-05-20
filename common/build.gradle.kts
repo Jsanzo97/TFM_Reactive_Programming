@@ -36,4 +36,5 @@ dependencies {
     implementation(Libs.arrowCore)
     implementation(Libs.koinAndroidViewModel)
     implementation(Libs.material)
+    implementation(Libs.constraintLayout)
 }
