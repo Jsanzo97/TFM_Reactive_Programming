@@ -9,12 +9,17 @@ import com.example.data.entity.toTeam
 import com.example.data.error.toCustomError
 import com.example.domain.entity.Team
 import com.example.domain.error.CustomError
+import com.example.domain.repository.SensorRepository
 import com.example.domain.repository.TeamsRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 
+/**
+ * Implementation of TeamsRepository to communicate the Domain layer with the Data layer
+ * @see TeamsRepository
+ */
 class TeamsDataRepository (
     private val localTeamsDatastore: LocalTeamsDatastore,
     private val dispatcher: CoroutineDispatcher

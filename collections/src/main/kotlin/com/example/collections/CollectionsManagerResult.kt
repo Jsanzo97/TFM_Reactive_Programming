@@ -14,6 +14,7 @@ data class CollectionsManagerResult (
 
 /**
  * Convert CollectionsManagerResult to DataCollectionResult
+ * @return new DataCollectionResult with the CollectionsManagerResult values
  */
 fun CollectionsManagerResult.toDataCollectionResult() = DataCollectionResult(
     elements, time
