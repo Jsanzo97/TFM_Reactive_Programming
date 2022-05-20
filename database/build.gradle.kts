@@ -45,7 +45,6 @@ android {
 dependencies {
     implementation(project(":domain"))
     implementation(project(":data"))
-    implementation(Libs.kotlinStdlib)
     implementation(Libs.coroutines)
     implementation(Libs.arrowCore)
     implementation(Libs.roomKtx)
