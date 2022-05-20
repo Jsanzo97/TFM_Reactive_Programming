@@ -5,6 +5,10 @@ import com.example.data.entity.toCollectionResult
 import com.example.domain.entity.CollectionsResult
 import com.example.domain.repository.CollectionsRepository
 
+/**
+ * Implementation of CollectionsRepository to communicate the Domain layer with the Data layer
+ * @see CollectionsRepository
+ */
 class CollectionsDataRepository (
     private val collectionsDatastore: CollectionsDatastore
 ) : CollectionsRepository {
@@ -20,13 +24,13 @@ class CollectionsDataRepository (
         ).toCollectionResult()
 
     override fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
-        numberList: Sequence<Int>,
+        numberSequence: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
     ): CollectionsResult =
         collectionsDatastore.findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
-            numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
+            numberSequence, maxNumbersToEvaluate, numbersToTake, maxNumberLength
         ).toCollectionResult()
 
 }

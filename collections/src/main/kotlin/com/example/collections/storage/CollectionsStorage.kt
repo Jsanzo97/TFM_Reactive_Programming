@@ -5,6 +5,10 @@ import com.example.collections.toDataCollectionResult
 import com.example.data.datastore.CollectionsDatastore
 import com.example.data.entity.DataCollectionResult
 
+/**
+ * Implementation of CollectionsDatastore to communicate the Data layer with the Collections layer
+ * @see CollectionsDatastore
+ */
 class CollectionsStorage: CollectionsDatastore {
 
     override fun findFirstNumbersInListThatAreOddAndTheirSquareHasCertainDigits(
@@ -17,12 +21,12 @@ class CollectionsStorage: CollectionsDatastore {
     ).toDataCollectionResult()
 
     override fun findFirstNumbersInSequenceThatAreOddAndTheirSquareHasCertainDigits(
-        numberList: Sequence<Int>,
+        numberSequence: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
     ): DataCollectionResult = CollectionsManager().findFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-        numberList, maxNumbersToEvaluate, numbersToTake, maxNumberLength
+        numberSequence, maxNumbersToEvaluate, numbersToTake, maxNumberLength
     ).toDataCollectionResult()
 
 }
