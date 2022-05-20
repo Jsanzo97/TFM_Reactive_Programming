@@ -1,12 +1,22 @@
 package com.example.collections
 
+/**
+ * Manage the operations performed on lists and sequences to evaluate their differences
+ */
 class CollectionsManager {
 
-    /* Given number list of N elements,
-       Take the M first odd numbers,
-       Then take only primes,
-       Then calculate the square of each one,
-       And finally remove those that has more than D digits.
+    /**
+     * Given number list of N elements,
+     * Take the M first odd numbers,
+     * Then take only primes,
+     * Then calculate the square of each one,
+     * Then remove those that has more than D digits,
+     * Finally sort the result descending
+     *
+     * @param numberList list of numbers to execute the operations
+     * @param maxNumbersToEvaluate number of elements that will be taken to check if they are odd
+     * @param numbersToTake number of odd elements that will be taken to check if they are primes
+     * @param maxNumberLength max length of numbers permitted
      */
     fun findFirstNumbersInListThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
         numberList: List<Int>,
@@ -32,20 +42,27 @@ class CollectionsManager {
         )
     }
 
-    /* Given number sequence of N elements,
-       Take the M first odd numbers,
-       Then take only primes,
-       Then calculate the square of each one,
-       And finally remove those that has more than D digits.
+    /**
+     * Given number sequence of N elements,
+     * Take the M first odd numbers,
+     * Then take only primes,
+     * Then calculate the square of each one,
+     * Then remove those that has more than D digits,
+     * Finally sort the result descending
+     *
+     * @param numberSequence sequence of numbers to execute the operations
+     * @param maxNumbersToEvaluate number of elements that will be taken to check if they are odd
+     * @param numbersToTake number of odd elements that will be taken to check if they are primes
+     * @param maxNumberLength max length of numbers permitted
      */
     fun findFirstNumbersInSequenceThatAreOddAndSelectFirstPrimesAndTheirSquareHasCertainDigits(
-        numberList: Sequence<Int>,
+        numberSequence: Sequence<Int>,
         maxNumbersToEvaluate: Int,
         numbersToTake: Int,
         maxNumberLength: Int
     ): CollectionsManagerResult {
         val startTime = System.currentTimeMillis()
-        val elements = numberList
+        val elements = numberSequence
             .takeWhile { it < maxNumbersToEvaluate }
             .filter { it % 2 != 0 }
             .take(numbersToTake)
@@ -63,6 +80,10 @@ class CollectionsManager {
         )
     }
 
+    /**
+     * Check if int number is prime or not
+     * @return true if the number is prime, false if not
+     */
     private fun Int.isPrime(): Boolean {
         if (this <= 3) {
             return true
