@@ -9,7 +9,6 @@ import com.example.data.entity.toTeam
 import com.example.data.error.toCustomError
 import com.example.domain.entity.Team
 import com.example.domain.error.CustomError
-import com.example.domain.repository.SensorRepository
 import com.example.domain.repository.TeamsRepository
 import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.flow.Flow
