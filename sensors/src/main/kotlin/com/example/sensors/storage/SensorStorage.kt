@@ -5,6 +5,10 @@ import com.example.sensors.Sensor
 import com.example.sensors.toDataSensor
 import kotlinx.coroutines.flow.map
 
+/**
+ * Implementation of SensorDatastore to communicate the Data layer with the Database layer
+ * @see SensorDatastore
+ */
 class SensorStorage(
     private val brightnessSensor: Sensor,
     private val orientationSensor: Sensor,
