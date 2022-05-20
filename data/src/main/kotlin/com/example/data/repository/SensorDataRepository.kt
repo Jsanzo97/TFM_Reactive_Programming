@@ -2,9 +2,14 @@ package com.example.data.repository
 
 import com.example.data.datastore.SensorDatastore
 import com.example.data.entity.toSensorResult
+import com.example.domain.repository.CollectionsRepository
 import com.example.domain.repository.SensorRepository
 import kotlinx.coroutines.flow.map
 
+/**
+ * Implementation of SensorRepository to communicate the Domain layer with the Data layer
+ * @see SensorRepository
+ */
 class SensorDataRepository (
     private val sensorDatastore: SensorDatastore
 ) : SensorRepository {

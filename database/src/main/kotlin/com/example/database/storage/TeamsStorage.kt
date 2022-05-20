@@ -13,13 +13,17 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 
+/**
+ * Implementation of LocalTeamsDatastore to communicate the Data layer with the Database layer
+ * @see LocalTeamsDatastore
+ */
 class TeamsStorage (
     private val teamsDao: TeamsDao
 ) : LocalTeamsDatastore {
 
-    override suspend fun saveTeam(dataTeam: List<DataTeam>) : Option<LocalDataError> {
+    override suspend fun saveTeam(dataTeams: List<DataTeam>) : Option<LocalDataError> {
         return try {
-            dataTeam.forEach { saveTeam(it) }
+            dataTeams.forEach { saveTeam(it) }
             None
         } catch (_: Exception) {
             WritingError.some()

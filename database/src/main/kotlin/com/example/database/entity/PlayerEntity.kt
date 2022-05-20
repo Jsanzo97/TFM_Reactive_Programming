@@ -5,6 +5,12 @@ import androidx.room.Entity
 import androidx.room.ForeignKey
 import com.example.data.entity.DataPlayer
 
+/**
+ * Represent player in the database
+ * @param name name of the player
+ * @param age age of the player
+ * @param teamId id of the team
+ */
 @Entity(
     tableName = "Player",
     primaryKeys = ["name", "team_ID"],
@@ -23,10 +29,18 @@ data class PlayerEntity (
     val teamId: Long
 )
 
+/**
+ * Convert DataPlayer to PlayerEntity
+ * @return new PlayerEntity with DataPlayer values
+ */
 fun DataPlayer.toPlayerEntity(teamId: Long) = PlayerEntity(
     name, age, teamId
 )
 
+/**
+ * Convert PlayerEntity to DataPlayer
+ * @return new DataPlayer with PlayerEntity values
+ */
 fun PlayerEntity.toDataPlayer() = DataPlayer(
     name, age
 )

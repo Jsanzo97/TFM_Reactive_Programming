@@ -7,6 +7,9 @@ import com.example.database.entity.PlayerEntity
 import com.example.database.entity.SportEntity
 import com.example.database.entity.TeamEntity
 
+/**
+ * Configuration of the database
+ */
 @Database(
     entities = [
         PlayerEntity::class,
