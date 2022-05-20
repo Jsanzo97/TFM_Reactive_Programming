@@ -10,6 +10,14 @@ import com.example.common.extensions.changeVisibility
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textview.MaterialTextView
 
+/**
+ * Represent custom dialog box with some customizable parameters
+ * @param title title of the dialog
+ * @param message body of the dialog
+ * @param positiveButtonAction action to perform if the user press the positive button
+ * @param showOkButton flag to know if should show positive button
+ * @param showCancelButton flag to know if should show negative button
+ */
 class CustomDialogFragment(
     private val title: String = "",
     private val message: String,
