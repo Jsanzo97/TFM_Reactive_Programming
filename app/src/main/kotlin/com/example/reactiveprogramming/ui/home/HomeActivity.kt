@@ -166,14 +166,9 @@ class HomeActivity: AppCompatActivity() {
             updateMargins(top = insets.systemWindowInsetTop)
         }
 
-        var newContentBottomMargin = 0
-        if (!ViewConfiguration.get(applicationContext).hasPermanentMenuKey()) {
-            newContentBottomMargin = -insets.systemWindowInsetBottom
-        }
-
         val content = findViewById<ConstraintLayout>(R.id.content)
         (content.layoutParams as? ViewGroup.MarginLayoutParams)?.apply {
-            updateMargins(top = toolbarHeight, bottom = newContentBottomMargin)
+            updateMargins(top = toolbarHeight, bottom = 0)
         }
     }
 
