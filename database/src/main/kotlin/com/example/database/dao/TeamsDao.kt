@@ -113,6 +113,6 @@ abstract class TeamsDao {
      * @param teamId id of the team that will be removed
      */
     @Query("delete from Team where team_id = :teamId")
-    abstract fun removeTeam(teamId: Long)
+    abstract suspend fun removeTeam(teamId: Long)
 
 }

@@ -56,7 +56,7 @@ class TeamsStorage (
         }
     }
 
-    override fun getTeamsReactive(): Flow<List<DataTeam>> {
+    override suspend fun getTeamsReactive(): Flow<List<DataTeam>> {
         return teamsDao.getTeamsReactive().map { teamEntityList ->
             teamEntityList.map { teamEntity ->
                 teamEntity.toDataTeam(

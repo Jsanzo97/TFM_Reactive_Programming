@@ -55,7 +55,7 @@ class TeamsDataRepository (
             })
     }
 
-    override fun getTeamsReactive(): Flow<List<Team>> =
+    override suspend fun getTeamsReactive(): Flow<List<Team>> =
         localTeamsDatastore.getTeamsReactive().map {
             it.map { dataTeam -> dataTeam.toTeam() }
         }

@@ -34,7 +34,7 @@ interface LocalTeamsDatastore {
      * Returns data flow with the teams of the database
      * @return flow with teams data
      */
-    fun getTeamsReactive(): Flow<List<DataTeam>>
+    suspend fun getTeamsReactive(): Flow<List<DataTeam>>
 
     /**
      * Returns the teams from database
