@@ -34,7 +34,7 @@ interface TeamsRepository {
      * Returns data flow with the teams of the database
      * @return flow with teams data
      */
-    fun getTeamsReactive(): Flow<List<Team>>
+    suspend fun getTeamsReactive(): Flow<List<Team>>
 
     /**
      * Returns the teams from database

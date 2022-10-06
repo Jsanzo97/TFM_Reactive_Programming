@@ -12,5 +12,5 @@ class GetTeamsReactiveUseCase(private val teamsRepository: TeamsRepository) {
      * Executes Use case
      * @return data flow with the teams retrieved
      */
-    operator fun invoke() = teamsRepository.getTeamsReactive()
+    suspend operator fun invoke() = teamsRepository.getTeamsReactive()
 }
