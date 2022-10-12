@@ -17,7 +17,7 @@ object Versions {
     const val androidGradlePlugin = "3.5.1"
     const val gradleVersions = "0.25.0"
 
-    const val minSdk = 23
+    const val minSdk = 21
     const val targetSdk = 29
 
     val sourceCompatibility = JavaVersion.VERSION_1_8
