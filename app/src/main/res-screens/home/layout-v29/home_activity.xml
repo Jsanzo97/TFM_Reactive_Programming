@@ -55,6 +55,7 @@
         app:itemTextAppearance="@style/AppTheme.NavigationDrawer.Text"
         app:itemIconTint="@color/item_nav_state_icon_color"
         app:itemTextColor="@color/item_nav_state_text_color_state"
+        app:itemBackground="@color/item_nav_state_background_color"
         app:menu="@menu/nav_drawer">
 
         <com.google.android.material.textview.MaterialTextView
