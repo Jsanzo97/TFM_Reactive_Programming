@@ -102,4 +102,5 @@ cd TFM-Jorge-Sanzo
 ---
 
 **Author:** Jorge Sanzo  
-**Master's Degree:** Mobile Engineering
+**Master's Degree:** Mobile Engineering  
+**Final Grade:** 9.5 / 10
