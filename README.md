@@ -4,7 +4,7 @@
 ![Android](https://img.shields.io/badge/Android-SDK%2029-grey?style=flat&logo=android&logoColor=white&labelColor=green)
 ![Min SDK](https://img.shields.io/badge/Min%20SDK-21-grey?style=flat&labelColor=green)
 ![Coroutines](https://img.shields.io/badge/Coroutines-1.3.2-grey?style=flat&logo=kotlin&logoColor=white&labelColor=3264ff)
-![Koin](https://img.shields.io/badge/Koin-2.0.1-grey?style=flat&logo=kotlin&logoColor=white&labelColor=FFD600)
+![Koin](https://img.shields.io/badge/Koin-2.0.1-grey?style=flat&logo=kotlin&logoColor=white&labelColor=3E0C59)
 ![Arrow](https://img.shields.io/badge/Arrow-0.10.0-grey?style=flat&labelColor=000000)
 
 This project is the Master's Thesis (TFM) for the Master's Degree in Mobile Engineering. The primary goal is to analyze and compare the performance, readability, and maintainability of **Reactive Programming** versus **Imperative/Functional Programming** in Android application development.
