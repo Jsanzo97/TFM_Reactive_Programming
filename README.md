@@ -7,7 +7,9 @@
 ![Koin](https://img.shields.io/badge/Koin-2.0.1-grey?style=flat&logo=kotlin&logoColor=white&labelColor=3E0C59)
 ![Arrow](https://img.shields.io/badge/Arrow-0.10.0-grey?style=flat&labelColor=000000)
 
-This project is the Master's Thesis (TFM) for the Master's Degree in Mobile Engineering. The primary goal is to analyze and compare the performance, readability, and maintainability of **Reactive Programming** versus **Imperative/Functional Programming** in Android application development.
+This project is the Master's Thesis (TFM) for the Master's Degree in Mobile Computing at Universidad Pontificia de Salamanca (October 2022). The primary goal is to analyze and compare the performance, readability, and maintainability of **Reactive Programming** versus **Imperative/Functional Programming** in Android application development.
+
+> 📄 The full thesis report is written in Spanish: [`docs/TFM_JorgeSanzoHernando.pdf`](docs/TFM_JorgeSanzoHernando.pdf)
 
 ---
 
@@ -52,9 +54,9 @@ Evaluation of high-frequency data streams originating from hardware sensors.
 - **Imperative Model**: Follows the traditional **Listener pattern**. State management, registration, and synchronization are handled manually within the UI controller or helper classes, often leading to more boilerplate and complex lifecycle management.
 
 ### 3. Processing Large Collections
-Analysis of computational efficiency and memory footprint during heavy data transformations.
-- **Reactive/Lazy Model**: Utilizes **Kotlin Sequences** and **Flows**. Operations are performed lazily, meaning elements are processed through the transformation chain one by one. This significantly reduces memory overhead when dealing with thousands of items.
-- **Imperative/Eager Model**: Utilizes standard **Kotlin Collection functions** (`map`, `filter`). These operations are eager and create intermediate collections for every step of the chain, which can lead to performance bottlenecks and higher GC (Garbage Collector) pressure in memory-constrained environments.
+Analysis of execution time during heavy data transformations.
+- **Reactive/Lazy Model**: Utilizes **Kotlin Sequences**. Operations are performed lazily, meaning elements are processed through the transformation chain one by one, without creating intermediate collections.
+- **Imperative/Eager Model**: Utilizes standard **Kotlin Collection functions** (`map`, `filter`). These operations are eager and create intermediate collections for every step of the chain, which can lead to performance bottlenecks.
 
 ---
 
@@ -72,16 +74,18 @@ Analysis of computational efficiency and memory footprint during heavy data tran
 
 ## 📊 Results Visualization
 
-The application includes built-in tools to monitor the behavior of each paradigm. Through interactive charts (MPAndroidChart), users can observe in real-time how data flows through the system and the resulting impact on UI responsiveness and resource consumption.
+The application includes built-in tools to monitor the behavior of each paradigm. Through interactive charts (MPAndroidChart), users can observe in real-time how data flows through the system and compare execution times and data-capture effectiveness between approaches.
 
 ---
 
 ## 🏁 Conclusions
 
 The research conducted in this project highlights several key findings:
-1. **Maintainability**: The **Reactive** approach, while having a steeper learning curve, drastically reduces boilerplate code in complex synchronization scenarios, leading to more robust and less error-prone codebases.
-2. **Performance**: For simple, one-shot operations, the **Imperative** model remains slightly more performant due to lower abstraction overhead. However, the **Reactive/Lazy** model scales significantly better when processing large volumes of data or high-frequency events (sensors).
-3. **Developer Experience**: The choice between paradigms should be driven by the data's nature. "State-heavy" applications benefit more from the Reactive model, whereas "Action-heavy" or simple utility apps may find the Imperative/Functional approach more intuitive and straightforward.
+1. **Database operations**: No notable difference in efficiency or execution time between Flow + coroutines and lists + async tasks. The reactive code is simpler, since threads and data are handled automatically, and the UI always reflects the current state of the database. It pays off when data changes frequently or many queries are needed; otherwise, either approach works. With plain lists, the view only updates when data is requested again, so it can show stale data.
+2. **Real-time sensors**: The imperative approach needs a polling interval. A long interval loses values (effectiveness dropped to about 10–16% in the test runs), while a very short one makes redundant queries (above 190%). The reactive approach receives every value emitted by the sensor (100%) with no interval to tune.
+3. **Large collections**: With heavy chains of operations, **Sequences** were clearly faster and more stable than **Lists**, and their cost depends on the number of elements processed rather than the total size. For small collections or few operations, plain lists are faster, so the choice should depend on the workload.
+
+Memory and resource usage were not measured and are listed as future work.
 
 ---
 
@@ -94,13 +98,13 @@ The research conducted in this project highlights several key findings:
 
 ### Installation
 ```bash
-git clone https://github.com/your-username/TFM-Jorge-Sanzo.git
-cd TFM-Jorge-Sanzo
+git clone https://github.com/Jsanzo97/TFM_Reactive_Programming.git
+cd TFM_Reactive_Programming
 ./gradlew assembleDebug
 ```
 
 ---
 
 **Author:** Jorge Sanzo  
-**Master's Degree:** Mobile Engineering  
+**Master's Degree:** Mobile Computing  
 **Final Grade:** 9.5 / 10
